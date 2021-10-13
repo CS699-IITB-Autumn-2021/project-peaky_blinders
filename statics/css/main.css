@@ -1,0 +1,224 @@
+#animation_box{
+    transition: 0.2s;
+}
+
+.grid {
+    background-color: darkcyan;
+    width: 99%;
+    position: relative;
+
+    color: white;
+}
+#editor { 
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 15px;
+    font-size: 20px;
+}
+#parent {
+    min-height: 600px;
+
+}
+.bar{
+    background-color:lightgreen;
+    opacity: 0.5;
+}
+.col-1-1{
+    width:49%;
+    position: relative;
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    height: 100%;
+}
+.box_container{
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    min-height: 100px;
+    margin-bottom: 10px;
+}
+
+.box_set{
+    text-align: center;
+    vertical-align: middle;
+    display: inline-block;
+    margin: 10px;
+    visibility: hidden;
+}
+
+.fieldSet{
+    text-align: left; 
+    vertical-align: middle;
+    display: inline-block;
+    margin: 10px;
+    position: relative;
+}
+.box{
+    margin: 5px;
+    height: 50px;
+    width: 50px;
+    background-color: lightsalmon;
+    display: inline-block;
+    transition: .2s;
+    font-size: 20px;
+    vertical-align: sub;
+    position: relative;
+    border-radius: 5px;
+    line-height: 45px;
+    position: relative;
+    text-align: center;
+}
+
+.array {
+    display: inline-block;
+}
+
+.stack{
+    display: block;
+}
+
+.box_label_active{
+    background-color: lawngreen;
+    transition: .2s;
+}
+
+
+/* *************************************TOH *********************************************************** */
+
+.toh_animation{
+    width:500px;
+    height:500px;
+    display: inline-block;
+    /*! line-height: 13.7px; */
+    vertical-align: middle;
+    position: relative;
+}
+
+.tower-div{
+    position: relative;
+    display: inline-block;
+    vertical-align: middle;
+    margin: auto;
+    top: 25%;
+}
+.tower{
+    width: 5px;
+    height: 250px;
+    background-color: rgb(10, 9, 9);
+    border-radius: 5px;
+    display: inline-block;
+    margin: 0 65px;
+}
+
+.base{
+    width:450px;
+    height:10px;
+    background-color: darkgreen;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.base-div{
+    position: relative;
+    top:-8px
+}
+
+.ring1-div{
+    position: relative;
+    top:-40px;
+    left:78px;
+    transition: 0.2s;
+}
+.ring1{
+    width:150px;
+    height:10px;
+    background-color: darkgreen;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.ring2-div{
+    position: relative;
+    top:-54px;
+    left:-51px;
+    transition: 0.2s;
+}
+.ring2{
+    width:100px;
+    height:10px;
+    background-color: darkgreen;
+    border-radius: 5px;
+    display: inline-block;
+}
+.ring3-div{
+    position: relative;
+    top:-68px;
+    left:-132px;
+    transition: 0.2s;
+}
+.ring3{
+    width:50px;
+    height:10px;
+    background-color: darkgreen;
+    border-radius: 5px;
+    display: inline-block;   
+}
+
+/**********************************STACK ***********************************/
+.arrow{
+    position: relative;
+    background:black;
+    width:5px;
+    height:60px;
+    transform:rotate(90deg);
+    /*! left: 0; */
+    display: inline-block;
+    vertical-align: sub;
+    /*! line-height: 43px; */
+}
+.arrow_head{
+    position: relative;
+    bottom:26px;
+    border:13px solid transparent;
+    background-clip: border-box;
+    border-bottom-color: tomato;
+    left: -11px;
+    display: inline-block;
+}
+arrow{
+    display: inline-block;
+    margin:5px;
+    text-align: center;
+    width: 60px;
+    position: absolute;
+    /*! right: -35px; */
+    height: 60px;
+    vertical-align: middle;
+    /*! font-size: 20px; */
+    transition: 0.2s;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    line-height: 60px;
+}
+
+.ar1{
+    transform: rotate(0deg);
+    height: 30px;
+    /* left: 420px; */
+}
+.ar2{
+    height: 450px;
+    /* top: -227px; */
+    /* left: 196px; */
+}
+.ar3{
+    /* top: -450px; */
+    transform: rotate(180deg);
+    height: 40px;
+    /* left: -27px; */
+}
