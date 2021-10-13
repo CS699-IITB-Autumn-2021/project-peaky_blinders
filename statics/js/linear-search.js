@@ -155,6 +155,7 @@ function loop()
 function loop_color(){
         interval = setInterval(loop,1000);
 }
+set_arr_list_Elm=[];
 
 function setSize(){
     arr_n = parseInt(document.getElementById('max_size_array').value);
@@ -165,15 +166,17 @@ function setSize(){
         elm.setAttribute('id','arr_input_search'+i);
         elm.value=i+1;
         arr.push(parseInt(document.getElementById('arr_input_search'+i).value));
+        set_arr_list_Elm.push(elm);
     }
     document.getElementById('set_Array_value').disabled = false;
     document.getElementById('SetSearchVal').disabled = false;
+    EnableCtrlButtons(rst);
 }
 
 function set_Array_value(){
     arr=[];
     for(itr=0;itr<arr_n;itr++){
-        arr.push(parseInt(document.getElementById('arr_input_search'+i).value));
+        arr.push(parseInt(document.getElementById('arr_input_search'+itr).value));
     }
     document.getElementById('SetSearchVal').disabled = false;
 }
@@ -224,6 +227,15 @@ searchValue=`;
 function reset(){
     removeBoxElm(search_numElm);
     code_line_itr=code_begin-1;
-    for(i=0;i<arr_n;i++)
-        removeBoxElm(arrElmSet[i]);
+    for(i=0;i<arr_n;i++){
+        if(arrElmSet!=null)
+            removeBoxElm(arrElmSet[i]);
+        if(set_arr_list_Elm!=null)
+            set_arr_list_Elm[i].remove();
+    }
+    document.getElementById('search_val').value='';
+    document.getElementById('max_size_array').value='';
+    document.getElementById('set_Array_value').disabled = true;
+    document.getElementById('SetSearchVal').disabled = true;
+    disbaleCtrlButtons();
 }
