@@ -7,6 +7,9 @@
     <link rel="stylesheet" href=" {% static 'css/main.css' %}">
     <script src="{% static 'js/ace-builds-master/src/ace.js' %}" type="text/javascript" charset="utf-8"></script>
     <script src="{% static 'js/lib.js' %}"></script>
+    <script src="{% static 'js/stack.js' %}"></script>
+    <script src="{% static 'js/button.js' %}"></script>
+    <script src="{% static 'js/init.js' %}"></script>
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 </head>
 <body>
@@ -15,8 +18,8 @@
             <div id="editor">int push(struct stack * s, int push_val){
     if(s==NULL || s->size == (s->top+1))
             return -1;
-    s->top=s->top+1;   
     s->arr[s->top]=push_val;
+    s->top=s->top+1;   
     return 1;
 }  
 
@@ -36,225 +39,43 @@ struct stack{
 };</div>
     </div>
     <div class='col-1-1' id='animation_box'>
+        <div class="stack">
+            <div id='variable_set' class="unselectable">
+                <div id='temp'></div>
+                <div id='heap'></div>
+            </div>                    
+        </div>
+    </div>
+
+    <div id='control_set'>
+        <button id="play_btn" class='button button_play' onclick="playButton()">PLAY</button>        
+        <button id="step_btn" class='button button_next' onclick="stepButton()">STEP</button>        
+        <button id="reset_btn" class='button button_reset'onclick="resetButton()">RESET</button>
+    </div>
+
+    <div id='input_set'>
+        <div>
+            <div id='create_struct'>
+                <input type="text" name="" id="stack_max_size" placeholder="Enter Size of stack" class='value_input'>
+                <button type="button" class="value_input value_input_create" onclick="createStack()">
+                    Create Stack
+                </button>        
+            </div>    
+        </div>
+        <div id='stack_ops'>
+            <div id='stack_push' class='col-1-1'>
+                <input type="text" name="" id="push_val" class='value_input'>
+                <button type="button" class="value_input value_input_push" id="push" onclick="pushStack()" disabled>
+                    push
+                </button>    
+            </div>
+            <div id='stack_pop'  class='col-1-1'>
+                <input type="text" name="" id="pop_val" readonly class='value_input'>
+                <button type="button" class="value_input value_input_pop" id="pop" onclick="popStack()" disabled>
+                    pop
+                </button>        
+            </div>
+        </div>
     </div>
 </div>
-Enter Size of stack
-<input type="text" name="" id="stack_max_size">
-<button type="button" class="btn btn-success" onclick="createStack()">
-    Create Stack
-</button>
-<input type="text" name="" id="push_val">
-<button type="button" class="btn btn-success" id="push" onclick="pushStack()" disabled>
-    push
-</button>
-<button type="button" class="btn btn-success" id="pop" onclick="popStack()" disabled>
-    pop
-</button>
-
-<script>    
-    /* Code lines numbers for animation change */
-    var push_begin = 1;
-    var overflow_check = 2;
-    var push_ret_err = 3;
-    var push_head_move = 4;
-    var add_value = 5;
-    var retpush = 6;
-    var pushend = 7;
-    var pop_begin = 10;
-    var underflow_check = 11;
-    var pop_ret_err = 12;
-    var pop_head_move = 14;
-    var pop_value = 13;
-    var retpop = 15;
-    var popend = 16;
-
-    //Max stack size
-    var stack_size = 0;
-
-    //current code line number
-    var code_line_itr = 0;
-
-    // Total line number of code
-    code_line_count=22;
-
-    // ace editor configuration
-    editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
-    editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
-    editor.getSession().setMode("ace/mode/c_cpp");  // sets the langugage for key highlight as c_cpp (both c and c++)
-    editor.setReadOnly(true);   // make the code section as read only
-
-    // Range Object to be used to identity line of code.
-    Range = ace.require('ace/range').Range;
-
-    // removing initial line markers :: removeMarker(Marker id)
-    editor.session.removeMarker(1);
-    editor.session.removeMarker(2);
-    
-    // adding marker to each line of code.
-    const r = []
-    for(itr=0;itr<code_line_count;itr++)
-    {   
-        // marking the range for  code line no <itr>
-        r[itr] = new Range(itr, 0,itr, 100)
-        // class foo<id_count> will act as an identifire for each line
-        r[itr].id = editor.session.addMarker(r[itr],"foo"+(itr+1),"fullLine");
-    }
-
-    // assigning unique element id's to any new div 
-    var id_count=0;
-
-    // FUNCTION VARIABLE TO store the interval function
-    var interval;
-    
-    // stores last highlighted line number to remove
-    var line_rem_highlight;
-
-    var stk_obj;
-
-    var stack_content = [];
-    var top1=0; 
-    var size=stack_size;
-    function loop() {
-        if (code_line_itr != push_begin && code_line_itr != pop_begin && code_line_itr != 0) {
-            document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
-        }
-        if (stk_obj.top_val.classList.contains('box_label_active')) {
-            stk_obj.top_val.classList.remove('box_label_active');
-        }
-        if (stk_obj.arr_list[size-(top1+1)] && stk_obj.arr_list[size-(top1+1)].classList.contains('box_label_active')) {
-            stk_obj.arr_list[size-(top1+1)].classList.remove('box_label_active');
-        }
-        switch(code_line_itr) {
-            case push_begin:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                stk_obj.element.classList.add('box_label_active');
-                stk_obj.element.innerHTML = stack_content[stack_content.length-1];
-                code_line_itr++;
-                break;
-            case overflow_check:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                if (top1 == size) {
-                    code_line_itr++;    
-                }
-                else {
-                    code_line_itr+=2;
-                }
-                break;
-            case push_ret_err:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                code_line_itr = pushend;
-                break;
-            case push_head_move:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                stk_obj.top_pointer.style.top = 55*(Math.ceil(size/2)-(top1+1))+'px';
-                stk_obj.top_val.innerHTML = top1;
-                stk_obj.top_val.classList.add('box_label_active');
-                code_line_itr++;
-                break;
-            case add_value:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                stk_obj.element.classList.remove('box_label_active');
-                stk_obj.element.innerHTML = ''; 
-                stk_obj.arr_list[size-(top1+1)].classList.add('box_label_active');
-                stk_obj.arr_list[size-(top1+1)].innerHTML = stack_content[stack_content.length-1];
-                code_line_itr++;
-                break;
-            case retpush:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                code_line_itr++;
-                break;
-            case pushend:
-                document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
-                code_line_itr=0;
-                break;
-            case pop_begin:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                code_line_itr++;
-                break;
-            case underflow_check:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                if (top1 == -1) {
-                    code_line_itr++;    
-                }
-                else {
-                    code_line_itr+=2;
-                }
-                break;
-            case pop_ret_err:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                code_line_itr = popend;
-                break;
-            case pop_head_move:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                top1 = top1-1;
-                stk_obj.top_val.innerHTML = top1;
-                stk_obj.top_val.classList.add('box_label_active');
-                stk_obj.top_pointer.style.top = 55*(Math.ceil(size/2)-(top1+1))+'px';
-                code_line_itr++;
-                break;
-            case pop_value:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                stk_obj.arr_list[size-(top1+1)].classList.add('box_label_active');
-                stk_obj.arr_list[size-(top1+1)].innerHTML=' ';
-                stk_obj.element.classList.add('box_label_active');
-                stk_obj.element.innerHTML = stack_content.pop();
-                code_line_itr++;
-                break;
-            case retpop:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                line_rem_highlight = code_line_itr;
-                code_line_itr++;
-                break;
-            case pushend:
-                document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
-                code_line_itr=0;
-                break;
-        }  
-    }
-    
-    function pushStack(){
-        code_line_itr = push_begin;
-        top1 = parseInt(stk_obj.top_val.innerHTML)+1;
-        size = parseInt(stk_obj.size_val.innerHTML);
-        var input = document.getElementById('push_val').value;
-        stack_content.push(input);
-        loop_color();
-    }
-
-
-    function popStack(){
-        code_line_itr = pop_begin;
-        top1 = parseInt(stk_obj.top_val.innerHTML);
-        size = parseInt(stk_obj.size_val.innerHTML);
-        loop_color();
-    }
-
-
-    function createStack(){
-        if (!stk_obj) {
-            stack_size = parseInt(document.getElementById("stack_max_size").value);
-            stk_obj = new Stack('animation_box', stack_size);
-            document.getElementById("push").disabled = false;
-            document.getElementById("pop").disabled = false;
-        }
-    }  
-
-    // this function puts the loop() function  on interval call of 1000 milli sec
-    // i.e it is called after every 1000 milli sec of 1 sec
-    function loop_color(){
-        interval = setInterval(loop,1000);
-    }
-</script>
-</body>
-</html>
+</body></html>
