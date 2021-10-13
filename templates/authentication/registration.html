@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>DSA_Visualiser</title>
+
+{% load static %}
+
+<link rel="stylesheet" href="{% static 'css/registration.css' %}">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+</head>
+<body>
+
+<h1>DSA VISUALISER</h1>
+
+<div class="login">
+	<h2>Registration</h2>
+	<h5 style="color: red; text-align: center;">{{ message }}<h5>
+	<form method="POST" action="/register">
+		{% csrf_token %}
+        <input type="text" class="first active" placeholder="First Name" id="fname" name="fname"/>
+        <input type="text" class="last active" placeholder="Last Name" id="lname" name="lname"/>
+
+		<input type="email" class="email active" placeholder="Email Id" id="email" name="email"/>
+
+		<input type="password" class="lock active"  id="pass1" name="pass1" placeholder="Password"/>
+	    <input type="password" class="doublelock active" id="pass2" name="pass2" placeholder="Confirm Password"/>
+		<h6 id='message' style="text-align: center;"></h6>
+	<div class="login-bwn">
+	   <input type="submit" value="Register" disabled/>
+	</div>
+</form>
+	<div class="login-bottom">
+		
+		
+			<div class="clear"> </div></a>
+				<div class="clear"> </div>
+		
+		<h4>Already on DSA Visualiser? </h4>
+		<div class="reg-bwn"><a href="/">Login</a></div>
+	</div>
+  </div>
+
+  <script>
+  $('#pass2').on('keyup', function () {
+	if ($('#pass1').val() == $('#pass2').val()) {
+	  $('#message').html('Matching').css('color', 'green');
+	  $('input[type="submit"]').removeAttr("disabled");
+	} else 
+	  $('#message').html('Not Matching').css('color', 'red');
+  });
+</script>
+</body>
+</html>
