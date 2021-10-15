@@ -74,3 +74,7 @@ def stackBO(request):
 @login_required(login_url="signin")
 def stackAppl(request):
     return render(request, "stack/stack_toh.html")
+
+@login_required(login_url="signin")
+def insertionsort(request):
+    return render(request, "insertion_sort/insertion_sort.html")
