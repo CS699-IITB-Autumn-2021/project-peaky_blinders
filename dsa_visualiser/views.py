@@ -84,6 +84,8 @@ def queue(request):
 def queueBO(request):
     return render(request, "queue/queue.html")
 
+def insertionsort(request):
+    return render(request, "insertion_sort/insertion_sort.html")
 # @login_required(login_url="signin")
 # def queueAppl(request):
 #     return render(request, "stack/stack_toh.html")

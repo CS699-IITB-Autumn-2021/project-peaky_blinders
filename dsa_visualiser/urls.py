@@ -10,6 +10,7 @@ urlpatterns = [
     path('stack', views.stack, name="stack"),
     path('stack-BO', views.stackBO, name="stackBO"),
     path('stack-appl', views.stackAppl, name="stackAppl"),
+    path('insertion-sort', views.insertionsort, name="insertionsort"),
     path('queue', views.queue, name="queue"),
     path('queue-BO', views.queueBO, name="qeueuBO"),
 #     path('queue-appl', views.queueAppl, name="queueAppl")
