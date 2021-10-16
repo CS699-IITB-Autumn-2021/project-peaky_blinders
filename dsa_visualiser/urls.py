@@ -9,5 +9,8 @@ urlpatterns = [
     path('linear-search', views.linear_search, name="linearsearch"),
     path('stack', views.stack, name="stack"),
     path('stack-BO', views.stackBO, name="stackBO"),
-    path('stack-appl', views.stackAppl, name="stackAppl")
-]
+    path('stack-appl', views.stackAppl, name="stackAppl"),
+    path('queue', views.queue, name="queue"),
+    path('queue-BO', views.queueBO, name="qeueuBO"),
+#     path('queue-appl', views.queueAppl, name="queueAppl")
+ ]
