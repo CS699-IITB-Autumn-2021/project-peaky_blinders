@@ -76,5 +76,16 @@ def stackAppl(request):
     return render(request, "stack/stack_toh.html")
 
 @login_required(login_url="signin")
+def queue(request):
+    user = User.objects.get(username = request.user)
+    return render(request, "dashboard/dash_queue.html", {'name':user.first_name+" "+user.last_name, 'history': {'Linear Search', 'Linked List', 'Sorting', 'Stack Basic Operations'}})
+
+@login_required(login_url="signin")
+def queueBO(request):
+    return render(request, "queue/queue.html")
+
 def insertionsort(request):
     return render(request, "insertion_sort/insertion_sort.html")
+# @login_required(login_url="signin")
+# def queueAppl(request):
+#     return render(request, "stack/stack_toh.html")

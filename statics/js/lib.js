@@ -39,6 +39,10 @@ function draw_array(var_name,variable,size,parent_id){
     return draw_boxes(variable,size,draw_fieldset(var_name,parent_id).id,'array');
 }
 
+function draw_array_vertical(var_name,variable,size,parent_id){
+    return draw_boxes(variable,size,draw_fieldset(var_name,parent_id).id,'stack');
+}
+
 function draw_arrow(parent_id)
 {
     arrow_box = create_html_element('arrow',parent_id);
@@ -49,21 +53,15 @@ function draw_arrow(parent_id)
     return arrow_box;
 }
 
-
-function draw_arrow_special(parent_id)
+function draw_arrow_color(parent_id,arrowColor,arrow_headColor)
 {
     arrow_box = create_html_element('arrow',parent_id);
-    arrow_tail1 = create_html_element('div',arrow_box.id);
-    arrow_tail1.setAttribute('class','arrow');
-    arrow_tail1.classList.add('ar1');
-    arrow_tail2 = create_html_element('div',arrow_box.id);
-    arrow_tail2.setAttribute('class','arrow');
-    arrow_tail2.classList.add('ar2');
-    arrow_tail3 = create_html_element('div',arrow_box.id);
-    arrow_tail3.setAttribute('class','arrow');
-    arrow_tail3.classList.add('ar3');
-    arrow_head = create_html_element('div',arrow_tail3.id); 
+    arrow_tail = create_html_element('div',arrow_box.id);
+    arrow_tail.setAttribute('class','arrow');
+    arrow_tail.style.background=arrowColor;
+    arrow_head = create_html_element('div',arrow_tail.id); 
     arrow_head.setAttribute('class','arrow_head');
+    arrow_head.style.borderBottomColor = arrow_headColor;
     return arrow_box;
 }
 
@@ -149,8 +147,7 @@ class Stack{
         unhighlightBoxELement(this.top_val);
         unhighlightBoxELement(this.size_val);
     }
-    remove()
-    {
+    remove(){
         this.top_val.parentElement.parentElement.remove();
     }
 }
@@ -180,5 +177,96 @@ class linkedList{
             this.arr.push(val);
             this.size++;
         }
+    }
+}
+
+
+class Queue{
+    constructor(parent_id,size,queueName){
+        this.queue_field = draw_fieldset(queueName,parent_id);
+        
+        /*const*/
+        this.size = size;
+        this.sizeElm = draw_variable('size',size,this.queue_field.id);
+        /**temp*/
+        this.front=-1;
+        this.frontElem = draw_variable('front',this.front,this.queue_field.id);
+        /**temp*/
+        this.rear=-1;
+        this.rearElm = draw_variable('rear',this.rear,this.queue_field.id);
+
+        this.front_pointer = draw_arrow_color(this.queue_field.id,'red','red');
+        this.front_pointer.style.position='relative';        
+        this.front_pointer.style.top =-55*(Math.ceil(this.size/2)-(this.front+1))+'px';
+        this.front_pointer.style.left = '68px';
+
+        this.rear_pointer = draw_arrow_color(this.queue_field.id,'green','green');
+        this.rear_pointer.style.position='relative';        
+        this.rear_pointer.style.top = -55*(Math.ceil(this.size/2)-(this.rear+1))+'px';
+        
+        /**heap*/
+        this.arr=[];
+        for(var i=0;i<this.size;i++){
+            this.arr.push(' ');
+        }
+        this.arrElem = draw_array_vertical('arr',this.arr,size,this.queue_field.id);
+    }
+    
+    enqueue(val){
+        highlightBoxELement(this.frontElem);
+        highlightBoxELement(this.rearElem);
+        if(this.rear==this.size-1){
+            console.log("queue full");            
+            highlightBoxELement(this.sizeElm);
+        }
+        else{
+            if(this.front==-1)
+            {
+                this.front=0;
+                this.frontElem.innerHTML=this.front;
+            }
+            this.rear+=1;
+            this.rearElm.innerHTML = this.rear;
+            this.arr[this.rear]=val;
+            this.arrElem[this.rear].innerHTML = val;
+            highlightBoxELement(this.arrElem[this.rear]);
+            this.rear_pointer.style.top = -55*(Math.ceil(this.size/2)-(this.rear+1))+'px';
+            this.front_pointer.style.top =-55*(Math.ceil(this.size/2)-(this.front+1))+'px';
+        }    
+    }
+
+    dequeue (){
+        var val=-1;
+        highlightBoxELement(this.frontElem);
+        if(this.front==-1){
+            console.log("queue empty");
+        }
+        else{
+            val = this.arr[this.front];
+            this.arrElem[this.front].innerHTML = ' ';
+            unhighlightBoxELement(this.arrElem[this.front]);
+            this.front+=1;
+            this.frontElem.innerHTML=this.front;
+            if(this.front > this.rear)
+            {
+                highlightBoxELement(this.rearElm);
+                this.front=this.rear=-1;
+                this.frontElem.innerHTML=this.rear;
+                this.rearElm.innerHTML=this.rear;
+            }
+            this.rear_pointer.style.top = -55*(Math.ceil(this.size/2)-(this.rear+1))+'px';
+            this.front_pointer.style.top =-55*(Math.ceil(this.size/2)-(this.front+1))+'px';
+        }
+        return val;
+    }
+
+    removeHighlight(){
+        unhighlightBoxELement(this.frontElem);
+        unhighlightBoxELement(this.rearElm);
+        unhighlightBoxELement(this.sizeElm);
+    }
+
+    remove(){
+        this.frontElm.parentElement.parentElement.remove();
     }
 }
