@@ -11,4 +11,5 @@ urlpatterns = [
     path('stack-BO', views.stackBO, name="stackBO"),
     path('stack-appl', views.stackAppl, name="stackAppl"),
     path('insertion-sort', views.insertionsort, name="insertionsort"),
+    path('merge-sort', views.mergesort, name="mergesort")
 ]
