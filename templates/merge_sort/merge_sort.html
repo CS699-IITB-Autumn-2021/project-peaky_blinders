@@ -56,6 +56,16 @@ void merge(int arr[], int l, int m, int r) {
     while (j < n2) {
         arr[k++] = R[j++];
     }
+}
+
+int main(){
+    int arr[] = {5, 4, 3, 2, 1};
+    int n = sizeof(arr)/sizeof(arr[0]);
+ 
+    mergeSort(arr, n);
+ 
+    printArray(arr, n);
+    return 0;
 }</div>
 </div>
     <div class='col-1-1' id='animation_box'>

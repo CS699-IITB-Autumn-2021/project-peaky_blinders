@@ -36,16 +36,23 @@ var while_loop_3 = 40;
 var arr_ele_ass_4 = 41;
 var while_loop_3_end = 42;
 var merge_func_end = 43;
+var main = 45;
+var arr_decl = 46;
+var size_cal = 47;
+var mergesort_call = 49;
+var printarr = 51;
+var ret0 = 52;
+var end = 53;
 
  
 // Total line number of code
-var code_line_count=43;
+var code_line_count=53;
 
 // ace editor configuration
 var editor;
 
 //current code line number
-var code_line_itr = mergesort_func_start;
+var code_line_itr;
 
 // assigning unique element id's to any new div 
 var id_count=0;
@@ -123,7 +130,8 @@ set_arr_list_Elm=[];
 
 
 async function loop() {
-    if (code_line_itr != mergesort_func_start && code_line_itr != 0 && code_line_itr != 12) {
+    
+    if (code_line_itr != main && code_line_itr != 0 && code_line_itr != 12 && code_line_itr != mergesort_func_start) {
         document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
     }
     
@@ -144,8 +152,36 @@ async function loop() {
         await sleep(100);
         document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
     }
-
+    
     switch (code_line_itr) {
+        case main:
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;
+            break;
+        case arr_decl:
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;
+            break;
+        case size_cal:
+            line_rem_highlight = code_line_itr;
+            code_line_itr+=2;
+            break;
+        case mergesort_call:
+            line_rem_highlight = code_line_itr;
+            code_line_itr = mergesort_func_start;
+            break;
+        case printarr:
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;
+            break;
+        case ret0:
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;
+            break;
+        case end:
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;
+            break;
         case mergesort_func_start:
             line_rem_highlight = code_line_itr;
             code_line_itr++;
@@ -153,7 +189,7 @@ async function loop() {
         case curr_size_dec:
             line_rem_highlight = code_line_itr;
             curr_size = 0;
-            curr_size_element = draw_variable('current size', curr_size, "variable_set");
+            curr_size_element = draw_variable('curr size', curr_size, "variable_set");
             highlightBoxELement(curr_size_element);
             code_line_itr++; 
             break;
@@ -235,7 +271,7 @@ async function loop() {
             line_rem_highlight = code_line_itr;
             removeBoxElm(curr_size_element);
             removeBoxElm(start_index);
-            code_line_itr = -1;
+            code_line_itr = printarr;
             break;
         case merge_func_start:           
             line_rem_highlight = code_line_itr;
@@ -508,11 +544,73 @@ function set_Array_value(){
         arr.push(parseInt(document.getElementById('arr_input_search'+itr).value));
     }
     arrElmSet =  draw_array('arr', arr, arr_n, parent_id); 
+    editor.setValue(sortCode+arr_n+arraySize+arr+arrayValue+arr_n+restcode);
+    code_line_itr = main;
     EnableCtrlButtons();
 }
 
+sortCode=`void mergeSort(int arr[], int n) {
+    int curr_size;  
+    int left_start; 
+
+    for (curr_size=1; curr_size <= n-1; curr_size = 2*curr_size) {
+        for (left_start=0; left_start < n-1; left_start += 2*curr_size) {
+            int mid = min(left_start + curr_size - 1, n-1);
+            int right_end = min(left_start + 2*curr_size - 1, n-1);
+            
+            merge(arr, left_start, mid, right_end);
+        }
+    }
+}
+
+void merge(int arr[], int l, int m, int r) {
+    int i, j, k;
+    int n1 = m - l + 1;
+    int n2 =  r - m;
+    int L[n1], R[n2];
+
+    for (i = 0; i < n1; i++)
+        L[i] = arr[l + i];
+
+    for (j = 0; j < n2; j++)
+        R[j] = arr[m + 1+ j];
+
+    i = 0; j = 0; k = l;
+    
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k++] = L[i++];
+        }
+        else {
+            arr[k++] = R[j++];
+        }
+    }
+    while (i < n1) {
+        arr[k++] = L[i++];
+    }
+    while (j < n2) {
+        arr[k++] = R[j++];
+    }
+}
+
+int main(){
+    int arr[`;
+    
+arraySize = `] = {`;
+
+arrayValue=`};
+    int n = `;
+
+restcode = `;
+
+    mergeSort(arr, n);
+
+    printArray(arr, n);
+    return 0;
+}`;
+
 function reset(){
-    code_line_itr=mergesort_func_start;
+    code_line_itr=main;
     for(i=0;i<arr_n;i++){
         if(arrElmSet!=null)
             removeBoxElm(arrElmSet[i]);
