@@ -279,6 +279,8 @@ async function loop() {
             break;
         case for_loop_3:         
             line_rem_highlight = code_line_itr;
+            highlightBoxELement(i_element);
+            highlightBoxELement(temp_arr1_size_ele);
             if (i_index >= temp_arr1_size) {
                 code_line_itr = for_loop_4;
             }
@@ -300,6 +302,8 @@ async function loop() {
             break;
         case for_loop_4:     
             line_rem_highlight = code_line_itr;
+            highlightBoxELement(j_element);
+            highlightBoxELement(temp_arr2_size_ele);
             if (j_index >= temp_arr2_size) {
                 code_line_itr = ijk_ass;
             }
@@ -332,6 +336,10 @@ async function loop() {
             break;
         case while_loop_1:
             line_rem_highlight = code_line_itr;
+            highlightBoxELement(i_element);
+            highlightBoxELement(temp_arr1_size_ele);
+            highlightBoxELement(j_element);
+            highlightBoxELement(temp_arr2_size_ele);
             if (i_index >= temp_arr1_size || j_index >= temp_arr2_size) {
                 code_line_itr = while_loop_1_end;
             }
@@ -341,6 +349,8 @@ async function loop() {
             break;
         case if_cond:
             line_rem_highlight = code_line_itr;
+            highlightBoxELement(temp_arr1[i_index]);
+            highlightBoxELement(temp_arr2[j_index]);
             if (L[i_index] > R[j_index]) {
                 code_line_itr = if_end;
             }
@@ -399,6 +409,8 @@ async function loop() {
             break;
         case while_loop_2:
             line_rem_highlight = code_line_itr;
+            highlightBoxELement(i_element);
+            highlightBoxELement(temp_arr1_size_ele);
             if (i_index >= temp_arr1_size) {
                 code_line_itr = while_loop_2_end;
             }
@@ -426,6 +438,8 @@ async function loop() {
             break;
         case while_loop_3:
             line_rem_highlight = code_line_itr;
+            highlightBoxELement(j_element);
+            highlightBoxELement(temp_arr2_size_ele);
             if (j_index >= temp_arr2_size) {
                 code_line_itr = while_loop_3_end;
             }
