@@ -78,26 +78,6 @@ var interval;
 
 set_arr_list_Elm=[];
 
-
-function insertion_sort () {
-    for (let i=1; i<arr_n; i++) {
-        index_i.innerHTML = i;
-        temp.innerHTML = arr[i];
-        temp_element = arr[i];
-        let j = i-1;
-        while (arr[j] > temp_element && j >= 0){
-            index_j.innerHTML = j;
-            arr[j+1] = arr[j];
-            arrElmSet[j+1].innerHTML = arr[j];
-            j--;
-        }
-        arr[j+1] = temp_element;
-        arrElmSet[j+1].innerHTML = temp_element;
-        temp.innerHTML = 0;
-        console.log(i + " " + j);
-    }
-}
-
 function loop() {
     
     if (code_line_itr != func_name && code_line_itr != 0) {
