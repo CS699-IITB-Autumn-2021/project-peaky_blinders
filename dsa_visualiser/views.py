@@ -71,6 +71,10 @@ def stack(request):
 def stackBO(request):
     return render(request, "stack/stack.html")
 
-# @login_required(login_url="signin")
-# def stackAppl(request):
-#     return render(request, "stack/stack.html")
+@login_required(login_url="signin")
+def stackAppl(request):
+    return render(request, "stack/stack_toh.html")
+
+@login_required(login_url="signin")
+def binary_search(request):
+    return render(request, "binary_search/binary.html")
