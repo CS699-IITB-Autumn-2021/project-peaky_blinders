@@ -38,9 +38,35 @@ function draw_variable(var_name,variable,parent_id){
 function draw_array(var_name,variable,size,parent_id){
     return draw_boxes(variable,size,draw_fieldset(var_name,parent_id).id,'array');
 }
+function draw_set(arrName,arr,arr_n,parent_id){
+    parent = draw_fieldset(arrName,parent_id);
+    box_list = [];
+    for(i=0;i<arr_n;i++)
+    {
+        elm = document.createElement('div');
+        elm.setAttribute('id','div_'+id_count);
+        elm.setAttribute('class','set');
+        id_count++;
 
-function draw_array_vertical(var_name,variable,size,parent_id){
-    return draw_boxes(variable,size,draw_fieldset(var_name,parent_id).id,'stack');
+        box = document.createElement('div');
+        box.setAttribute('id','div_'+id_count);
+        box.setAttribute('class','box');
+        id_count++;
+        box.innerHTML = arr[i];
+
+        box_list.push(box);
+
+        box2 = document.createElement('div');
+        box2.setAttribute('id','div_'+id_count);
+        box2.setAttribute('class','dummybox');
+        id_count++;
+
+        elm.appendChild(box);
+        elm.appendChild(box2);
+        document.getElementById(parent.id).appendChild(elm);
+
+    }
+    return box_list;
 }
 
 function draw_arrow(parent_id)
@@ -123,7 +149,7 @@ class Stack{
         highlightBoxELement(this.top_val);
     }
     pop(){
-        var val=-1;
+        var val=' ';
         var top = parseInt(this.top_val.innerHTML);
         var size = parseInt(this.size_val.innerHTML);
         if(top==-1)
@@ -185,59 +211,80 @@ class Queue{
     constructor(parent_id,size,queueName){
         this.queue_field = draw_fieldset(queueName,parent_id);
         
+        var div_variables_set = create_html_element('div',this.queue_field.id);
+        // div_variables_set.setAttribute('id','queue_varaibleSet');
         /*const*/
         this.size = size;
-        this.sizeElm = draw_variable('size',size,this.queue_field.id);
+        this.sizeElm = draw_variable('size',size,div_variables_set.id);
         /**temp*/
         this.front=-1;
-        this.frontElem = draw_variable('front',this.front,this.queue_field.id);
+        this.frontElm = draw_variable('front',this.front,div_variables_set.id);
+        this.frontElm.classList.add('front_val_legend');
         /**temp*/
         this.rear=-1;
-        this.rearElm = draw_variable('rear',this.rear,this.queue_field.id);
-
-        this.front_pointer = draw_arrow_color(this.queue_field.id,'red','red');
-        this.front_pointer.style.position='relative';        
-        this.front_pointer.style.top =-55*(Math.ceil(this.size/2)-(this.front+1))+'px';
-        this.front_pointer.style.left = '68px';
-
-        this.rear_pointer = draw_arrow_color(this.queue_field.id,'green','green');
-        this.rear_pointer.style.position='relative';        
-        this.rear_pointer.style.top = -55*(Math.ceil(this.size/2)-(this.rear+1))+'px';
-        
+        this.rearElm = draw_variable('rear',this.rear,div_variables_set.id);
+        this.rearElm.classList.add('rear_val_legend');
         /**heap*/
         this.arr=[];
         for(var i=0;i<this.size;i++){
             this.arr.push(' ');
         }
-        this.arrElem = draw_array_vertical('arr',this.arr,size,this.queue_field.id);
+        this.arrElem = draw_set('arr',this.arr,this.size,this.queue_field.id);
+        var arr_box_id = this.arrElem[0].parentElement.parentElement.id
+
+        /**Arrow creation */
+        this.front_pointer = draw_arrow_color(arr_box_id,'red','red');
+        this.front_pointer.style.position='relative';        
+        this.front_pointer.style.transform = 'rotate(270deg)';
+            
+        this.rear_pointer = draw_arrow_color(arr_box_id,'green','green');
+        this.rear_pointer.style.position='relative';        
+        this.rear_pointer.style.transform = 'rotate(270deg)';
+        /**/ 
+
+        /*arrow position setting */
+        var rectBox = this.arrElem[0].getBoundingClientRect();
+        rectBox['x']-=60;
+        this.faRectOrigin = this.front_pointer.getBoundingClientRect();
+        this.front_pointer.style.top =(rectBox['y']-this.faRectOrigin['y'])+55+'px';
+        this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';
+
+        this.reRectOrigin = this.rear_pointer.getBoundingClientRect();
+        this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+        this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
     }
     
     enqueue(val){
-        highlightBoxELement(this.frontElem);
-        highlightBoxELement(this.rearElem);
+        highlightBoxELement(this.frontElm);
+        highlightBoxELement(this.rearElm);
         if(this.rear==this.size-1){
             console.log("queue full");            
             highlightBoxELement(this.sizeElm);
         }
         else{
-            if(this.front==-1)
-            {
-                this.front=0;
-                this.frontElem.innerHTML=this.front;
-            }
             this.rear+=1;
             this.rearElm.innerHTML = this.rear;
             this.arr[this.rear]=val;
             this.arrElem[this.rear].innerHTML = val;
             highlightBoxELement(this.arrElem[this.rear]);
-            this.rear_pointer.style.top = -55*(Math.ceil(this.size/2)-(this.rear+1))+'px';
-            this.front_pointer.style.top =-55*(Math.ceil(this.size/2)-(this.front+1))+'px';
+            var rectBox = this.arrElem[this.rear].getBoundingClientRect();
+            this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+            this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
+            if(this.front==-1)
+            {
+                this.front_pointer.style.visibility='visible';
+                this.rear_pointer.style.visibility='visible';
+                this.front=0;
+                this.frontElm.innerHTML=this.front;
+                this.front_pointer.style.top =rectBox['y']-this.faRectOrigin['y']+55+'px';
+                this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';    
+            }
         }    
     }
 
     dequeue (){
-        var val=-1;
-        highlightBoxELement(this.frontElem);
+        var val=' ';
+        highlightBoxELement(this.frontElm);
         if(this.front==-1){
             console.log("queue empty");
         }
@@ -246,27 +293,61 @@ class Queue{
             this.arrElem[this.front].innerHTML = ' ';
             unhighlightBoxELement(this.arrElem[this.front]);
             this.front+=1;
-            this.frontElem.innerHTML=this.front;
+            this.frontElm.innerHTML=this.front;
+            
             if(this.front > this.rear)
             {
                 highlightBoxELement(this.rearElm);
                 this.front=this.rear=-1;
-                this.frontElem.innerHTML=this.rear;
+                this.frontElm.innerHTML=this.rear;
                 this.rearElm.innerHTML=this.rear;
+                var rectBox = this.arrElem[0].getBoundingClientRect();
+                rectBox['x']-=60;
+                this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+                this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
             }
-            this.rear_pointer.style.top = -55*(Math.ceil(this.size/2)-(this.rear+1))+'px';
-            this.front_pointer.style.top =-55*(Math.ceil(this.size/2)-(this.front+1))+'px';
+            else{
+                var rectBox = this.arrElem[this.front].getBoundingClientRect();
+            }
+            this.front_pointer.style.top =rectBox['y']-this.faRectOrigin['y']+55+'px';
+            this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';    
         }
         return val;
     }
 
     removeHighlight(){
-        unhighlightBoxELement(this.frontElem);
+        unhighlightBoxELement(this.frontElm);
         unhighlightBoxELement(this.rearElm);
         unhighlightBoxELement(this.sizeElm);
     }
 
     remove(){
-        this.frontElm.parentElement.parentElement.remove();
+        this.front_pointer.remove();
+        this.rear_pointer.remove();
+        this.queue_field.remove();
+    }
+    
+    set_arrow_position(){
+        if(this.front==-1){
+            var rectBox = this.arrElem[0].getBoundingClientRect();
+            rectBox['x']-=60;
+        }
+        else{
+            var rectBox = this.arrElem[this.front].getBoundingClientRect();
+        }
+        this.faRectOrigin = this.front_pointer.getBoundingClientRect();
+        this.front_pointer.style.top =(rectBox['y']-this.faRectOrigin['y'])+55+'px';
+        this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';    
+
+        if(this.rear==-1){
+            var rectBox = this.arrElem[0].getBoundingClientRect();
+            rectBox['x']-=60;
+        }
+        else{
+            var rectBox = this.arrElem[this.rear].getBoundingClientRect();
+        }
+        this.reRectOrigin = this.rear_pointer.getBoundingClientRect();
+        this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+        this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';           
     }
 }

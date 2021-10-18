@@ -91,6 +91,18 @@ body{
     display: block;
 }
 
+/* for gueue */
+.front_val_legend{
+    background-color: red;
+    color:white;
+}
+
+.rear_val_legend{
+    background-color: green;
+    color:white;
+}
+/* *************************8 */
+
 .box_label_active{
     background-color: lawngreen;
     transition: .2s;
@@ -423,10 +435,10 @@ button[disabled]{
 .value_input_push:hover{
     background-color:rgb(216, 109, 226);
 }
+
 .value_input_push:active{
     transform: translateX(2px);
 }
-
 
 .value_input_pop{
     background-color:rgb(194, 102, 85);
@@ -440,9 +452,27 @@ button[disabled]{
     transform: translateX(2px);
 }
 
-/***********************************************Merge Sort********************************/
+/* _______________________________________________queue____________________________________________________________________ */
 
-
-.stack #heap_row{
-    display: block;
+.set{
+    width:60px;
+    height: 120px;
+    margin: 5px;
+    display: inline-block;
+    position: relative;
+}
+.dummybox{
+    margin: 5px;
+    height: 50px;
+    width: 50px;
+    display: inline-block;
+    transition: .2s;
+    font-size: 20px;
+    vertical-align: sub;
+    position: relative;
+    border-radius: 5px;
+    line-height: 45px;
+    position: relative;
+    text-align: center;
+    visibility: none;
 }
