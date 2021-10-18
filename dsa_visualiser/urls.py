@@ -10,8 +10,7 @@ urlpatterns = [
     path('stack', views.stack, name="stack"),
     path('stack-BO', views.stackBO, name="stackBO"),
     path('stack-appl', views.stackAppl, name="stackAppl"),
-    path('binary-search',views.binary_search,name="binarysearch")
-
+    path('binary-search',views.binary_search,name="binarysearch"),
     path('insertion-sort', views.insertionsort, name="insertionsort"),
     path('merge-sort', views.mergesort, name="mergesort"),
     path('queue', views.queue, name="queue"),
