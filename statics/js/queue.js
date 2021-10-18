@@ -61,7 +61,7 @@ function loop() {
     // if (stk_obj.top_val.classList.contains('box_label_active')) {
     //     stk_obj.top_val.classList.remove('box_label_active');
     // }
-    stk_obj.removeHighlight();
+    queue_obj.removeHighlight();
     switch(code_line_itr) {
         default:
             break;
@@ -89,6 +89,7 @@ function createQueue(){
             document.getElementById("dequeue").disabled = false;    
         }
     }
+    EnableCtrlButtons();
 }  
 
 // this function puts the loop() function  on interval call of 1000 milli sec
@@ -104,3 +105,10 @@ function reset(){
     document.getElementById("enqueue").disabled = true;
     document.getElementById("dequeue").disabled = true;    
 }
+// var timeout;
+// window.addEventListener('resize', function(event) {
+//     if(queue_obj!=null){
+//  //       this.clearTimeout(timeout);
+//         timeout = setTimeout(queue_obj.set_arrow_position(),1000);
+//     }
+// }, true);
