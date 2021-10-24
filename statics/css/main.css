@@ -476,3 +476,57 @@ button[disabled]{
     text-align: center;
     visibility: none;
 }
+
+.pbutton{
+    height:60px;
+    width:200px;
+    box-shadow: 
+    inset 0 3px 2px rgba(255,255,255,.22),
+    /* inset 0 -3px 2px rgba(0,0,0,.17), 
+    inset 0 20px 10px rgba(255,255,255,.12),  */
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
+    border:0;
+    outline: 0;
+    padding:15px;
+    margin: 15px;
+    text-align: center;
+    font-size:large;
+    background-color:rgb(240, 133, 250);
+    color: aliceblue;
+    font-size:medium;
+}
+
+.cbutton{
+    height:60px;
+    width:200px;
+    box-shadow: 
+    inset 0 3px 2px rgba(255,255,255,.22),
+    /* inset 0 -3px 2px rgba(0,0,0,.17), 
+    inset 0 20px 10px rgba(255,255,255,.12),  */
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
+    border:0;
+    outline: 0;
+    padding:15px;
+    margin: 15px;
+    text-align: center;
+    font-size:large;
+    background-color:rgb(194, 102, 85);
+    color: aliceblue;
+    font-size:medium;
+}
+
+.pbutton:hover{
+    background-color:rgb(216, 109, 226);
+}
+
+.pbutton:active{
+    transform: translateX(2px);
+}
+.cbutton:hover{
+    background-color:rgb(190, 59, 36);
+}
+.cbutton:active{
+    transform: translateX(2px);
+}
