@@ -92,6 +92,6 @@ def insertionsort(request):
 def mergesort(request):
     return render(request, "merge_sort/merge_sort.html")
     
-# @login_required(login_url="signin")
-# def queueAppl(request):
-#     return render(request, "stack/stack_toh.html")
+@login_required(login_url="signin")
+def queueAppl(request):
+    return render(request, "queue/queue_pc.html")

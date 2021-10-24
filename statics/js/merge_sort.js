@@ -330,8 +330,7 @@ async function loop() {
             highlightBoxELement(temp_arr1[i_index]);
             arr_H_ele1 = arrElmSet[start + i_index];
             arr_H_ele2 = temp_arr1[i_index];
-            i_index++;
-            i_element.innerHTML = i_index;
+            i_element.innerHTML = i_index++;
             highlightBoxELement(start_index);
             highlightBoxELement(i_element);
             code_line_itr = for_loop_3;
@@ -353,8 +352,7 @@ async function loop() {
             highlightBoxELement(temp_arr2[j_index]);
             arr_H_ele1 = arrElmSet[mid + 1 + j_index];
             arr_H_ele2 = temp_arr2[j_index];
-            j_index++;
-            j_element.innerHTML = j_index;
+            j_element.innerHTML = j_index++;
             highlightBoxELement(j_element);
             highlightBoxELement(mid_element);
             code_line_itr = for_loop_4;
