@@ -1,6 +1,7 @@
+"""Imports"""
 from django.urls import path
 from . import views
-
+# Paths for different urls provied by this website
 urlpatterns = [
     path('', views.signin, name="signin"),
     path('register', views.register, name="register"),
@@ -8,15 +9,15 @@ urlpatterns = [
     path('dashboard', views.dashboard, name="dashboard"),
     path('linear-search', views.linear_search, name="linearsearch"),
     path('stack', views.stack, name="stack"),
-    path('stack-BO', views.stackBO, name="stackBO"),
-    path('stack-appl', views.stackAppl, name="stackAppl"),
+    path('stack-BO', views.stack_bo, name="stackBO"),
+    path('stack-appl', views.stack_appl, name="stackAppl"),
     path('binary-search',views.binary_search,name="binarysearch"),
     path('insertion-sort', views.insertionsort, name="insertionsort"),
     path('merge-sort', views.mergesort, name="mergesort"),
     path('queue', views.queue, name="queue"),
-    path('queue-BO', views.queueBO, name="qeueuBO"),
-    path('queue-appl', views.queueAppl, name="queueAppl"),
+    path('queue-BO', views.queue_bo, name="qeueuBO"),
+    path('queue-appl', views.queue_appl, name="queueAppl"),
     path('sorting', views.sorting, name="sorting"),
     path('searching', views.searching, name="searching"),
-    path('done/<animation>', views.storeAnimationDoneStatus, name="done"),
+    path('done/<animation>', views.store_animation_done_status, name="done"),
  ]
