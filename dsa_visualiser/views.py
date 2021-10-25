@@ -95,3 +95,8 @@ def mergesort(request):
 @login_required(login_url="signin")
 def queueAppl(request):
     return render(request, "queue/queue_pc.html")
+
+@login_required(login_url="signin")
+def binary_search(request):
+    return render(request, "binary_search/binary.html")
+    
