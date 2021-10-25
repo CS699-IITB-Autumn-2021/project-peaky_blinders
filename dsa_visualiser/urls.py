@@ -15,5 +15,6 @@ urlpatterns = [
     path('merge-sort', views.mergesort, name="mergesort"),
     path('queue', views.queue, name="queue"),
     path('queue-BO', views.queueBO, name="qeueuBO"),
-#     path('queue-appl', views.queueAppl, name="queueAppl")
+    path('queue-appl', views.queueAppl, name="queueAppl")
+    
 ]

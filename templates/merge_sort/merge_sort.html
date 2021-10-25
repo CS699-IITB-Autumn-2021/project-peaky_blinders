@@ -16,14 +16,14 @@
         <div class='col-1-1' id="parent">
             <div id="editor">void mergeSort(int arr[], int n) {
     int curr_size;  
-    int left_start; 
+    int start; 
 
     for (curr_size=1; curr_size <= n-1; curr_size = 2*curr_size) {
-        for (left_start=0; left_start < n-1; left_start += 2*curr_size) {
-            int mid = min(left_start + curr_size - 1, n-1);
-            int right_end = min(left_start + 2*curr_size - 1, n-1);
+        for (start=0; start < n-1; start += 2*curr_size) {
+            int mid = min(start + curr_size - 1, n-1);
+            int end = min(start + 2*curr_size - 1, n-1);
             
-            merge(arr, left_start, mid, right_end);
+            merge(arr, left_start, mid, end);
         }
     }
 }

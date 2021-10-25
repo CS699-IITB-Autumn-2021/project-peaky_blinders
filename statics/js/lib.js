@@ -111,6 +111,20 @@ function removeBoxElm(elm){
             elm.parentElement.remove();
 }
 
+function createButtonArr(number_of_buttons, innertext, class1, onclickfunc, parent_id, isDisabled) {
+    btn_arr = [];
+    for (var i=1; i<=number_of_buttons; i++) {
+        let btn = document.createElement("button");
+        btn.setAttribute("class", class1);
+        btn.innerHTML = innertext + " " + i;
+        btn.onclick = function () { onclickfunc(btn.innerHTML.substr(0, 1)+btn.innerHTML.substr(btn.innerHTML.length-1, 1)); };;
+        btn.disabled = isDisabled;
+        btn_arr.push(btn);
+        document.getElementById(parent_id).appendChild(btn);
+    }
+    return btn_arr;
+}
+
 
 class Stack{
     constructor(parent_id,size,stackName){
@@ -257,12 +271,39 @@ class Queue{
     enqueue(val){
         highlightBoxELement(this.frontElm);
         highlightBoxELement(this.rearElm);
-        if(this.rear==this.size-1){
+        if((this.front == 0 && this.rear == this.size-1) || (this.rear == (this.front-1)%(this.size-1))){
             console.log("queue full");            
             highlightBoxELement(this.sizeElm);
         }
-        else{
-            this.rear+=1;
+        else if (this.rear == this.size-1 && this.front != 0){
+            this.rear = 0;
+            this.rearElm.innerHTML = this.rear;
+            this.arr[this.rear]=val;
+            this.arrElem[this.rear].innerHTML = val;
+            highlightBoxELement(this.arrElem[this.rear]);
+            var rectBox = this.arrElem[0].getBoundingClientRect();
+            rectBox['x']-=65;
+            this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+            this.rear_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';
+        }
+        else if (this.front==-1) {
+            this.front_pointer.style.visibility='visible';
+            this.rear_pointer.style.visibility='visible';
+            this.rear = 0;
+            this.rearElm.innerHTML = this.rear;
+            this.arr[this.rear]=val;
+            this.arrElem[this.rear].innerHTML = val;
+            highlightBoxELement(this.arrElem[this.rear]);
+            var rectBox = this.arrElem[this.rear].getBoundingClientRect();
+            this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+            this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
+            this.front = 0;
+            this.frontElm.innerHTML=this.front;
+            this.front_pointer.style.top =rectBox['y']-this.faRectOrigin['y']+55+'px';
+            this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';
+        }
+        else {
+            this.rear++;
             this.rearElm.innerHTML = this.rear;
             this.arr[this.rear]=val;
             this.arrElem[this.rear].innerHTML = val;
@@ -271,16 +312,6 @@ class Queue{
             var rectBox = this.arrElem[this.rear].getBoundingClientRect();
             this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
             this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
-
-            if(this.front==-1)
-            {
-                this.front_pointer.style.visibility='visible';
-                this.rear_pointer.style.visibility='visible';
-                this.front=0;
-                this.frontElm.innerHTML=this.front;
-                this.front_pointer.style.top =rectBox['y']-this.faRectOrigin['y']+55+'px';
-                this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';    
-            }
         }    
     }
 
@@ -290,30 +321,42 @@ class Queue{
         if(this.front==-1){
             console.log("queue empty");
         }
-        else{
+        else if (this.front == this.rear){
+            val = this.arr[this.front];
+            this.arrElem[this.front].innerHTML = ' ';
+            unhighlightBoxELement(this.arrElem[this.front]);
+            this.front = -1;
+            this.rear = -1;
+            this.rearElm.innerHTML=this.rear;
+            this.frontElm.innerHTML=this.front;
+            var rectBox = this.arrElem[0].getBoundingClientRect();
+            rectBox['x']-=60;
+            this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
+            this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
+            this.front_pointer.style.top =(rectBox['y']-this.faRectOrigin['y'])+55+'px';
+            this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';
+        }
+        else if (this.front == this.size-1) {
+            val = this.arr[this.front];
+            this.arrElem[this.front].innerHTML = ' ';
+            unhighlightBoxELement(this.arrElem[this.front]);
+            var rectBox = this.arrElem[this.front].getBoundingClientRect();
+            this.front=0;
+            this.frontElm.innerHTML=this.front;
+            this.front_pointer.style.top =(rectBox['y']-this.faRectOrigin['y'])+55+'px';
+            this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';
+        }
+        else {
             val = this.arr[this.front];
             this.arrElem[this.front].innerHTML = ' ';
             unhighlightBoxELement(this.arrElem[this.front]);
             this.front+=1;
+            var rectBox = this.arrElem[this.front].getBoundingClientRect();
+            // this.front++;
             this.frontElm.innerHTML=this.front;
-            
-            if(this.front > this.rear)
-            {
-                highlightBoxELement(this.rearElm);
-                this.front=this.rear=-1;
-                this.frontElm.innerHTML=this.rear;
-                this.rearElm.innerHTML=this.rear;
-                var rectBox = this.arrElem[0].getBoundingClientRect();
-                rectBox['x']-=60;
-                this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
-                this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
-            }
-            else{
-                var rectBox = this.arrElem[this.front].getBoundingClientRect();
-            }
-            this.front_pointer.style.top =rectBox['y']-this.faRectOrigin['y']+55+'px';
-            this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';    
-        }
+            this.front_pointer.style.top =(rectBox['y']-this.faRectOrigin['y'])+55+'px';
+            this.front_pointer.style.left=rectBox['x']-this.faRectOrigin['x']+'px';
+        }           
         return val;
     }
 
