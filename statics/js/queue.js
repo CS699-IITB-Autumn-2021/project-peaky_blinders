@@ -14,11 +14,12 @@ var deque_begin = 12;
 var underflow_check = 13;
 var deque_ret_err = 14;
 var else2_begin = 15;
-var front_ptr_incr = 16;
-var front_rear_condition_check = 17;
-var front_rear_update = 18;
-var else2_end = 19;
-var deque_end = 20;
+var front_rear_condition_check = 16;
+var front_rear_update = 17;
+var else3 = 18;
+var front_ptr_incr = 19;
+var else2_end = 20;
+var deque_end = 21;
 
 
 // ace editor configuration
@@ -27,7 +28,7 @@ var editor;
 //Max stack size
 //var stack_size = 0;
 var queue_size =0;
-code_line_count=20;
+code_line_count=21;
 
 //current code line number
 var code_line_itr = 0;
@@ -43,6 +44,7 @@ var line_rem_highlight;
 
 var queue_obj=null;
 var val;
+var val2;
 
 // var stack_content = [];
 // var top1=0; 
@@ -71,6 +73,7 @@ function setUpEditor(){
 }
 
 var enqValElm;
+var deqValElm;
 var parent_id = 'variable_set';
 var temp = 'temp';
 var heap = 'heap';
@@ -183,6 +186,8 @@ function loop() {
         case deque_begin:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
+
+            deqValElm=draw_variable('deq_val',' ',queue_obj.sizeElm.parentElement.parentElement.id);
             code_line_itr++;
             break;
         case underflow_check:
@@ -201,36 +206,28 @@ function loop() {
         line_rem_highlight = code_line_itr;
         code_line_itr++;
         break;
-        case front_ptr_incr:
-            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-            line_rem_highlight = code_line_itr;
-            val = queue_obj.arr[queue_obj.front];
-            queue_obj.arrElem[queue_obj.front].innerHTML = ' ';
-            unhighlightBoxELement(queue_obj.arrElem[queue_obj.front]);
-            queue_obj.front+=1;
-            queue_obj.frontElm.innerHTML=queue_obj.front;
-            var rectBox = queue_obj.arrElem[queue_obj.front].getBoundingClientRect();  
-            queue_obj.front_pointer.style.top =rectBox['y']-queue_obj.faRectOrigin['y']+55+'px';
-            queue_obj.front_pointer.style.left=rectBox['x']-queue_obj.faRectOrigin['x']+'px';  
-            code_line_itr++;
-            break;
+        
         case front_rear_condition_check:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
-             if(queue_obj.front>queue_obj.rear){
+             if(queue_obj.front >= queue_obj.rear){
                 highlightBoxELement(queue_obj.rearElm);
-                 code_line_itr++;
+                 code_line_itr = front_rear_update;
                 
              }
              else{
-                code_line_itr = else2_end;
+                code_line_itr = else3;
 
              }
              break;
-            
         case front_rear_update:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
+            queue_obj.arrElem[queue_obj.front].innerHTML = ' ';
+            unhighlightBoxELement(queue_obj.arrElem[queue_obj.front]);
+            val2 = queue_obj.arr[queue_obj.front];
+            deqValElm.innerHTML = val2;
+            
             queue_obj.front=queue_obj.rear=-1;
             queue_obj.frontElm.innerHTML=queue_obj.rear;
             queue_obj.rearElm.innerHTML=queue_obj.rear;
@@ -240,6 +237,25 @@ function loop() {
             queue_obj.rear_pointer.style.left=rectBox['x']-queue_obj.reRectOrigin['x']+'px';
             queue_obj.front_pointer.style.top =rectBox['y']-queue_obj.faRectOrigin['y']+55+'px';
             queue_obj.front_pointer.style.left=rectBox['x']-queue_obj.faRectOrigin['x']+'px'; 
+            code_line_itr = else2_end;
+            break;
+        case  else3:
+            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;  
+            break;
+        case front_ptr_incr:
+            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
+            line_rem_highlight = code_line_itr;
+            val2 = queue_obj.arr[queue_obj.front];
+            deqValElm.innerHTML = val2;
+            queue_obj.arrElem[queue_obj.front].innerHTML = ' ';
+            unhighlightBoxELement(queue_obj.arrElem[queue_obj.front]);
+            queue_obj.front+=1;
+            queue_obj.frontElm.innerHTML=queue_obj.front;
+            var rectBox = queue_obj.arrElem[queue_obj.front].getBoundingClientRect();  
+            queue_obj.front_pointer.style.top =rectBox['y']-queue_obj.faRectOrigin['y']+55+'px';
+            queue_obj.front_pointer.style.left=rectBox['x']-queue_obj.faRectOrigin['x']+'px';  
             code_line_itr++;
             break;
             
@@ -253,6 +269,7 @@ function loop() {
             code_line_itr=0;
             
             clearInterval(interval);
+            removeBoxElm(deqValElm);
             playButton(0);
             disbaleCtrlButtons(play);
             disbaleCtrlButtons(step);
@@ -274,6 +291,7 @@ function enqueue(){
 function dequeue(){
   //  document.getElementById('dequeue_val').value = queue_obj.dequeue();
     code_line_itr = deque_begin;
+   
     EnableCtrlButtons();
 }
 

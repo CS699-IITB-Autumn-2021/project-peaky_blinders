@@ -13,13 +13,15 @@
 
 </head>
 <body>
+	<h1>DSA VISUALISER</h1>
+	
 
-<h1>DSA VISUALISER</h1>
 <div class="login">
+	
 	<h2>Login</h2>
 	<form method="POST" action="">
 		{% csrf_token %}
-		<input type="text" class="user active" id="email" name="email" placeholder="Username"/>
+		<input type="email" class="user active" id="email" name="email" placeholder="Email"/>
 		<input type="password" class="lock active" id="password" name="password" placeholder="Password"/>
 	
 	

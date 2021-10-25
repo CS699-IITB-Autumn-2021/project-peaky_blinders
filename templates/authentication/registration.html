@@ -52,6 +52,20 @@
 	} else 
 	  $('#message').html('Not Matching').css('color', 'red');
   });
+
+  
+  const re = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+  
+
+$("#email").on("input", function(){
+if($('#email').val().match(re)){
+	$('#message').html('correct email').css('color', 'green');
+
+}else
+$('#message').html(' incorrect email ').css('color', 'red');
+
+
+});
 </script>
 </body>
 </html>

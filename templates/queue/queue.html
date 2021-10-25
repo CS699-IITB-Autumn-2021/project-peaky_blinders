@@ -16,25 +16,26 @@
     <div class='grid'>
         <div class='col-1-1' id="parent">
             <div id="editor">void enQueue(int value){
-        if (rear == SIZE - 1)
-            printf("\nQueue is Full!!");
-        else{
-             if(front == -1)
-                 front = 0;
-             rear++;
-             items[rear] = value;
-        }
+    if (rear == SIZE - 1)
+        printf("\nQueue is Full!!");
+    else{
+            if(front == -1)
+                front = 0;
+            rear++;
+            items[rear] = value;
     }
+ }
                         
 void deQueue(){
-    if (front == -1)
-    printf("\nQueue is Empty!!");
-    else{
-    front++;
-    if(front > rear)
-    front = rear = -1;
+if (front == -1)
+   printf("\nQueue is Empty!!");
+else{
+    if(front >= rear)
+        front = rear = -1;
+    else
+        front++;
     }
-    }</div>
+}</div>
 </div>
     <div class='col-1-1' id='animation_box'>
         <div class="stack">

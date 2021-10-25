@@ -13,7 +13,7 @@ h1 {
 
   .login {
     width: 31%;
-    margin: 35px auto 0;
+    margin: 170px auto 0;
     padding: 15px 0px 0px 0px;
     border-radius: 5px;
     background:#fff;
@@ -26,9 +26,9 @@ h1 {
   }
   .login form input[type="text"] {
     outline: none;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 400;
-    color: #db0808;
+    color: #0f81ec;
     padding: 10px 20px 10px 46px;
     border: 1px solid #2DC2BC;
     border-radius: 5px;
@@ -39,9 +39,9 @@ h1 {
   
   .login form input[type="email"] {
     outline: none;
-    font-size: 15px;
+    font-size: 19px;
     font-weight: 400;
-    color: #e01515;
+    color: #0f81ec;
     padding: 10px 20px 10px 46px;
     border: 1px solid #2DC2BC;
     border-radius: 5px;
@@ -62,7 +62,7 @@ h1 {
     margin: 0 auto 11px;
     width: 60%;
     -webkit-appearance: none;
-    color:#c0c0c0;
+    color:#0f81ec;
   }
   .login input[type="confirm password"] {
     outline: none;
@@ -74,7 +74,7 @@ h1 {
     margin: 0 auto 11px;
     width: 60%;
     -webkit-appearance: none;
-    color:#c0c0c0;
+    color:#0f81ec;
   }
 
   .login input[type="submit"] {
@@ -99,23 +99,23 @@ h1 {
 }
 
 .login form input.first {
-    background: url(../images/user.png)no-repeat 15px 7px #fff;
+    background: url(../images/user.png)no-repeat 15px 13px #fff;
     display: block;
   }
   .login form input.last {
-    background: url(../images/user.png)no-repeat 15px 7px #fff;
+    background: url(../images/user.png)no-repeat 15px 13px #fff;
     display: block;
   }
   .login form input.email {
-    background: url(../images/user.png)no-repeat 15px 7px #fff;
+    background: url(../images/user.png)no-repeat 15px 13px #fff;
     display: block;
   }
   .login form input.lock {
-    background: url(../images/key.png)no-repeat 15px 7px #fff;
+    background: url(../images/key.png)no-repeat 15px 13px #fff;
     display: block;
   }
   .login form input.doublelock {
-    background: url(../images/key.png)no-repeat 15px 7px #fff;
+    background: url(../images/key.png)no-repeat 15px 13px #fff;
     display: block;
   }
 
