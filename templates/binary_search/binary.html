@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<title>Binary Search</title>
+{% load static %}
+<script src="{% static 'js/ace-builds-master/src/ace.js' %}"></script>
+<link rel="stylesheet" href="{% static 'css/normalize.css' %}">
+<link rel="stylesheet" href="{% static 'css/main.css' %}">
+<script src="{% static 'js/lib.js' %}"></script>
+<script src="{% static 'js/binary-search.js' %}"></script>
+<script src="{% static 'js/button.js' %}"></script>
+<script src="{% static 'js/init.js' %}"></script>
+</head>
+<body>
+    <div class='grid'>
+        <div class='col-1-1' id="parent">
+            <div id="editor">int binarySearch(int arr[], int n, int x)
+                {
+                  int low = 0, high = n-1;
+                  while (low <= high)
+                    {
+                        int mid = (low + high)/2;
+                        if (x == arr[mid]) {
+                            return mid;
+                        }
+                        else if (x < arr[mid]) {
+                            high = mid - 1;
+                        }
+                        else {
+                            low = mid + 1;
+                        }
+                    }
+                 return -1;
+                }
+                 
+                int main(void)
+                {
+                    int arr[] = { 2, 5, 6, 8, 9, 10 };
+                    int x = 5;
+                    int n = sizeof(arr)/sizeof(arr[0]);
+                    binarySearch(arr, n, x);
+                    return 0;
+                }
+</div>
+</div>
+    <div class='col-1-1' id='animation_box'>
+        <div class="stack">
+            <div id='variable_set' class="unselectable">
+                <div id='temp'></div>
+                <div id='heap'></div>
+            </div>                    
+        </div>
+    </div>
+</div>
+<div id='control_set'>
+    <button id="play_btn" class='button button_play' onclick="playButton()">PLAY</button>        
+    <button id="step_btn" class='button button_next' onclick="stepButton()">STEP</button>        
+    <button id="reset_btn" class='button button_reset'onclick="resetButton()">RESET</button>
+</div>
+
+<div id='input_set'>
+    <div>
+        <div id='create_struct'>
+            <input type="text" name="" id="max_size_array" placeholder="Enter Size of Array" class='value_input'>
+            <button type="button" class="value_input value_input_create" onclick="setSize()">
+                Set Size
+            </button>        
+        </div>    
+    </div>
+    <div id='stack_ops'>
+        <div id='stack_push' class='col-1-1'>
+            <div id='input_array_set'>
+            <button type="button" class="value_input value_input_push" id="set_Array_value" onclick="set_Array_value()" disabled>
+                Set Array
+            </button>        
+        </div>
+    </div>
+        <div id='stack_pop'  class='col-1-1'>
+            <input type="text" name="" id="search_val"  class='value_input'>
+            <button type="button" class="value_input value_input_pop" id="SetSearchVal" onclick="SetSearchVal()" disabled>
+                Search
+            </button>        
+        </div>
+    </div>
+</div>
+</body>    </html>

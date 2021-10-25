@@ -166,3 +166,11 @@ def storeAnimationDoneStatus(request, animation):
             setattr(history, animation, 2)
     history.save()
     return redirect("/dashboard")
+
+@login_required(login_url="signin")
+def binary_search(request):
+    history = History.objects.get(username = request.user)
+    history.binarySearch = 1
+    history.save()
+    return render(request, "binary_search/binary.html")
+    

@@ -34,7 +34,7 @@ var line_rem_highlight;
 
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
-    editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
+    editor.setTheme("ace/theme/cobalt");   // set the background theme to coba+lt0
     editor.getSession().setMode("ace/mode/c_cpp");  // sets the langugage for key highlight as c_cpp (both c and c++)
     editor.setReadOnly(true);   // make the code section as read only
     Range = ace.require('ace/range').Range;    // Range Object to be used to identity line of code.
