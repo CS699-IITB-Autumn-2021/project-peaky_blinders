@@ -19,74 +19,130 @@
 
 <body>
     <div class="wrapper">
-       
+        
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>DSA Examples</h3>
+                <h3>DSA Visualiser</h3>
             </div>
 
             <ul class="list-unstyled components">
-                {% if "Linked List" in history %}
-                <li style="background-color: #0099CC;">
-                    <a>Linked List</a>
-                </li>
-                {% else %}
                 <li>
-                    <a>Linked List</a>
-                </li>    
-                {% endif %}
-                <li>
-                    <a href="#pageSubmenu" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Stack</a>
-                    <ul class="collapse list-unstyled" id="pageSubmenu">
-                        {% if "Stack Basic Operations" in history %}
-                        <li style="background-color: #0099CC;">
-                            <a>Basic Operations</a>
+                    <!-- <a href="#pageSubmenu1" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Linked List</a> -->
+                    <!-- <ul class="collapse list-unstyled" id="pageSubmenu1"> -->
+                        {% if "linkedListBo" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href>LL Basic Operations</a>
                         </li>
                         {% else %}
                         <li>
-                            <a>Basic Operations</a>
+                            <a href>LL Basic Operations</a>
                         </li>    
                         {% endif %}
-                        {% if "Stack Applications" in history %}
-                        <li style="background-color: #0099CC;">
-                            <a>Applications</a>
+                        {% if "linkedListAppl" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href>LL Applications</a>
                         </li>
                         {% else %}
                         <li>
-                            <a>Applications</a>
+                            <a href>LL Applications</a>
+                        </li>    
+                        {% endif %}
+                    <!-- </ul> -->
+                </li>
+                <li>
+                    <!-- <a href="#pageSubmenu2" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Stack</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu2"> -->
+                        {% if "stackBo" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/stack-BO">Stack Basic Operations</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/stack-BO">Stack Basic Operations</a>
+                        </li>    
+                        {% endif %}
+                        {% if "stackAppl" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/stack-appl">Stack Applications</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/stack-appl">Stack Applications</a>
+                        </li>    
+                        {% endif %}
+                    <!-- </ul> -->
+                </li>
+                <li>
+                    <!-- <a href="#pageSubmenu3" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Queue</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu3"> -->
+                        {% if "queueBo" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/queue-BO">Queue Basic Operations</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/queue-BO">Queue Basic Operations</a>
+                        </li>    
+                        {% endif %}
+                        {% if "queueAppl" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/queue-appl">Queue Applications</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/queue-appl">Queue Applications</a>
                         </li>    
                         {% endif %}
                         
-                    </ul>
+                    <!-- </ul> -->
                 </li>
-                {% if "Queue" in history %}
-                <li style="background-color: #0099CC;">
-                    <a>Queue</a>
-                </li>
-                {% else %}
                 <li>
-                    <a>Queue</a>
-                </li>    
-                {% endif %}
-                {% if "Searching" in history %}
-                <li style="background-color: #0099CC;">
-                    <a>Searching</a>
+                    <!-- <a href="#pageSubmenu4" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Searching</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu4"> -->
+                        {% if "linearSearch" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/linear-search">Linear Search</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/linear-search">Linear Search</a>
+                        </li>    
+                        {% endif %}
+                        {% if "binarySearch" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href>Binary Search</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href>Binary Search</a>
+                        </li>    
+                        {% endif %}
+                    <!-- </ul> -->
                 </li>
-                {% else %}
                 <li>
-                    <a>Searching</a>
-                </li>    
-                {% endif %}
-                {% if "Sorting" in history %}
-                <li style="background-color: #0099CC;">
-                    <a>Sorting</a>
+                    <!-- <a href="#pageSubmenu5" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">Sorting</a>
+                    <ul class="collapse list-unstyled" id="pageSubmenu5"> -->
+                        {% if "insertionSort" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/insertion-sort">Insertion Sort</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/insertion-sort">Insertion Sort</a>
+                        </li>    
+                        {% endif %}
+                        {% if "mergeSort" in history %}
+                        <li style="background-color: #60d2f5;">
+                            <a href="/merge-sort">Merge Sort</a>
+                        </li>
+                        {% else %}
+                        <li>
+                            <a href="/merge-sort">Merge Sort</a>
+                        </li>    
+                        {% endif %}
+                        
+                    <!-- </ul> -->
                 </li>
-                {% else %}
-                <li>
-                    <a>Sorting</a>
-                </li>    
-                {% endif %}
-
             </ul>
 
             
@@ -94,97 +150,155 @@
 
         <!-- Page Content  -->
         <div id="content">
-
-            <nav class="navbar navbar-expand-lg navbar-light bg-light" >
+            <nav class="navbar navbar-expand-lg navbar-light" style="background-color: #1fbfb8;">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: #003399;">
+                    <button type="button" id="sidebarCollapse" class="btn btn-info" style="background-color: #3f5292;">
                         <i class="fas fa-align-left"></i>
-                        <span>History</span>
-                    </button>
-                    <button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <i class="fas fa-align-justify"></i>
+                        <span>Progress</span>
                     </button>
 
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
-                            <li class="logo-image">
-                                
-                             <img src="{% static 'images/user.png' %}" class="img-fluid">
-                              
-
-                            </li>
                             <li class="nav-item">
-                                <label class="usr" style="color: rgb(65, 73, 65); " for="curr_username">{{ name }}</label>
+                                <label class="usr" style="text-align: center; vertical-align: bottom; font-size: larger; padding-top: 8px;" for="curr_username">Welcome {{ name }}</label>
                             </li>
                             <li class="nav-item ">
-                                <a href="/logout"><button type="button" class="btn btn-danger" style="background-color:#003399;">Logout</button></a>
+                                <a href="/logout"><button type="button" class="btn btn-danger" >Logout</button></a>
                             </li>
-                            
-                            
                         </ul>
                     </div>
                 </div>
             </nav>
 
+            {% if dashboard == 'stack' %}
             <div class="container py-4">
                 
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
-                        <div class="card p-2" style="background-color: none;">
-                            <a class="card-block stretched-link text-decoration-none"  href="">
-                                <h4 class="card-title" style="text-align: center; color:  #66CCFF;font-size:300%" >Linked List</h4>
+                        <a class="card mb-3 p-2" href="/stack-BO">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title" >Basic Operations</h4>
                                 <!-- <p class="card-text" style="color: #0099CC;font-size:150%">A linked-list is a sequence of data structures which are connected together via links.</p> -->
-                                
-                            </a>
-                        </div>
-                        <div class="card p-2"  style="background-color:none">
-                            <a class="card-block stretched-link text-decoration-none" href="/stack">
-                                <h4 class="card-title" style="text-align: center; color:  #3399FF;font-size:300%">Stack</h4>
-                                <!-- <p class="card-text"  style="color: #9A3334;font-size:150%">A Stack is a linear data structure that follows the LIFO (Last-In-First-Out) principle.</p> -->
-                                
-                            </a>
-                        </div>
-                        <div class="card p-2"  style="background-color: none;">
-                            <a class="card-block stretched-link text-decoration-none" href="/queue">
-                                <h4 class="card-title" style="text-align: center;color:  #66CCFF;font-size:300%">Queue</h4>
-                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">A Queue is a linear structure which follows a particular order in which the operations are performed. The order is First In First Out (FIFO).</p> -->
-                                
-                            </a>
-                        </div>
-                       
-                    </div>
-                </div>
-            </div>
-            <div class="container py-4">
-                
-                <div class="card-deck-wrapper">
-                    <div class="card-deck" >
-                        <div class="card p-2"  style="background-color:none;" style="width: 30%;" >
-                            <a class="card-block stretched-link text-decoration-none" href="/linear-search">
-                                <h4 class="card-title" style="text-align: center;color:  #66CCFF;font-size:300%">Linear Search</h4>
-                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one.</p> -->
-                                
-                            </a>
-                        </div>
-                        <div class="card p-2"  style="background-color: none" style="width: 30%;" >
-                            <a class="card-block stretched-link text-decoration-none" href>
-                                <h4 class="card-title" style="text-align: center;color:  #66CCFF;font-size:300%">Binary Search</h4>
-                                <!-- <p class="card-text"  style="color: #0099CC;font-size:150%"> Search a sorted array by repeatedly dividing the search interval in half.</p> -->
-                                        
-                                    </a>
-                                </div>
-                                
-                            
+                            </div>
+                        </a>
                         
-                        <div class="card p-2"  style="background-color:none;" style="width: 30%;" >
-                            <a class="card-block stretched-link text-decoration-none" href="/insertion-sort">
-                                <h4 class="card-title" style="text-align: center;color:  #9A3334;font-size:300%">Insertion Sort</h4>
+                        <a class="card mb-3 p-2" href="/stack-appl">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Application</h4>
+                                <!-- <p class="card-text"  style="color: #9A3334;font-size:150%">A Stack is a linear data structure that follows the LIFO (Last-In-First-Out) principle.</p> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% elif dashboard == 'queue' %}
+            <div class="container py-4">
+                
+                <div class="card-deck-wrapper">
+                    <div class="card-deck">
+                        <a class="card mb-3 p-2" href="/queue-BO">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title" >Basic Operations</h4>
+                                <!-- <p class="card-text" style="color: #0099CC;font-size:150%">A linked-list is a sequence of data structures which are connected together via links.</p> -->
+                            </div>
+                        </a>
+                        
+                        <a class="card mb-3 p-2" href="/queue-appl">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Application</h4>
+                                <!-- <p class="card-text"  style="color: #9A3334;font-size:150%">A Stack is a linear data structure that follows the LIFO (Last-In-First-Out) principle.</p> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% elif dashboard == 'linkedList' %}
+            <div class="container py-4">
+                
+                <div class="card-deck-wrapper">
+                    <div class="card-deck">
+                        <a class="card mb-3 p-2" href="/linear-search">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title" >Linear Search</h4>
+                                <!-- <p class="card-text" style="color: #0099CC;font-size:150%">A linked-list is a sequence of data structures which are connected together via links.</p> -->
+                            </div>        
+                        </a>
+                        
+                        <a class="card mb-3 p-2" href="/binary-search">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Binary Search</h4>
+                                <!-- <p class="card-text"  style="color: #9A3334;font-size:150%">A Stack is a linear data structure that follows the LIFO (Last-In-First-Out) principle.</p> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% elif dashboard == 'sorting' %}
+            <div class="container py-4">
+                
+                <div class="card-deck-wrapper">
+                    <div class="card-deck">
+                        <a class="card mb-3 p-2" href="/insertion-sort">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title" >Insertion Sort</h4>
+                                <!-- <p class="card-text" style="color: #0099CC;font-size:150%">A linked-list is a sequence of data structures which are connected together via links.</p> -->
+                            </div>
+                        </a>
+                        
+                        <a class="card mb-3 p-2" href="/merge-sort">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Merge Sort</h4>
+                                <!-- <p class="card-text"  style="color: #9A3334;font-size:150%">A Stack is a linear data structure that follows the LIFO (Last-In-First-Out) principle.</p> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% elif dashboard == 'searching' %}
+            <div class="container py-4">
+                
+                <div class="card-deck-wrapper">
+                    <div class="card-deck">
+                        <a class="card mb-3 p-2" href="/linear-search">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title" >Linear Search</h4>
+                                <!-- <p class="card-text" style="color: #0099CC;font-size:150%">A linked-list is a sequence of data structures which are connected together via links.</p> -->
+                            </div>        
+                        </a>
+                        
+                        <a class="card mb-3 p-2" href="/binary-search">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Binary Search</h4>
+                                <!-- <p class="card-text"  style="color: #9A3334;font-size:150%">A Stack is a linear data structure that follows the LIFO (Last-In-First-Out) principle.</p> -->
+                            </div>
+                        </a>
+                    </div>
+                </div>
+            </div>
+            {% else %}
+            <div class="container py-4">
+                
+                <div class="card-deck-wrapper">
+                    <div class="card-deck" >
+                        <a class="card mb-3 p-2" href="">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Linked List</h4>
+                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one.</p> -->     
+                            </div>
+                        </a>
+                        <a class="card mb-3 p-2" href="/stack">
+                        <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Stack</h4>
                                 <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements.</p> -->
-                                
-                            </a>
                         </div>
-                    
+                        </a>
+                        <a class="card mb-3 p-2" href="/queue">
+                            <div class="card-block stretched-link text-decoration-none" >
+                                <h4 class="card-title">Queue</h4>
+                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements.</p> -->
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
@@ -192,16 +306,29 @@
                 
                 <div class="card-deck-wrapper">
                     <div class="card-deck" >
-                        <div class="card p-2"  style="background-color:none;" style="width: 30%;" >
-                            <a class="card-block stretched-link text-decoration-none" href="/merge-sort">
-                                <h4 class="card-title" style="text-align: center;color:  #66CCFF;font-size:300%">Merge Sort</h4>
-                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one.</p> -->
-                                
-                            </a>
+                        <a class="card mb-3 p-2" href="/searching">
+                            <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Searching</h4>
+                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">Linear search is a very simple search algorithm. In this type of search, a sequential search is made over all items one by one.</p> -->     
+                            </div>
+                        </a>
+                        <a class="card mb-3 p-2" href="/sorting">
+                        <div class="card-block stretched-link text-decoration-none">
+                                <h4 class="card-title">Sorting</h4>
+                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements.</p> -->
                         </div>
+                        </a>
+                        <a class="card mb-3 p-2" href="">
+                            <div class="card-block stretched-link text-decoration-none" >
+                                <h4 class="card-title">More Coming Soon</h4>
+                                <!-- <p class="card-text"  style="color: #CCFFCC;font-size:150%">A Sorting Algorithm is used to rearrange a given array or list elements according to a comparison operator on the elements.</p> -->
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>
+
+            {% endif %}
             <!-- <div class="card-columns">
                 <div class="card bg-primary" style="cursor: pointer;">
                   <div class="card-body text-center">
