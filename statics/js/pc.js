@@ -228,8 +228,8 @@ function loop() {
         case cons_func_end:
             line_rem_highlight = code_line_itr;
             document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
-            code_line_itr = 0;
-            playButton();
+            // code_line_itr = 0;
+            playButton(0);
             disbaleCtrlButtons(play);
             disbaleCtrlButtons(step);
             break;

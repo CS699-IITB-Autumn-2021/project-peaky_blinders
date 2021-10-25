@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>home</title>
     <title>TowerOfHanoi</title>
     {% load static %}
     <link rel="stylesheet" href="{% static 'css/normalize.css' %}">
@@ -141,6 +140,7 @@ int main() {
         <button id="step_btn" class='button button_next' onclick="stepButton()">STEP</button>        
         <button id="step2_btn" style="display:none" onclick="loop()">STEP</button>        
         <button id="reset_btn" class='button button_reset'onclick="resetButton()">RESET</button>
+        <a href="/done/stackAppl"><button class='button button_reset'>Done</button></a>
     </div>
 </body>
 </html>
