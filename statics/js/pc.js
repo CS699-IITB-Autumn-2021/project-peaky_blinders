@@ -53,11 +53,7 @@ var size=stack_size;
 
 
 /**
- * this function puts the loop() function  on interval call of 1000 milli sec
- * i.e it is called after every 1000 milli sec of 1 sec
- * @param {string} color1 - The first color, in hexadecimal format.
- * @param {string} color2 - The second color, in hexadecimal format.
- * @return {string} The blended color.
+ * Setup the editor.
  */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
