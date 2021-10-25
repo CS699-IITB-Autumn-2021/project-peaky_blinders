@@ -35,7 +35,7 @@ var code_line_itr = 0;
 // Total line number of code
 code_line_count=23;
 
-    // assigning unique element id's to any new div 
+// assigning unique element id's to any new div 
 var id_count=0;
 
 // FUNCTION VARIABLE TO store the interval function
@@ -44,12 +44,21 @@ var interval;
 // stores last highlighted line number to remove
 var line_rem_highlight;
 
+// Queue object
 var queue_obj=null;
 
-var stack_content = [];
-var top1=0; 
+// size of queue
 var size=stack_size;
 
+
+
+/**
+ * this function puts the loop() function  on interval call of 1000 milli sec
+ * i.e it is called after every 1000 milli sec of 1 sec
+ * @param {string} color1 - The first color, in hexadecimal format.
+ * @param {string} color2 - The second color, in hexadecimal format.
+ * @return {string} The blended color.
+ */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
     editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
@@ -72,15 +81,31 @@ function setUpEditor(){
     }
 }
 
-var parent_id = 'variable_set';
+// temp parent id
 var temp = 'temp';
+
+// heap parent id
 var heap = 'heap';
-var constants = 'constants'
+
+// producer's array to hold buttons
 var prod_arr=[];
+
+// consumer array to hold buttons
 var cons_arr=[];
+
+//mutex html element
 var mutex=null;
+
+// mutex val element
 var mutex_val = '';
 
+
+/**
+ * This function loops over each line of code in editor by checking 
+ * cases according to line number. Every case highlights particular 
+ * line of code, does some opeartion on data structure and changes 
+ * animations accordingly.
+ */
 function loop() {
     if (code_line_itr != prod_func && code_line_itr != cons_func && code_line_itr != 0) {
         document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
@@ -236,27 +261,51 @@ function loop() {
     }  
 }
 
+
+
+/**
+ * Calls enqueue method of queue_obj type
+ */
 function enqueue(){
     queue_obj.enqueue("x");
 }
 
 
+
+/**
+ * Calls dequeue method of queue_obj type
+ */
 function dequeue(){
     queue_obj.dequeue();
 }
 
+
+
+/**
+ * Creates array of n producer buttons and disables create producer button.
+ */
 function createProd() {
     var n_prod = document.getElementById('nProd').value;
     prod_arr = createButtonArr(n_prod, "Producer", "pbutton", producer, "temp2", false);
     document.getElementById("nprod").disabled = true;
 }
 
+
+/**
+ * Creates array of n consumers buttons and disables create consumer button.
+ */
 function createCons() {
     var n_cons = document.getElementById('nCons').value;
     cons_arr = createButtonArr(n_cons, "Consumer", "cbutton", consumer, "temp1", true);
     document.getElementById("ncons").disabled = true;
 }
 
+
+ /**
+ * Sets free mutex to producer asking for it and starts code execution 
+ * at start of producer function. Enables control buttons.
+ * @param {string} producer - Id of producer that wants to produce item
+ */
 function producer(producer) {
     if (mutex.innerHTML === '') {
         mutex.innerHTML = producer;
@@ -268,6 +317,12 @@ function producer(producer) {
     EnableCtrlButtons();
 }
 
+
+/**
+ * Sets free mutex to consumer asking for it and starts code execution 
+ * at start of consumer function. Enables control buttons
+ * @param {string} producer - Id of consumer that wants to consume item.
+ */
 function consumer(consumer) {
     if (mutex.innerHTML === '') {
         mutex.innerHTML = consumer;
@@ -278,6 +333,13 @@ function consumer(consumer) {
     }
     EnableCtrlButtons();
 }
+
+
+/**
+ * Blend two colors together.
+ * Creates queue if not present already. Creates mutex box and enables 
+ * create producer and consumer buttons. Enables reset button.
+ */
 function createQueue(){
     if (!queue_obj) {
         queue_size = parseInt(document.getElementById("max_size").value);
@@ -293,12 +355,21 @@ function createQueue(){
     EnableCtrlButtons(rst);
 }  
 
-// this function puts the loop() function  on interval call of 1000 milli sec
-// i.e it is called after every 1000 milli sec of 1 sec
+
+
+/**
+ * Runs loop function every 1000 milliseconds.
+ */
 function loop_color(){
     interval = setInterval(loop,1000);
 }
 
+
+
+/**
+ * Removes queue animation. Disables create producer and consumer 
+ * buttons. Remove producers and consumers. Remove mutex element.
+ */
 function reset(){
     if(queue_obj!=null)
         queue_obj.remove();
