@@ -267,9 +267,11 @@ class Queue{
             this.arr[this.rear]=val;
             this.arrElem[this.rear].innerHTML = val;
             highlightBoxELement(this.arrElem[this.rear]);
+            //rear pointer movement 
             var rectBox = this.arrElem[this.rear].getBoundingClientRect();
             this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
             this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';
+
             if(this.front==-1)
             {
                 this.front_pointer.style.visibility='visible';

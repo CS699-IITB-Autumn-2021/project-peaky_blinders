@@ -336,6 +336,9 @@ function reset(){
         if(set_arr_list_Elm!=null)
             set_arr_list_Elm[i].remove();
     }
+     index_mid=0;
+     index_low=0;
+     index_high=0;
     document.getElementById('search_val').value='';
     document.getElementById('max_size_array').value='';
     document.getElementById('set_Array_value').disabled = true;
