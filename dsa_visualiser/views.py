@@ -6,7 +6,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from dsa_visualiser.models import *
 
-history_list = ["username", "linkedListBo", "linkedListApp", "stackBo", "stackAppl", "queueBo", "queueAppl", "linearSearch", "binarySearch", "insertionSort", "mergeSort"]
+history_list = ["linkedListBo", "linkedListAppl", "stackBo", "stackAppl", "queueBo", "queueAppl", "linearSearch", "binarySearch", "insertionSort", "mergeSort"]
 
 #Add the logic to redirect to same page from where sign in was redirected
 def signin(request):
@@ -64,27 +64,9 @@ def dashboard(request):
     user = User.objects.get(username = request.user)
     history = History.objects.get(username = request.user)
     history1 = []
-    if history.linkedListBo == 2:
-        history1.append("linkedListBo")
-    if history.linkedListAppl == 2:
-        history1.append("linkedListAppl")
-    if history.stackBo == 2:
-        history1.append("stackBo")
-    if history.stackAppl == 2:
-        history1.append("stackAppl")
-    if history.queueBo == 2:
-        history1.append("queueBo")
-    if history.queueAppl == 2:
-        history1.append("queueAppl")
-    if history.linearSearch == 2:
-        history1.append("linearSearch")
-    if history.binarySearch == 2:
-        history1.append("binarySearch")
-    if history.insertionSort == 2:
-        history1.append("insertionSort")
-    if history.mergeSort == 2:
-        history1.append("mergeSort")
-    
+    for i in history_list:
+        if getattr(history, i) == 2:
+            history1.append(i)
     return render(request, "dashboard/dashboard.html", {'name':user.first_name+" "+user.last_name, 'history': history1, 'dashboard':'dashboard'})
 
 @login_required(login_url="signin")
@@ -99,26 +81,9 @@ def stack(request):
     user = User.objects.get(username = request.user)
     history = History.objects.get(username = request.user)
     history1 = []
-    if history.linkedListBo == 2:
-        history1.append("linkedListBo")
-    if history.linkedListAppl == 2:
-        history1.append("linkedListAppl")
-    if history.stackBo == 2:
-        history1.append("stackBo")
-    if history.stackAppl == 2:
-        history1.append("stackAppl")
-    if history.queueBo == 2:
-        history1.append("queueBo")
-    if history.queueAppl == 2:
-        history1.append("queueAppl")
-    if history.linearSearch == 2:
-        history1.append("linearSearch")
-    if history.binarySearch == 2:
-        history1.append("binarySearch")
-    if history.insertionSort == 2:
-        history1.append("insertionSort")
-    if history.mergeSort == 2:
-        history1.append("mergeSort")
+    for i in history_list:
+        if getattr(history, i) == 2:
+            history1.append(i)
     return render(request, "dashboard/dashboard.html", {'name':user.first_name+" "+user.last_name, 'history': history1, 'dashboard':'stack'})
 
 @login_required(login_url="signin")
@@ -140,26 +105,9 @@ def queue(request):
     user = User.objects.get(username = request.user)
     history = History.objects.get(username = request.user)
     history1 = []
-    if history.linkedListBo == 2:
-        history1.append("linkedListBo")
-    if history.linkedListAppl == 2:
-        history1.append("linkedListAppl")
-    if history.stackBo == 2:
-        history1.append("stackBo")
-    if history.stackAppl == 2:
-        history1.append("stackAppl")
-    if history.queueBo == 2:
-        history1.append("queueBo")
-    if history.queueAppl == 2:
-        history1.append("queueAppl")
-    if history.linearSearch == 2:
-        history1.append("linearSearch")
-    if history.binarySearch == 2:
-        history1.append("binarySearch")
-    if history.insertionSort == 2:
-        history1.append("insertionSort")
-    if history.mergeSort == 2:
-        history1.append("mergeSort")
+    for i in history_list:
+        if getattr(history, i) == 2:
+            history1.append(i)
     return render(request, "dashboard/dashboard.html", {'name':user.first_name+" "+user.last_name, 'history': history1,'dashboard':'queue'})
 
 @login_required(login_url="signin")
@@ -195,26 +143,9 @@ def sorting(request):
     user = User.objects.get(username = request.user)
     history = History.objects.get(username = request.user)
     history1 = []
-    if history.linkedListBo == 2:
-        history1.append("linkedListBo")
-    if history.linkedListAppl == 2:
-        history1.append("linkedListAppl")
-    if history.stackBo == 2:
-        history1.append("stackBo")
-    if history.stackAppl == 2:
-        history1.append("stackAppl")
-    if history.queueBo == 2:
-        history1.append("queueBo")
-    if history.queueAppl == 2:
-        history1.append("queueAppl")
-    if history.linearSearch == 2:
-        history1.append("linearSearch")
-    if history.binarySearch == 2:
-        history1.append("binarySearch")
-    if history.insertionSort == 2:
-        history1.append("insertionSort")
-    if history.mergeSort == 2:
-        history1.append("mergeSort")
+    for i in history_list:
+        if getattr(history, i) == 2:
+            history1.append(i)
     return render(request, "dashboard/dashboard.html", {'name':user.first_name+" "+user.last_name, 'history': history1, 'dashboard':'sorting'})
 
 @login_required(login_url="signin")
@@ -222,50 +153,16 @@ def searching(request):
     user = User.objects.get(username = request.user)
     history = History.objects.get(username = request.user)
     history1 = []
-    if history.linkedListBo == 2:
-        history1.append("linkedListBo")
-    if history.linkedListAppl == 2:
-        history1.append("linkedListAppl")
-    if history.stackBo == 2:
-        history1.append("stackBo")
-    if history.stackAppl == 2:
-        history1.append("stackAppl")
-    if history.queueBo == 2:
-        history1.append("queueBo")
-    if history.queueAppl == 2:
-        history1.append("queueAppl")
-    if history.linearSearch == 2:
-        history1.append("linearSearch")
-    if history.binarySearch == 2:
-        history1.append("binarySearch")
-    if history.insertionSort == 2:
-        history1.append("insertionSort")
-    if history.mergeSort == 2:
-        history1.append("mergeSort")
+    for i in history_list:
+        if getattr(history, i) == 2:
+            history1.append(i)
     return render(request, "dashboard/dashboard.html", {'name':user.first_name+" "+user.last_name, 'history': history1, 'dashboard':'searching'})
 
 @login_required(login_url="signin")
 def storeAnimationDoneStatus(request, animation):
     history = History.objects.get(username = request.user)
-    if animation == "linkedListBo":
-        history.linkedListBo = 2
-    elif animation == "linkedListAppl":
-        history.linkedListAppl = 2
-    elif animation ==  "stackBo":
-        history.stackBo = 2
-    elif animation == "stackAppl":
-        history.stackAppl = 2
-    elif animation == "queueBo":
-        history.queueBo = 2
-    elif animation == "queueAppl":
-        history.queueAppl = 2
-    elif animation == "linearSearch":
-        history.linearSearch = 2
-    elif animation == "binarySearch":
-        history.binarySearch = 2
-    elif animation == "insertionSort":
-        history.insertionSort = 2
-    elif animation == "mergeSort":
-        history.mergeSort = 2
+    for i in history_list:
+        if animation == i:
+            setattr(history, animation, 2)
     history.save()
     return redirect("/dashboard")
