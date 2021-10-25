@@ -3,7 +3,7 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background: #fafafa;
+    background-color: #fafafa;
 }
 
 p {
@@ -24,11 +24,14 @@ a:focus {
 
 .navbar {
     padding: 15px 10px;
-    background: rgb(219, 179, 179);
+    background-color: rgb(219, 179, 179);
     border: none;
     border-radius: 0;
     margin-bottom: 40px;
-    box-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 
+    inset 0 3px 2px rgba(255,255,255,.22),
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
 }
 .nav-item{
     margin:20px;
@@ -62,25 +65,30 @@ a:focus {
 }
 
 #sidebar {
-    min-width: 250px;
-    max-width: 250px;
-    background: #64d0df;
-    color: #fff;
+    min-width: 300px;
+    max-width: 300px;
+    background-color: #1fbfb8;/*#c9f3e6;*/
+    color:  #2c3e8f;
     transition: all 0.3s;
 }
 
 #sidebar.active {
-    margin-left: -250px;
+    margin-left: -300px;
 }
 
 #sidebar .sidebar-header {
-    padding: 20px;
-    background: #64d0df;
+    padding-top: 50px; 
+    padding-bottom: 50px;
+    text-align: center;
+
+    background-color: #1fbfb8;/*#c9f3e6;*/
+    border-bottom: 1px solid rgb(206, 204, 204);
 }
 
 #sidebar ul.components {
     padding: 20px 0;
-    border-bottom: 1px solid #64d0db;
+    padding-top: 0;
+    border-bottom: 1px solid #1fbfb8;/*#c9f3e6;*/
 }
 
 #sidebar ul p {
@@ -89,20 +97,22 @@ a:focus {
 }
 
 #sidebar ul li a {
-    padding: 10px;
-    font-size: 1.1em;
+    padding: 20px;
+    padding-left: 25px;
+    font-size: 20px;
     display: block;
+    border-bottom: 1px solid rgb(206, 204, 204);
 }
 
 #sidebar ul li a:hover {
-    color: #7386D5;
-    background: #fff;
+    color: #1e2e6b;
+    background-color: #fff;
 }
 
 #sidebar ul li.active>a,
 a[aria-expanded="true"] {
     color: #fff;
-    background: #6d7fcc;
+    background-color: #6d7fcc;
 }
 
 a[data-toggle="collapse"] {
@@ -118,9 +128,9 @@ a[data-toggle="collapse"] {
 }
 
 ul ul a {
-    font-size: 0.9em !important;
+    font-size: 15px !important;
     padding-left: 30px !important;
-    background: #6d7fcc;
+    background-color: #6d7fcc;
 }
 
 ul.CTAs {
@@ -142,9 +152,32 @@ ul.CTAs a {
     padding: 20px;
     min-height: 100vh;
     transition: all 0.3s;
+    background-color: rgb(206, 204, 204);
 }
 .card-deck-wrapper{
     color:rgb(14, 11, 11);
+}
+
+.card-title {
+    color: whitesmoke;
+    text-align: center;
+    font-size: 200%;
+    vertical-align: middle;
+    padding-top: 50px;
+}
+
+.card {
+    border-radius: 20px;
+    background-color: #26495c;
+}
+
+.p-2 {
+    height: 180px;
+    text-align: center;
+    box-shadow: 
+    inset 0 3px 2px rgba(255,255,255,.22),
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
 }
 
 
