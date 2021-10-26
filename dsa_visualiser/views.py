@@ -76,7 +76,7 @@ def register(request):
         linkedListAppl=0, stackBo=0, stackAppl=0, queueBo=0, queueAppl=0,
         linearSearch=0, binarySearch=0, insertionSort=0, mergeSort=0)
         history.save()
-
+        messages.success(request, "User registered successfully..")
         return redirect('signin')
 
     return render(request, "authentication/registration.html")

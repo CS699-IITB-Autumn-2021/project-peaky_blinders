@@ -1,0 +1,12 @@
+{
+    "source": {
+        "includePattern": ".+\\.js(doc|x)?$",   
+        "include": ["statics/js/"],                       
+        "exclude": ["node_modules", "statics/js/ace-builds-master", "statics/js/domarrow.js-master"]             
+    },
+    "recurseDepth": 10,                         
+    "opts": {
+        "destination": "./docs/",               
+        "recurse": true                         
+    }
+}
