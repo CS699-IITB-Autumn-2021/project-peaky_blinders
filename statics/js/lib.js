@@ -196,30 +196,327 @@ class Stack{
 class linkedList{
     constructor(parent_id){
         this.linkedListField = draw_fieldset('LInked List',parent_id);
+        this.linkedListField.style.maxWidth = '800px';  
         this.arr = [];
         this.size = 0;
         this.box_list=[];
         this.arrow_list=[];
+        this.manual =0 ;
+        this.dir=0; // right 0 left 1
+        this.lc = 0;
+        this.level=0;
+        this.litr=0;
+        this.ltype= 0 //0 odd 1 even
+        this.head = draw_boxes(['H'],1,this.linkedListField.id,'array')[0];
+        // this.head.style.fontSize = '15px';
+        this.box_list.push(this.head);
+        this.size=1;
+        this.linkedListField.style.borderBottom='none';
     }
+
+    setArrowBox(arrow,box){
+        var field_rect = this.linkedListField.getBoundingClientRect();
+        var cur_box_rect = box.getBoundingClientRect();
+        var cur_arw_rect = arrow.getBoundingClientRect();
+    
+        if(800-field_rect['right']<40){
+            if(this.manual ==0)
+            {
+                // var last_box_rect = this.box_list[this.size-1].getBoundingClientRect();
+
+                if((field_rect['right']-cur_box_rect['right'] < 90)) {
+                }   
+                else{
+                    arrow.style.transform = 'rotate(90deg)';
+                    box.style.top = 60+'px';
+                    this.manual=1;  
+                    this.dir=1;
+                    this.level=1;
+                    this.lc = this.size;
+                    this.litr  = 1;
+                    if((field_rect['right']-cur_arw_rect['right'] < 90)){
+                        arrow.style.top =  '60px';                    
+                        arrow.style.left = -60+'px';
+                        box.style.left =130*(this.box_list.length-1)+'px'; 
+                        this.ltype = 0;
+                    }
+                    else{
+                        arrow.style.left =(130*(this.box_list.length-1))+'px';
+                        box.style.left = (130*(this.box_list.length-1))-70+'px'; 
+                        this.ltype = 1;
+                    }    
+                } 
+            }    
+            else{
+                if(this.dir==1){
+                    if(this.litr <(this.lc-1)){
+                        arrow.style.transform  = 'rotate(180deg)';
+                        arrow.style.top = 60*this.level + 'px';
+                        box.style.top = 60*this.level + 'px';
+                        if(this.ltype==0){
+                            arrow.style.left = 130*(this.lc-2*this.litr-1)+130+'px';
+                            box.style.left = 130*(this.lc-2*this.litr-1)+'px';                                   
+                        }
+                        else{
+                            arrow.style.left = 130*(this.lc-2*this.litr-((this.level+1)/2))+60+'px';
+                            box.style.left = 130*(this.lc-2*this.litr-((this.level+1)/2))-70+'px';    
+                        }
+                        this.litr+=1;
+                    }             
+                    else if(this.litr == (this.lc-1)){
+                        arrow.style.transform  = 'rotate(180deg)';
+                        arrow.style.top = 60*this.level + 'px';
+                        
+                        if(this.ltype==1){
+                            // box.style.top = 60*this.level + 'px';
+                            arrow.style.left = 130*(this.lc-2*this.litr-1)+60+'px';
+                            // box.style.left = 129*(this.lc-2*this.litr-1)-70+'px';
+                        }
+                        else{
+                            box.style.top = 60*this.level + 'px';
+                            arrow.style.left = 130*(this.lc-2*this.litr-1)+130+'px';
+                            box.style.left = 130*(this.lc-2*this.litr-1)+'px';
+                        }
+                        this.litr+=1;    
+                    }
+                    else{
+                        arrow.style.transform  = 'rotate(90deg)';
+                        box.style.top = 60+60*this.level+'px';
+                        if(this.ltype==0){
+                            arrow.style.top = 60+60*this.level+'px';                    
+                            arrow.style.left =-(130*(this.lc-1))-60+'px';                                            
+                        }
+                        else{
+                            arrow.style.top = 60*this.level+'px';                    
+                            arrow.style.left = -60+'px';
+                            box.style.left = -120+'px';
+                        }
+                        this.dir=0;
+                        this.level+=1;
+                        this.litr=1;
+                    }           
+                }
+                else if(this.dir==0){
+                    if(this.litr <(this.lc-1)){
+                        arrow.style.top = 60*this.level + 'px';
+                        box.style.top = 60*this.level + 'px';
+                        if(this.ltype==1){
+                            arrow.style.left=-130+'px';
+                            box.style.left = -130+'px';
+                        }
+                        else{
+                            
+                        }
+                        this.litr+=1;
+                    }   
+                    else if(this.litr==(this.lc-1)){
+                        if(this.ltype==1){
+                            arrow.style.top = 50*(this.level -1)+ 'px';
+                            box.style.top = 50*(this.level-1) + 'px';
+                            box.style.left =130*(this.lc-2)+60+'px'; 
+                            arrow.style.left =130*(this.lc-2)+60+'px';     
+                        }
+                        else{
+                            arrow.style.top = 60*(this.level)+ 'px';
+                            box.style.top = 60*(this.level) + 'px';    
+                        }
+                        this.litr+=1;
+                    }
+                    else{
+                        arrow.style.transform = 'rotate(90deg)';
+                        this.dir=1;
+                        this.level+=1;
+                        this.litr  = 1;
+                        if(this.ltype==0){
+                            arrow.style.top = 60*(this.level)+ 'px';
+                            arrow.style.left = -60+'px';
+                            box.style.left =130*(this.lc-1)+'px'; 
+                            box.style.top = 60*(this.level)+ 'px';
+                        }
+                        else{
+                            arrow.style.top = 60*(this.level-1)+ 'px';
+                            arrow.style.left =(130*(this.lc-this.level+1))+'px';
+                            box.style.left = (130*(this.lc-this.level+1))-70+'px'; 
+                            box.style.top = 60*(this.level)+ 'px';
+                            
+                        }    
+                    }
+                }
+            }
+        }
+        else{
+            // this.lc = this.size-1;
+        }
+    }
+
     insert(val){
         if(this.size ==0){
             this.arr.push(val);
             this.box_list.push(draw_boxes([val],1,this.linkedListField.id,'array')[0]);
             this.size++;
         }
-        // -135 for 4   left -260 top 
         else{
             var arrow = draw_arrow(this.linkedListField.id);
-            arrow.style.position='relative';
-            this.arrow_list.push(arrow);
-            var box = draw_boxes([val],1,this.linkedListField.id,'array')[0];
+            arrow.style.position='relative';    
+            var box = draw_boxes([val],1,this.linkedListField.id,'array')[0];      
+            this.setArrowBox(arrow,box);            
             this.box_list.push(box);
+            this.arrow_list.push(arrow);
             this.arr.push(val);
             this.size++;
         }
     }
-}
 
+    insertShowAtPos(val,pos){
+        var box = draw_boxes([val],1,this.linkedListField.id,'array')[0];
+        var field_rect = this.linkedListField.getBoundingClientRect();
+        box.style.position = 'absolute';
+        if(pos ==0 || pos>=this.size-1){
+            this.insert(val);    
+        }
+        else{
+            var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
+            var boxPreRect = this.box_list[pos-1].getBoundingClientRect();
+            var arrowPre = this.arrow_list[pos-1];
+            var arrowPost = this.arrow_list[pos];
+
+            if(boxPostRect['y']==boxPreRect['y']){
+                if(this.lc==0){
+                   var boxh = 0;
+                   var boxw = pos;
+                }
+                else{
+                    var boxh = Math.floor(pos/this.lc);
+                    if(boxh%2==0){
+                        var boxw = pos%this.lc;
+                    }
+                    else{
+                        var boxw = this.lc - pos%this.lc;
+                    }
+                }
+                console.log(boxh);
+                console.log(boxw);
+
+                if(boxPostRect['x']-boxPreRect['x'] > 0){
+                    arrowPre.style.transform = 'rotate(-45deg)';
+                    arrowPost.style.transform = 'rotate(45deg)';
+                    box.style.top = 15+boxh*70+(boxh-1)*60 + 'px';
+                    box.style.left = 15+(boxw)*130 +'px';
+                }
+                else{   
+                    arrowPre.style.transform = 'rotate(135deg)';
+                    arrowPost.style.transform = 'rotate(225deg)';
+                    box.style.top = 15+boxh*70+(boxh+1)*60 + 'px';
+                    box.style.left = 15 + (boxw -1)*130 +'px';
+                }
+            }
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+                if(this.lc==0){
+                    var boxh = 0;
+                    var boxw = pos;
+                }
+                else{
+                    var boxh = Math.floor(pos/this.lc);
+                    var boxw = pos%this.lc;
+                }
+                console.log(boxh);
+                console.log(boxw); 
+                arrowPre.style.transform = 'rotate(45deg)';
+                arrowPost.style.transform = 'rotate(45deg)';
+                if(boxPreRect['x']-field_rect['x']>100){
+                    box.style.top = (boxh+1)*70+(boxh+1)*60 -60+ 'px';
+                    box.style.left = 15+(this.lc-2)*130 +75+'px';         
+                    console.log("ygxg");    
+                }
+                else{
+                    box.style.top = 15+(boxh)*70+(boxh)*60 -60+ 'px';
+                    box.style.left = 15+60+'px';         
+                }
+            }
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+                if(this.lc==0){
+                    var boxh = 0;
+                    var boxw = pos;
+                }
+                else{
+                    var boxh = Math.floor(pos/this.lc);
+                    var boxw = pos%this.lc;
+                }
+                console.log(boxh);
+                console.log(boxw); 
+                arrowPre.style.transform = 'rotate(135deg)';
+                arrowPost.style.transform = 'rotate(135deg)';
+                if(boxPostRect['x']-field_rect['x']>100){
+                    box.style.top = 15+(boxh)*70+(boxh)*60 -60+ 'px';
+                    box.style.left = 15+(this.lc-2)*130 +75+'px';         
+                    console.log("ygxl");    
+                }
+                else{
+                    box.style.top = (boxh+1)*70+(boxh+1)*60 -60+ 'px';
+                    box.style.left = 15+60+'px';         
+                }
+            }
+        }
+    }
+
+    appendArray(){
+        for(var i=0;i<this.size-1;i++){
+            this.box_list[i+1].innerHTML = this.arr[i];
+        }
+    }
+
+    insertAtPos(val,pos){
+        this.arr.splice(pos-1,0,val);
+        var arrow = draw_arrow(this.linkedListField.id);
+        arrow.style.position='relative';    
+        var box = draw_boxes([' '],1,this.linkedListField.id,'array')[0];      
+        this.setArrowBox(arrow,box);            
+        this.box_list.push(box);
+        this.arrow_list.push(arrow);
+        this.size++;
+        this.appendArray();
+    }
+
+    delete(val){
+        var val_index = this.arr.findIndex((elm)=>elm==val);
+        console.log(val_index);
+        if(val_index==-1)
+            console.log('no node with value 5');
+        else{
+            this.arr.splice(val_index,1);
+            this.box_list[this.size-1].remove();
+            this.box_list.pop();
+
+            this.arrow_list[this.size-2].remove();
+            this.arrow_list.pop();
+
+            this.litr--;
+            this.size--;
+            var field_rect = this.linkedListField.getBoundingClientRect();
+            
+            if(this.manual==1){
+                if(this.lc >= this.size){
+                    this.lc=0;
+                    this.dir=0;
+                    this.level=0;
+                    this.manual=0;
+                }
+                if(this.litr==0&&this.size==1){
+                        // ok                
+                }
+                else if(this.litr==0){
+                    this.litr=this.lc;
+                    this.level-=1;
+                    if(this.dir==0)
+                        this.dir=1;
+                    else
+                        this.dir=0;       
+                }    
+            }
+            this.appendArray();    
+        }
+    }   
+}
 
 class Queue{
     constructor(parent_id,size,queueName){
