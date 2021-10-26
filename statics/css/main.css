@@ -530,3 +530,10 @@ button[disabled]{
 .cbutton:active{
     transform: translateX(2px);
 }
+
+
+/* ---------------------------------------------------------Linked list--------------------------- */
+.hc_{
+    margin: 5px;
+    margin-left: 10px;
+}

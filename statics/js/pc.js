@@ -27,7 +27,7 @@ var cons_func_end = 23;
 var editor;
 
 //Max stack size
-var stack_size = 0;
+var queue_size = 0;
 
 //current code line number
 var code_line_itr = 0;
@@ -48,7 +48,7 @@ var line_rem_highlight;
 var queue_obj=null;
 
 // size of queue
-var size=stack_size;
+var size=queue_size;
 
 
 
@@ -332,7 +332,6 @@ function consumer(consumer) {
 
 
 /**
- * Blend two colors together.
  * Creates queue if not present already. Creates mutex box and enables 
  * create producer and consumer buttons. Enables reset button.
  */

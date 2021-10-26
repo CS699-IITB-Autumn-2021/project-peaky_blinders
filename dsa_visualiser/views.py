@@ -76,7 +76,7 @@ def register(request):
         linkedListAppl=0, stackBo=0, stackAppl=0, queueBo=0, queueAppl=0,
         linearSearch=0, binarySearch=0, insertionSort=0, mergeSort=0)
         history.save()
-
+        messages.success(request, "User registered successfully..")
         return redirect('signin')
 
     return render(request, "authentication/registration.html")
@@ -332,3 +332,38 @@ def binary_search(request):
     history.binarySearch = 1
     history.save()
     return render(request, "binary_search/binary.html")
+
+@login_required(login_url="signin")
+def linkedlist_appl(request):
+    """Takes redirect linked list application request from front end, processes it and
+    renders linked list application animation.
+
+    :param request: request object from front end
+    :return: HTMLType response and status according to conditions
+    """
+
+    # Updates history DB to say user visited specific animation (value 1 is updated) and
+    # animation rendered
+    history = History.objects.get(username = request.user)
+    history.linkedListAppl = 1
+    history.save()
+    return render(request, "linked_list/hash_with_chain.html")
+
+@login_required(login_url="signin")
+def linkedlist(request):
+    """Takes redirect linked list dashboard request from front end, processes it and
+    redirects to linked list dashboard.
+
+    :param request: request object from front end
+    :return: HTMLType response and status according to conditions
+    """
+
+    # get user from User DB find his progress from history DB and render searching dashboard
+    user = User.objects.get(username = request.user)
+    history = History.objects.get(username = request.user)
+    history1 = []
+    for i in history_list:
+        if getattr(history, i) == 2:
+            history1.append(i)
+    return render(request, "dashboard/dashboard.html",
+    {'name':user.first_name+" "+user.last_name, 'history': history1, 'dashboard':'linkedList'})

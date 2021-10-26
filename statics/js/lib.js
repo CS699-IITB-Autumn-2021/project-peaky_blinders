@@ -194,8 +194,8 @@ class Stack{
 
 
 class linkedList{
-    constructor(parent_id){
-        this.linkedListField = draw_fieldset('LInked List',parent_id);
+    constructor(parent_id, linkedListName){
+        this.linkedListField = draw_fieldset(linkedListName,parent_id);
         this.linkedListField.style.maxWidth = '800px';  
         this.arr = [];
         this.size = 0;
@@ -481,7 +481,7 @@ class linkedList{
         var val_index = this.arr.findIndex((elm)=>elm==val);
         console.log(val_index);
         if(val_index==-1)
-            console.log('no node with value 5');
+            console.log('no node with value '+val);
         else{
             this.arr.splice(val_index,1);
             this.box_list[this.size-1].remove();
