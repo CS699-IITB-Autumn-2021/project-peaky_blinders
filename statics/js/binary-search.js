@@ -131,6 +131,7 @@ function loop()
      
     switch(code_line_itr){
         case (code_end):
+            line_rem_highlight = code_line_itr;
             reset();
             break;
         case main:
@@ -173,8 +174,9 @@ function loop()
              code_line_itr++;
               break;
         case cond1_check:
+            line_rem_highlight = code_line_itr;
             if(index_low<=index_high){
-                line_rem_highlight = code_line_itr;
+               
                  code_line_itr = mid_calc;
                 }
             else{
@@ -239,6 +241,7 @@ function loop()
         case false_return:
             line_rem_highlight=code_line_itr;
             code_line_itr=code_end;
+            document.getElementById('id01').style.display='block';
             
              break;
         default:
@@ -371,11 +374,11 @@ function reset(){
     for(i=0;i<arr_n;i++){
         if(arrElmSet!=null){
             removeBoxElm(arrElmSet[i]);
-            document.getElementById('arr_input_search'+itr)
+            document.getElementById('arr_input_search'+i).remove();
         }
         if(set_arr_list_Elm!=null) {
             set_arr_list_Elm[i].remove();
-            document.getElementById('arr_input_search'+itr)
+           
         }
         
     }
