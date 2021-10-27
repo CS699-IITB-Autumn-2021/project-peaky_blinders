@@ -300,8 +300,6 @@ class Stack{
     }
 }
 
-
-
 class linkedList{
     constructor(parent_id){
         this.linkedListField = draw_fieldset('LInked List',parent_id);
