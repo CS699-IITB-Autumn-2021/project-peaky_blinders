@@ -1,4 +1,32 @@
-/**
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: lib.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: lib.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
  * function Creates HTML element of given type under given parent_id
  * @param {string} element_type- type of element
  * @param {string} parent_id - parent id of element
@@ -24,7 +52,7 @@ function create_html_element(element_type,parent_id){
 
 function draw_boxes(arr,arr_n,parent_id,type_class){
     elm_list = [];
-    for(i=0;i<arr_n;i++)
+    for(i=0;i&lt;arr_n;i++)
     {
         elm = create_html_element('div',parent_id);
         elm.setAttribute('class','box');
@@ -82,7 +110,7 @@ function draw_array(var_name,variable,size,parent_id){
 function draw_set(arrName,arr,arr_n,parent_id){
     parent = draw_fieldset(arrName,parent_id);
     box_list = [];
-    for(i=0;i<arr_n;i++)
+    for(i=0;i&lt;arr_n;i++)
     {
         elm = document.createElement('div');
         elm.setAttribute('id','div_'+id_count);
@@ -197,7 +225,7 @@ function removeBoxElm(elm){
  */
 function createButtonArr(number_of_buttons, innertext, class1, onclickfunc, parent_id, isDisabled) {
     btn_arr = [];
-    for (var i=1; i<=number_of_buttons; i++) {
+    for (var i=1; i&lt;=number_of_buttons; i++) {
         let btn = document.createElement("button");
         btn.setAttribute("class", class1);
         btn.innerHTML = innertext + " " + i;
@@ -220,7 +248,7 @@ class Stack{
      */
     constructor(parent_id,size,stackName){
         const arr_blank =[];
-        for(var i=0;i<size;i++)
+        for(var i=0;i&lt;size;i++)
         {
             arr_blank.push(' ');
         }
@@ -300,6 +328,8 @@ class Stack{
     }
 }
 
+
+
 class linkedList{
     constructor(parent_id){
         this.linkedListField = draw_fieldset('LInked List',parent_id);
@@ -331,12 +361,12 @@ class linkedList{
         var cur_box_rect = box.getBoundingClientRect();
         var cur_arw_rect = arrow.getBoundingClientRect();
     
-        if(800-field_rect['right']<40){
+        if(800-field_rect['right']&lt;40){
             if(this.manual ==0)
             {
                 // var last_box_rect = this.box_list[this.size-1].getBoundingClientRect();
 
-                if((field_rect['right']-cur_box_rect['right'] < 90)) {
+                if((field_rect['right']-cur_box_rect['right'] &lt; 90)) {
                 }   
                 else{
                     // arrow.style.transform = 'rotate(90deg)';
@@ -347,7 +377,7 @@ class linkedList{
                     this.level=1;
                     this.lc = this.size;
                     this.litr  = 1;
-                    if((field_rect['right']-cur_arw_rect['right'] < 90)){
+                    if((field_rect['right']-cur_arw_rect['right'] &lt; 90)){
                         arrow.style.top =  '60px';                    
                         arrow.style.left = -60+'px';
                         box.style.left =130*(this.box_list.length-1)+'px'; 
@@ -362,7 +392,7 @@ class linkedList{
             }    
             else{
                 if(this.dir==1){
-                    if(this.litr <(this.lc-1)){
+                    if(this.litr &lt;(this.lc-1)){
                         // arrow.style.transform  = 'rotate(180deg)';
                         arrow.classList.add('arrow_rt_180');
                         arrow.style.top = 60*this.level + 'px';
@@ -413,7 +443,7 @@ class linkedList{
                     }           
                 }
                 else if(this.dir==0){
-                    if(this.litr <(this.lc-1)){
+                    if(this.litr &lt;(this.lc-1)){
                         arrow.style.top = 60*this.level + 'px';
                         box.style.top = 60*this.level + 'px';
                         if(this.ltype==1){
@@ -529,7 +559,7 @@ class linkedList{
                 box.style.left = 15 + (boxw -1)*130 +'px';
             }
         }
-        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] > 0)){
             if(this.lc==0){
                 var boxh = 0;
                 var boxw = pos;
@@ -550,7 +580,7 @@ class linkedList{
                 box.style.left = 15+60+'px';         
             }
         }
-        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] &lt; 0)){
             if(this.lc==0){
                 var boxh = 0;
                 var boxw = pos;
@@ -574,7 +604,7 @@ class linkedList{
     }
 
     setArrowPre(pos){
-        if(this.size-1 < pos+1)
+        if(this.size-1 &lt; pos+1)
             var boxPostRect = this.box_list[pos].getBoundingClientRect();
         else
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
@@ -591,18 +621,18 @@ class linkedList{
                 arrowPre.classList.add('arrow_rt_135');
             }
         }
-        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] > 0)){
             // arrowPre.style.transform = 'rotate(45deg)';
             arrowPre.classList.add('arrow_rt_45');
         }
-        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] &lt; 0)){
             // arrowPre.style.transform = 'rotate(135deg)';
             arrowPre.classList.add('arrow_rt_135');
         }               
     }
 
     setArrowPost(pos){
-        if(pos < this.arrow_list.length){
+        if(pos &lt; this.arrow_list.length){
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
             if(pos==0)
                 var boxPreRect = this.box_list[pos].getBoundingClientRect();
@@ -620,11 +650,11 @@ class linkedList{
                     arrowPost.classList.add('arrow_rt_225');
                 }
             }
-            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] > 0)){
                 // arrowPost.style.transform = 'rotate(45deg)';
                 arrowPost.classList.add('arrow_rt_45');
             }
-            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] &lt; 0)){
                 // arrowPost.style.transform = 'rotate(135deg)';
                 arrowPost.classList.add('arrow_rt_135');
             }    
@@ -632,7 +662,7 @@ class linkedList{
     }
 
     resetArrowPre(pos){
-        if(this.size-1 < pos+1)
+        if(this.size-1 &lt; pos+1)
             var boxPostRect = this.box_list[pos].getBoundingClientRect();
         else
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
@@ -649,18 +679,18 @@ class linkedList{
                 arrowPre.classList.remove('arrow_rt_135');
             }
         }
-        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] > 0)){
             // arrowPre.style.transform = 'rotate(45deg)';
             arrowPre.classList.remove('arrow_rt_45');
         }
-        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] &lt; 0)){
             // arrowPre.style.transform = 'rotate(135deg)';
             arrowPre.classList.remove('arrow_rt_135');
         }               
     }
 
     resetArrowPost(pos){
-        if(pos < this.arrow_list.length){
+        if(pos &lt; this.arrow_list.length){
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
     
             if(pos==0)
@@ -680,11 +710,11 @@ class linkedList{
                     arrowPost.classList.remove('arrow_rt_225');
                 }
             }
-            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] > 0)){
                 // arrowPost.style.transform = 'rotate(45deg)';
                 arrowPost.classList.remove('arrow_rt_45');
             }
-            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &amp;&amp;  (boxPostRect['x']-boxPreRect['x'] &lt; 0)){
                 // arrowPost.style.transform = 'rotate(135deg)';
                 arrowPost.classList.remove('arrow_rt_135');
             }    
@@ -692,7 +722,7 @@ class linkedList{
     }
 
     appendArray(){
-        for(var i=0;i<this.size-1;i++){
+        for(var i=0;i&lt;this.size-1;i++){
             this.box_list[i+1].innerHTML = this.arr[i];
         }
     }
@@ -745,7 +775,7 @@ class linkedList{
                     this.level=0;
                     this.manual=0;
                 }
-                if(this.litr==0&&this.size==1){
+                if(this.litr==0&amp;&amp;this.size==1){
                         // ok                
                 }
                 else if(this.litr==0){
@@ -762,7 +792,7 @@ class linkedList{
     }   
 
     removeHighlight(){
-        for(i=0;i<this.size;i++){
+        for(i=0;i&lt;this.size;i++){
             unhighlightBoxELement(this.box_list[i]);
         }
         unhighlightBoxELement(this.tempBox);
@@ -793,7 +823,7 @@ class Queue{
         this.rearElm.classList.add('rear_val_legend');
         /**heap*/
         this.arr=[];
-        for(var i=0;i<this.size;i++){
+        for(var i=0;i&lt;this.size;i++){
             this.arr.push(' ');
         }
         this.arrElem = draw_set('arr',this.arr,this.size,this.queue_field.id);
@@ -828,11 +858,11 @@ class Queue{
     enqueue(val){
         highlightBoxELement(this.frontElm);
         highlightBoxELement(this.rearElm);
-        if((this.front == 0 && this.rear == this.size-1) || (this.rear == (this.front-1)%(this.size-1))){
+        if((this.front == 0 &amp;&amp; this.rear == this.size-1) || (this.rear == (this.front-1)%(this.size-1))){
             console.log("queue full");            
             highlightBoxELement(this.sizeElm);
         }
-        else if (this.rear == this.size-1 && this.front != 0){
+        else if (this.rear == this.size-1 &amp;&amp; this.front != 0){
             this.rear = 0;
             this.rearElm.innerHTML = this.rear;
             this.arr[this.rear]=val;
@@ -964,4 +994,26 @@ class Queue{
         this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
         this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';           
     }
-}
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Queue.html">Queue</a></li><li><a href="Stack.html">Stack</a></li></ul><h3>Global</h3><ul><li><a href="global.html#consumer">consumer</a></li><li><a href="global.html#create_html_element">create_html_element</a></li><li><a href="global.html#createButtonArr">createButtonArr</a></li><li><a href="global.html#createCons">createCons</a></li><li><a href="global.html#createHashTable">createHashTable</a></li><li><a href="global.html#createLinkedList">createLinkedList</a></li><li><a href="global.html#createProd">createProd</a></li><li><a href="global.html#createQueue">createQueue</a></li><li><a href="global.html#createStack">createStack</a></li><li><a href="global.html#deleteFromLinkedList">deleteFromLinkedList</a></li><li><a href="global.html#deleteVal">deleteVal</a></li><li><a href="global.html#dequeue">dequeue</a></li><li><a href="global.html#draw_array">draw_array</a></li><li><a href="global.html#draw_arrow">draw_arrow</a></li><li><a href="global.html#draw_arrow_color">draw_arrow_color</a></li><li><a href="global.html#draw_boxes">draw_boxes</a></li><li><a href="global.html#draw_fieldset">draw_fieldset</a></li><li><a href="global.html#draw_set">draw_set</a></li><li><a href="global.html#draw_variable">draw_variable</a></li><li><a href="global.html#enqueue">enqueue</a></li><li><a href="global.html#highlightBoxELement">highlightBoxELement</a></li><li><a href="global.html#insertInLinkedLIst">insertInLinkedLIst</a></li><li><a href="global.html#insertVal">insertVal</a></li><li><a href="global.html#loop">loop</a></li><li><a href="global.html#loop_color">loop_color</a></li><li><a href="global.html#popStack">popStack</a></li><li><a href="global.html#producer">producer</a></li><li><a href="global.html#pushStack">pushStack</a></li><li><a href="global.html#removeBoxElm">removeBoxElm</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#searchCode">searchCode</a></li><li><a href="global.html#set_Array_value">set_Array_value</a></li><li><a href="global.html#SetSearchVal">SetSearchVal</a></li><li><a href="global.html#setSize">setSize</a></li><li><a href="global.html#setUpEditor">setUpEditor</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#sortCode">sortCode</a></li><li><a href="global.html#unhighlightBoxELement">unhighlightBoxELement</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 16:54:14 GMT+0530 (India Standard Time)
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
