@@ -44,18 +44,43 @@ var interval;
 
 // stores last highlighted line number to remove
 var line_rem_highlight;
+
+// parent id initialisation
 var parent_id = 'variable_set';
+
+//parent id temp
 var temp = 'temp';
+
+//parent id heap
 var heap = 'heap';
+
+//parent id constants
 var constants = 'constants'
+
+// linked list object initialisation
 var linkedListObj = null;
+
+//insert value variable
 var insert_val;
+
+//insert position variable
 var insert_pos;
+
+// insert value html element 
 var insert_valElm;
+
+//inser value position element 
 var insert_posElm;
+
+//delete value variable
 var del_var;
+
+// delete value html element
 var del_varElm;
 
+/**
+ * Setup the editor.
+ */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
     editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
@@ -77,12 +102,25 @@ function setUpEditor(){
         // console.log(itr);
     }
 }
-
+// insert between iteration variable
 var insert_while_itr;
+
+// delete between iteration variable
 var del_while_itr;
+
+//insert position variable
 var insert_pos_storage;
+
+//delete position variable
 var del_pos_storage;
 
+
+/**
+ * This function loops over each line of code in editor by checking 
+ * cases according to line number. Every case highlights particular 
+ * line of code, does some opeartion on data structure and changes 
+ * animations accordingly.
+ */
 function loop() {
     if (code_line_itr != insert_func_begin && code_line_itr != 0) {
         document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
@@ -381,6 +419,10 @@ del_func_end = 27;
     //     }
 }
 
+
+/**
+ * create linked list and enable control buttons.
+ */
 function createLinkedList(){
     if(!linkedListObj){
         linkedListObj = new linkedList(heap);
@@ -392,6 +434,11 @@ function createLinkedList(){
     EnableCtrlButtons('reset');
 }  
 
+
+
+/**
+ * insert value in linked list and enable control buttons.
+ */
 function insertInLinkedLIst(){
     insert_val = parseInt(document.getElementById('insert_val').value);
     if(isNaN(insert_val)){
@@ -413,6 +460,11 @@ function insertInLinkedLIst(){
     }
 }
 
+
+
+/**
+ * delete values from linked list and enable control buttons.
+ */
 function deleteFromLinkedList(){
     del_var = parseInt(document.getElementById('del_val').value);
     if(isNaN(del_var)){
@@ -426,11 +478,18 @@ function deleteFromLinkedList(){
     }
 }
 
-// this function puts the loop() function  on interval call of 1000 milli sec
-// i.e it is called after every 1000 milli sec of 1 sec
+
+/**
+ * Runs loop function every 1000 milliseconds.
+ */
 function loop_color(){
     interval = setInterval(loop,1000);
 }
+
+
+/**
+ * Removes linked list animation. Disables insert and delete buttons. 
+ */
 
 function reset(){
     if(linkedListObj!=null){
