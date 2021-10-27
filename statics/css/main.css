@@ -600,7 +600,7 @@ button[disabled]{
   .popup{
     display: none; 
     position: fixed; 
-    z-index: 1; 
+    z-index: 7; 
     padding-top: 100px; 
     left: 700px;
     top: -110px;

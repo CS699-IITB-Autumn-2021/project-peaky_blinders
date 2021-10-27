@@ -131,6 +131,7 @@ function loop()
      
     switch(code_line_itr){
         case (code_end):
+            line_rem_highlight = code_line_itr;
             reset();
             break;
         case main:
@@ -144,12 +145,13 @@ function loop()
             line_rem_highlight = code_line_itr;
             code_line_itr++;     
             break;
-            case x_creation:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                search_numElm = draw_variable('x',search_num,parent_id);
-                line_rem_highlight = code_line_itr;
-                code_line_itr++;  
-                break;
+
+        case x_creation:
+            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
+            search_numElm = draw_variable('x',search_num,parent_id);
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;  
+            break;
 
         case n_calculate:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
@@ -173,9 +175,9 @@ function loop()
              code_line_itr++;
               break;
         case cond1_check:
+            line_rem_highlight = code_line_itr;
             if(index_low<=index_high){
-                line_rem_highlight = code_line_itr;
-                 code_line_itr = mid_calc;
+                  code_line_itr = mid_calc;
                 }
             else{
                  code_line_itr = false_return ;
@@ -371,11 +373,10 @@ function reset(){
     for(i=0;i<arr_n;i++){
         if(arrElmSet!=null){
             removeBoxElm(arrElmSet[i]);
-            document.getElementById('arr_input_search'+itr)
+            document.getElementById('arr_input_search'+i).remove();
         }
         if(set_arr_list_Elm!=null) {
             set_arr_list_Elm[i].remove();
-            document.getElementById('arr_input_search'+itr)
         }
         
     }
