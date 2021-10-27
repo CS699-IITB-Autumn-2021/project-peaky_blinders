@@ -350,6 +350,22 @@ def linkedlist_appl(request):
     return render(request, "linked_list/hash_with_chain.html")
 
 @login_required(login_url="signin")
+def linkedlist_bo(request):
+    """Takes redirect linked list application request from front end, processes it and
+    renders linked list application animation.
+
+    :param request: request object from front end
+    :return: HTMLType response and status according to conditions
+    """
+
+    # Updates history DB to say user visited specific animation (value 1 is updated) and
+    # animation rendered
+    history = History.objects.get(username = request.user)
+    history.linkedListBo = 1
+    history.save()
+    return render(request, "linked_list/linked_list.html")
+
+@login_required(login_url="signin")
 def linkedlist(request):
     """Takes redirect linked list dashboard request from front end, processes it and
     redirects to linked list dashboard.

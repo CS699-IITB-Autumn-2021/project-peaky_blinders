@@ -21,5 +21,6 @@ urlpatterns = [
     path('searching', views.searching, name="searching"),
     path('done/<animation>', views.store_animation_done_status, name="done"),
     path('linkedlist-appl', views.linkedlist_appl, name="linkedlistAppl"),
+    path('linkedlist-bo', views.linkedlist_bo, name="linkedlistBO"),
     path('linkedlist', views.linkedlist, name="linkedlist")
  ]
