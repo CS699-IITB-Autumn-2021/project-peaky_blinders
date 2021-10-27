@@ -63,6 +63,11 @@ var interval;
 // stores last highlighted line number to remove
 var line_rem_highlight;
 
+
+
+/**
+ * Setup the editor.
+ */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
     editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
@@ -126,9 +131,15 @@ id_count=0;
 // FUNCTION VARIABLE TO store the interval function
 var interval;
 
+//array html elements.
 set_arr_list_Elm=[];
 
-
+/**
+ * This function loops over each line of code in editor by checking 
+ * cases according to line number. Every case highlights particular 
+ * line of code, does some opeartion on data structure and changes 
+ * animations accordingly.
+ */
 async function loop() {
     
     if (code_line_itr != main && code_line_itr != 0 && code_line_itr != 12 && code_line_itr != mergesort_func_start) {
@@ -517,10 +528,19 @@ async function loop() {
     }
 } 
 
+
+/** 
+* this function puts the loop() function  on interval call of 1000 milli sec
+* i.e it is called after every 1000 milli sec of 1 sec
+*/
 function loop_color(){
     interval = setInterval(loop,1000);
 }
 
+
+/**
+ * set size of a array
+ */
 function setSize(){
     arr_n = parseInt(document.getElementById('max_size_array').value);
     arr=[];
@@ -536,6 +556,9 @@ function setSize(){
     EnableCtrlButtons(rst);
 }
 
+/**
+ * set value of a array and enable the control buttons 
+ */
 function set_Array_value(){
     arr=[];
     for(itr=0;itr<arr_n;itr++){
@@ -547,6 +570,10 @@ function set_Array_value(){
     EnableCtrlButtons();
 }
 
+
+/**
+ * set array value  which are given at run time .
+ */
 sortCode=`void mergeSort(int arr[], int n) {
     int curr_size;  
     int left_start; 
@@ -607,6 +634,11 @@ restcode = `;
     return 0;
 }`;
 
+
+/**
+ * Removes merge sort animation. Disables setarray and control
+ * button. 
+ */
 function reset(){
     code_line_itr=main;
     for(i=0;i<arr_n;i++){
@@ -636,4 +668,5 @@ function reset(){
     }
     
     disbaleCtrlButtons();
+    document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }

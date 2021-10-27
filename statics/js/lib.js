@@ -1,4 +1,8 @@
-// function Creates HTML element of given type under given parent_id
+/**
+ * @param {string,string} create_html_element - function Creates HTML element of given type under given parent_id
+
+ */
+
 function create_html_element(element_type,parent_id){
     elm = document.createElement(element_type);
     elm.setAttribute('id',element_type+'_'+id_count);
@@ -7,7 +11,11 @@ function create_html_element(element_type,parent_id){
     return elm;
 }
 
-// 
+/**
+ * @param {Array,integer,string,string} draw_boxes - function Creates HTML element of given type under given parent_id
+
+ */
+
 function draw_boxes(arr,arr_n,parent_id,type_class){
     elm_list = [];
     for(i=0;i<arr_n;i++)
@@ -163,7 +171,7 @@ class Stack{
         highlightBoxELement(this.top_val);
     }
     pop(){
-        var val=' ';
+        var val=-1;
         var top = parseInt(this.top_val.innerHTML);
         var size = parseInt(this.size_val.innerHTML);
         if(top==-1)

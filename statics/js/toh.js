@@ -591,9 +591,14 @@ function myclick(){
     document.getElementById('step2_btn').click();
 }
 
+/** 
+* this function puts the loop() function  on interval call of 1000 milli sec
+* i.e it is called after every 1000 milli sec of 1 sec
+*/
 function loop_color(){
         interval = setInterval(myclick,1000);
 }
+
 
 function setNoOfDisc()
 {
