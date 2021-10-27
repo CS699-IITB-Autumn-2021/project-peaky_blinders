@@ -333,8 +333,8 @@ class linkedList{
     }
     /**
      * Sets the arrow and box to correct position and angle
-     * @param {html object} arrow newly created arrow 
-     * @param {html object} box  newly created box
+     * @param {object} arrow newly created arrow 
+     * @param {object} box  newly created box
      */
     setArrowBox(arrow,box){
         var field_rect = this.linkedListField.getBoundingClientRect();
@@ -822,7 +822,7 @@ class linkedList{
     }
 
     /**
-     * removes the liked list opbect from the display
+     * removes the liked list object from the display
      */
     remove(){
         this.linkedListField.remove();
