@@ -7,7 +7,7 @@ body{
 }
 
 .grid {
-    width: 99%;
+    width: 100%;
     position: relative;
     color: brown;
 }
@@ -236,6 +236,17 @@ body{
     display: inline-block;
     vertical-align: middle;
 }
+
+/*----------------------*/
+.linked_list #heap{
+    display: block;
+}
+
+.linked_list #temp{
+    display: block;
+    height: 150px;
+}
+
 /**********************************STACK ***********************************/
 .arrow{
     position: relative;
@@ -551,17 +562,19 @@ button[disabled]{
     inset 0 3px 2px rgba(255,255,255,.22),
     0 0 4px 1px rgba(0,0,0,.1), 
     0 3px 2px rgba(0,0,0,.2);
-    
+    margin-bottom: 1px;
   }
   
   /* Style the links inside the navigation bar */
   .navbar1 a {
-    float: left;
+    display: inline-block;
+    height: 30px;
+        /* float: left; */
     color: #0c0c0c;
     text-align: center;
-    padding: 14px 80px;
+    padding: 5px 20px;
     text-decoration: none;
-    font-size: 25px;
+    font-size: 20px;
   }
   
   /* Change the color of links on hover */
@@ -575,7 +588,9 @@ button[disabled]{
     background-color: #6d7fcc;
     color: white;
   }
-
+  .navbar1 #logout{
+      float:right;  
+  }
 
 
   /*______________________________________________________________________________________________________*/
@@ -628,4 +643,40 @@ button[disabled]{
 .hc_{
     margin: 5px;
     margin-left: 10px;
+}
+
+.arrow_rt_180{
+    transform: rotate(180deg);
+}
+
+.arrow_rt_90{
+    transform: rotate(90deg);
+}
+.arrow_rt_neg45{
+    transform: rotate(-45deg);
+}
+
+.arrow_rt_45{
+    transform: rotate(45deg);
+}
+
+.arrow_rt_135{
+    transform:rotate(135deg);
+}
+
+.arrow_rt_225{
+    transform: rotate(225deg);
+}
+
+.hide_box{
+    visibility: hidden;
+    transition: 0ms;
+}
+
+.btn_div{
+    margin-top: 10px;
+}
+
+#linked_list_ops .col-1-1{
+    vertical-align: top;
 }

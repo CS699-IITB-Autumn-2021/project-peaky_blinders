@@ -201,9 +201,10 @@ class Stack{
 }
 
 
+
 class linkedList{
-    constructor(parent_id, linkedListName){
-        this.linkedListField = draw_fieldset(linkedListName,parent_id);
+    constructor(parent_id){
+        this.linkedListField = draw_fieldset('LInked List',parent_id);
         this.linkedListField.style.maxWidth = '800px';  
         this.arr = [];
         this.size = 0;
@@ -220,6 +221,11 @@ class linkedList{
         this.box_list.push(this.head);
         this.size=1;
         this.linkedListField.style.borderBottom='none';
+        this.tempBox;
+        this.arrowPre;
+        this.arrowPost;
+        this.currBox;
+        this.currArrow;
     }
 
     setArrowBox(arrow,box){
@@ -235,7 +241,8 @@ class linkedList{
                 if((field_rect['right']-cur_box_rect['right'] < 90)) {
                 }   
                 else{
-                    arrow.style.transform = 'rotate(90deg)';
+                    // arrow.style.transform = 'rotate(90deg)';
+                    arrow.classList.add('arrow_rt_90');
                     box.style.top = 60+'px';
                     this.manual=1;  
                     this.dir=1;
@@ -258,7 +265,8 @@ class linkedList{
             else{
                 if(this.dir==1){
                     if(this.litr <(this.lc-1)){
-                        arrow.style.transform  = 'rotate(180deg)';
+                        // arrow.style.transform  = 'rotate(180deg)';
+                        arrow.classList.add('arrow_rt_180');
                         arrow.style.top = 60*this.level + 'px';
                         box.style.top = 60*this.level + 'px';
                         if(this.ltype==0){
@@ -272,7 +280,8 @@ class linkedList{
                         this.litr+=1;
                     }             
                     else if(this.litr == (this.lc-1)){
-                        arrow.style.transform  = 'rotate(180deg)';
+                        // arrow.style.transform  = 'rotate(180deg)';
+                        arrow.classList.add('arrow_rt_180');
                         arrow.style.top = 60*this.level + 'px';
                         
                         if(this.ltype==1){
@@ -288,7 +297,8 @@ class linkedList{
                         this.litr+=1;    
                     }
                     else{
-                        arrow.style.transform  = 'rotate(90deg)';
+                        // arrow.style.transform  = 'rotate(90deg)';
+                        arrow.classList.add('arrow_rt_90');
                         box.style.top = 60+60*this.level+'px';
                         if(this.ltype==0){
                             arrow.style.top = 60+60*this.level+'px';                    
@@ -331,7 +341,8 @@ class linkedList{
                         this.litr+=1;
                     }
                     else{
-                        arrow.style.transform = 'rotate(90deg)';
+                        // arrow.style.transform = 'rotate(90deg)';
+                        arrow.classList.add('arrow_rt_90');
                         this.dir=1;
                         this.level+=1;
                         this.litr  = 1;
@@ -372,98 +383,213 @@ class linkedList{
             this.arrow_list.push(arrow);
             this.arr.push(val);
             this.size++;
+            this.currArrow = arrow;
+            this.currBox = box;
         }
     }
 
-    insertShowAtPos(val,pos){
-        var box = draw_boxes([val],1,this.linkedListField.id,'array')[0];
+    insertTempAtPos(pos){
+        this.tempBox = draw_boxes([' '],1,this.linkedListField.id,'array')[0];
+        var box = this.tempBox;
         var field_rect = this.linkedListField.getBoundingClientRect();
         box.style.position = 'absolute';
-        if(pos ==0 || pos>=this.size-1){
-            this.insert(val);    
+        // box.style.visibility = 'hidden';
+        if(pos+1 > this.size-1){
+            var boxPostRect = this.box_list[pos].getBoundingClientRect();
         }
         else{
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
+        }
+        if(pos==0)
+            var boxPreRect = this.box_list[pos].getBoundingClientRect();
+        else
             var boxPreRect = this.box_list[pos-1].getBoundingClientRect();
-            var arrowPre = this.arrow_list[pos-1];
-            var arrowPost = this.arrow_list[pos];
 
-            if(boxPostRect['y']==boxPreRect['y']){
-                if(this.lc==0){
-                   var boxh = 0;
-                   var boxw = pos;
+        if(boxPostRect['y']==boxPreRect['y']){
+            if(this.lc==0){
+                var boxh = 0;
+                var boxw = pos;
+            }
+            else{
+                var boxh = Math.floor(pos/this.lc);
+                if(boxh%2==0){
+                    var boxw = pos%this.lc;
                 }
                 else{
-                    var boxh = Math.floor(pos/this.lc);
-                    if(boxh%2==0){
-                        var boxw = pos%this.lc;
-                    }
-                    else{
-                        var boxw = this.lc - pos%this.lc;
-                    }
+                    var boxw = this.lc - pos%this.lc;
                 }
-                console.log(boxh);
-                console.log(boxw);
+            }
+            console.log(boxh);
+            console.log(boxw);
 
+            if(boxPostRect['x']-boxPreRect['x'] > 0){
+                box.style.top = 15+boxh*70+(boxh-1)*60 + 'px';
+                box.style.left = 15+(boxw)*130 +'px';
+            }
+            else{   
+                box.style.top = 15+boxh*70+(boxh+1)*60 + 'px';
+                box.style.left = 15 + (boxw -1)*130 +'px';
+            }
+        }
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+            if(this.lc==0){
+                var boxh = 0;
+                var boxw = pos;
+            }
+            else{
+                var boxh = Math.floor(pos/this.lc);
+                var boxw = pos%this.lc;
+            }
+            console.log(boxh);
+            console.log(boxw); 
+            if(boxPreRect['x']-field_rect['x']>100){
+                box.style.top = (boxh+1)*70+(boxh+1)*60 -60+ 'px';
+                box.style.left = 15+(this.lc-2)*130 +75+'px';         
+                console.log("ygxg");    
+            }
+            else{
+                box.style.top = 15+(boxh)*70+(boxh)*60 -60+ 'px';
+                box.style.left = 15+60+'px';         
+            }
+        }
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+            if(this.lc==0){
+                var boxh = 0;
+                var boxw = pos;
+            }
+            else{
+                var boxh = Math.floor(pos/this.lc);
+                var boxw = pos%this.lc;
+            }
+            console.log(boxh);
+            console.log(boxw); 
+            if(boxPostRect['x']-field_rect['x']>100){
+                box.style.top = 15+(boxh)*70+(boxh)*60 -60+ 'px';
+                box.style.left = 15+(this.lc-2)*130 +75+'px';         
+                console.log("ygxl");    
+            }
+            else{
+                box.style.top = (boxh+1)*70+(boxh+1)*60 -60+ 'px';
+                box.style.left = 15+60+'px';         
+            }
+        }
+    }
+
+    setArrowPre(pos){
+        if(this.size-1 < pos+1)
+            var boxPostRect = this.box_list[pos].getBoundingClientRect();
+        else
+            var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
+        var boxPreRect = this.box_list[pos-1].getBoundingClientRect();
+        var arrowPre = this.arrow_list[pos-1];
+
+        if(boxPostRect['y']==boxPreRect['y']){
+            if(boxPostRect['x']-boxPreRect['x'] > 0){
+                // arrowPre.style.transform = 'rotate(-45deg)';
+                arrowPre.classList.add('arrow_rt_neg45');
+            }
+            else{   
+                // arrowPre.style.transform = 'rotate(135deg)';
+                arrowPre.classList.add('arrow_rt_135');
+            }
+        }
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+            // arrowPre.style.transform = 'rotate(45deg)';
+            arrowPre.classList.add('arrow_rt_45');
+        }
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+            // arrowPre.style.transform = 'rotate(135deg)';
+            arrowPre.classList.add('arrow_rt_135');
+        }               
+    }
+
+    setArrowPost(pos){
+        if(pos < this.arrow_list.length){
+            var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
+            if(pos==0)
+                var boxPreRect = this.box_list[pos].getBoundingClientRect();
+            else
+                var boxPreRect = this.box_list[pos-1].getBoundingClientRect();
+            var arrowPost = this.arrow_list[pos];
+    
+            if(boxPostRect['y']==boxPreRect['y']){
                 if(boxPostRect['x']-boxPreRect['x'] > 0){
-                    arrowPre.style.transform = 'rotate(-45deg)';
-                    arrowPost.style.transform = 'rotate(45deg)';
-                    box.style.top = 15+boxh*70+(boxh-1)*60 + 'px';
-                    box.style.left = 15+(boxw)*130 +'px';
+                    // arrowPost.style.transform = 'rotate(45deg)';
+                    arrowPost.classList.add('arrow_rt_45');
                 }
                 else{   
-                    arrowPre.style.transform = 'rotate(135deg)';
-                    arrowPost.style.transform = 'rotate(225deg)';
-                    box.style.top = 15+boxh*70+(boxh+1)*60 + 'px';
-                    box.style.left = 15 + (boxw -1)*130 +'px';
+                    // arrowPost.style.transform = 'rotate(225deg)';
+                    arrowPost.classList.add('arrow_rt_225');
                 }
             }
             else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
-                if(this.lc==0){
-                    var boxh = 0;
-                    var boxw = pos;
-                }
-                else{
-                    var boxh = Math.floor(pos/this.lc);
-                    var boxw = pos%this.lc;
-                }
-                console.log(boxh);
-                console.log(boxw); 
-                arrowPre.style.transform = 'rotate(45deg)';
-                arrowPost.style.transform = 'rotate(45deg)';
-                if(boxPreRect['x']-field_rect['x']>100){
-                    box.style.top = (boxh+1)*70+(boxh+1)*60 -60+ 'px';
-                    box.style.left = 15+(this.lc-2)*130 +75+'px';         
-                    console.log("ygxg");    
-                }
-                else{
-                    box.style.top = 15+(boxh)*70+(boxh)*60 -60+ 'px';
-                    box.style.left = 15+60+'px';         
-                }
+                // arrowPost.style.transform = 'rotate(45deg)';
+                arrowPost.classList.add('arrow_rt_45');
             }
             else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
-                if(this.lc==0){
-                    var boxh = 0;
-                    var boxw = pos;
+                // arrowPost.style.transform = 'rotate(135deg)';
+                arrowPost.classList.add('arrow_rt_135');
+            }    
+        }
+    }
+
+    resetArrowPre(pos){
+        if(this.size-1 < pos+1)
+            var boxPostRect = this.box_list[pos].getBoundingClientRect();
+        else
+            var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
+        var boxPreRect = this.box_list[pos-1].getBoundingClientRect();
+        var arrowPre = this.arrow_list[pos-1];
+
+        if(boxPostRect['y']==boxPreRect['y']){
+            if(boxPostRect['x']-boxPreRect['x'] > 0){
+                // arrowPre.style.transform = 'rotate(-45deg)';
+                arrowPre.classList.remove('arrow_rt_neg45');
+            }
+            else{   
+                // arrowPre.style.transform = 'rotate(135deg)';
+                arrowPre.classList.remove('arrow_rt_135');
+            }
+        }
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+            // arrowPre.style.transform = 'rotate(45deg)';
+            arrowPre.classList.remove('arrow_rt_45');
+        }
+        else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+            // arrowPre.style.transform = 'rotate(135deg)';
+            arrowPre.classList.remove('arrow_rt_135');
+        }               
+    }
+
+    resetArrowPost(pos){
+        if(pos < this.arrow_list.length){
+            var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
+    
+            if(pos==0)
+                var boxPreRect = this.box_list[pos].getBoundingClientRect();
+            else
+                var boxPreRect = this.box_list[pos-1].getBoundingClientRect();
+    
+            var arrowPost = this.arrow_list[pos];
+    
+            if(boxPostRect['y']==boxPreRect['y']){
+                if(boxPostRect['x']-boxPreRect['x'] > 0){
+                    // arrowPost.style.transform = 'rotate(45deg)';
+                    arrowPost.classList.remove('arrow_rt_45');
                 }
-                else{
-                    var boxh = Math.floor(pos/this.lc);
-                    var boxw = pos%this.lc;
-                }
-                console.log(boxh);
-                console.log(boxw); 
-                arrowPre.style.transform = 'rotate(135deg)';
-                arrowPost.style.transform = 'rotate(135deg)';
-                if(boxPostRect['x']-field_rect['x']>100){
-                    box.style.top = 15+(boxh)*70+(boxh)*60 -60+ 'px';
-                    box.style.left = 15+(this.lc-2)*130 +75+'px';         
-                    console.log("ygxl");    
-                }
-                else{
-                    box.style.top = (boxh+1)*70+(boxh+1)*60 -60+ 'px';
-                    box.style.left = 15+60+'px';         
+                else{   
+                    // arrowPost.style.transform = 'rotate(225deg)';
+                    arrowPost.classList.remove('arrow_rt_225');
                 }
             }
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] > 0)){
+                // arrowPost.style.transform = 'rotate(45deg)';
+                arrowPost.classList.remove('arrow_rt_45');
+            }
+            else if((boxPostRect['y']-boxPreRect['y'] > 0)  &&  (boxPostRect['x']-boxPreRect['x'] < 0)){
+                // arrowPost.style.transform = 'rotate(135deg)';
+                arrowPost.classList.remove('arrow_rt_135');
+            }    
         }
     }
 
@@ -485,11 +611,23 @@ class linkedList{
         this.appendArray();
     }
 
+    insertAtPos_noappend(val,pos){
+        this.arr.splice(pos-1,0,val);
+        var arrow = draw_arrow(this.linkedListField.id);
+        arrow.style.position='relative';    
+        var box = draw_boxes([0],1,this.linkedListField.id,'array')[0];      
+        this.setArrowBox(arrow,box);            
+        this.box_list.push(box);
+        this.arrow_list.push(arrow);
+        this.size++;
+        // this.appendArray();
+    }
+
     delete(val){
         var val_index = this.arr.findIndex((elm)=>elm==val);
         console.log(val_index);
         if(val_index==-1)
-            console.log('no node with value '+val);
+            console.log('no node with value 5');
         else{
             this.arr.splice(val_index,1);
             this.box_list[this.size-1].remove();
@@ -524,6 +662,17 @@ class linkedList{
             this.appendArray();    
         }
     }   
+
+    removeHighlight(){
+        for(i=0;i<this.size;i++){
+            unhighlightBoxELement(this.box_list[i]);
+        }
+        unhighlightBoxELement(this.tempBox);
+    }
+
+    remove(){
+        this.linkedListField.remove();
+    }
 }
 
 class Queue{

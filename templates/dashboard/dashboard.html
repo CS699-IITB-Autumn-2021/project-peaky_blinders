@@ -12,7 +12,8 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous">
     <link rel="stylesheet" href="{% static 'css/dashboardstyle.css' %}">
 
-    
+    <link href='https://fonts.googleapis.com/css?family=Autour One' rel='stylesheet'>
+
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/solid.js" integrity="sha384-tzzSw1/Vo+0N5UhStP3bvwWPq+uvzCMfrN1fEFe+xBmv1C/AtVX5K0uZtmcHitFZ" crossorigin="anonymous"></script>
     <script defer src="https://use.fontawesome.com/releases/v5.0.13/js/fontawesome.js" integrity="sha384-6OIrr52G08NpOFSZdxxz1xdNSndlD4vdcf/q2myIUVO0VsqaGHJsB0RaBE01VTOY" crossorigin="anonymous"></script>
 </head>
@@ -22,7 +23,7 @@
         
         <nav id="sidebar">
             <div class="sidebar-header">
-                <h3>DSA Visualiser</h3>
+                <h3 class='logo'>DSA Visualiser</h3>
             </div>
 
             <ul class="list-unstyled components">
@@ -161,7 +162,7 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="nav navbar-nav ml-auto">
                             <li class="nav-item">
-                                <label class="usr" style="text-align: center; vertical-align: bottom; font-size: larger; padding-top: 8px;" for="curr_username">Welcome {{ name }}</label>
+                                <label class="usr" style="text-align: center; vertical-align: bottom; font-size: larger; padding-top: 8px;" for="curr_username">{{ name }}</label>
                             </li>
                             <li class="nav-item ">
                                 <a href="/logout"><button type="button" class="btn btn-danger" >Logout</button></a>
@@ -218,7 +219,7 @@
                 
                 <div class="card-deck-wrapper">
                     <div class="card-deck">
-                        <a class="card mb-3 p-2" href="">
+                        <a class="card mb-3 p-2" href="linkedlist-bo">
                             <div class="card-block stretched-link text-decoration-none">
                                 <h4 class="card-title" >Basic Operations</h4>
                                 <!-- <p class="card-text" style="color: #0099CC;font-size:150%">A linked-list is a sequence of data structures which are connected together via links.</p> -->

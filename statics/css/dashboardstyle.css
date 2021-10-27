@@ -3,7 +3,7 @@
 @import "https://fonts.googleapis.com/css?family=Poppins:300,400,500,600,700";
 body {
     font-family: 'Poppins', sans-serif;
-    background-color: #fafafa;
+    background-color: #fff;
 }
 
 p {
@@ -32,6 +32,7 @@ a:focus {
     inset 0 3px 2px rgba(255,255,255,.22),
     0 0 4px 1px rgba(0,0,0,.1), 
     0 3px 2px rgba(0,0,0,.2);
+    height: 76px;
 }
 .nav-item{
     margin:20px;
@@ -77,11 +78,11 @@ a:focus {
 }
 
 #sidebar .sidebar-header {
-    padding-top: 50px; 
-    padding-bottom: 50px;
+    padding-top: 20px; 
+    padding-bottom: 13px;
     text-align: center;
 
-    background-color: #1fbfb8;/*#c9f3e6;*/
+    background-color:#fff; /*#1fbfb8;#c9f3e6;*/
     border-bottom: 1px solid rgb(206, 204, 204);
 }
 
@@ -149,10 +150,10 @@ ul.CTAs a {
 
 #content {
     width: 100%;
-    padding: 20px;
+    /*! padding: 20px; */
     min-height: 100vh;
     transition: all 0.3s;
-    background-color: rgb(206, 204, 204);
+    background-color: #fff;
 }
 .card-deck-wrapper{
     color:rgb(14, 11, 11);
@@ -169,6 +170,10 @@ ul.CTAs a {
 .card {
     border-radius: 20px;
     background-color: #26495c;
+}
+
+.card a{
+    transition: 0.2s;
 }
 
 .card:hover{
@@ -204,3 +209,7 @@ ul.CTAs a {
     }
 }
 
+.logo{
+    font-family: 'Autour One';
+    color:darkred;
+}
