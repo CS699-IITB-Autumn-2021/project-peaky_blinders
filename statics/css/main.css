@@ -624,3 +624,8 @@ button[disabled]{
     text-decoration: none;
     cursor: pointer;
   }
+/* ---------------------------------------------------------Linked list--------------------------- */
+.hc_{
+    margin: 5px;
+    margin-left: 10px;
+}

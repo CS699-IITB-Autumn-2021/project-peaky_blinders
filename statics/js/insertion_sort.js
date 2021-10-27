@@ -36,7 +36,7 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight=0;
 
 /**
  * Setup the editor.
@@ -353,5 +353,6 @@ function reset(){
     removeBoxElm(index_j);
     removeBoxElm(temp);
     disbaleCtrlButtons();
+    if(line_rem_highlight!=0)
     document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }

@@ -33,7 +33,7 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
 //stack object
 var stk_obj=null;
@@ -270,7 +270,7 @@ function popStack(){
 function createStack(){
     if (!stk_obj) {
         stack_size = parseInt(document.getElementById("stack_max_size").value);
-        if(isNaN(stack_size))
+        if(isNaN(stack_size) || stack_size==0)
         document.getElementById('id03').style.display='block';
           
         else{
@@ -312,6 +312,7 @@ function reset(){
     disbaleCtrlButtons();
     document.getElementById("push").disabled = true;
     document.getElementById("pop").disabled = true; 
-    stk_obj=null;   
+    stk_obj=null;  
+    if(line_rem_highlight!=0) 
     document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }

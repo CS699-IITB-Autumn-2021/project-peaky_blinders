@@ -30,7 +30,7 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
 
 /**
@@ -275,5 +275,6 @@ function reset(){
     document.getElementById('set_Array_value').disabled = true;
     document.getElementById('SetSearchVal').disabled = true;
     disbaleCtrlButtons();
+    if(line_rem_highlight!=0)
     document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }

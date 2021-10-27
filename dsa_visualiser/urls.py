@@ -20,4 +20,6 @@ urlpatterns = [
     path('sorting', views.sorting, name="sorting"),
     path('searching', views.searching, name="searching"),
     path('done/<animation>', views.store_animation_done_status, name="done"),
+    path('linkedlist-appl', views.linkedlist_appl, name="linkedlistAppl"),
+    path('linkedlist', views.linkedlist, name="linkedlist")
  ]

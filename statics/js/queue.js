@@ -40,7 +40,7 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
 // Queue object
 var queue_obj=null;
@@ -307,6 +307,7 @@ function enqueue(){
     code_line_itr = enqueue_begin;
     val = document.getElementById('enqueue_val').value;
     if(val=='')
+    
     document.getElementById('id04').style.display='block';
     else
     EnableCtrlButtons();
@@ -329,7 +330,7 @@ function dequeue(){
 function createQueue(){
     if (!queue_obj) {
         queue_size = parseInt(document.getElementById("max_size").value);
-        if(isNaN(queue_size))
+        if(isNaN(queue_size) || queue_size ==0)
            document.getElementById('id03').style.display='block';
         else{
             queue_obj = new Queue(heap, queue_size,'queue');
@@ -361,7 +362,8 @@ function reset(){
     queue_obj=null;
     document.getElementById("enqueue").disabled = true;
     document.getElementById("dequeue").disabled = true;   
-    document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
+   if(line_rem_highlight!=0)
+   document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }
 
 
