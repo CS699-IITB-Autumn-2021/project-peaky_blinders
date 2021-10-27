@@ -150,7 +150,7 @@ var del_pos_storage;
  * animations accordingly.
  */
 function loop() {
-    if (code_line_itr != insert_func_begin &amp;&amp; code_line_itr != 0) {
+    if (code_line_itr != insert_func_begin &amp;&amp; code_line_itr != 0 &amp;&amp; code_line_itr!=del_func_start) {
         document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
     }
     unhighlightBoxELement(insert_posElm);
@@ -310,19 +310,6 @@ function loop() {
             disbaleCtrlButtons(play);
             disbaleCtrlButtons(step);
             break;
-/*
-del_func_start =17;
-del_while_start =18;
-del_while_head_to_head_next=19;
-del_while_end=20;
-del_if_head_null=21;
-del_if_head_null_true=22;
-del_temp_to_head=23;
-del_head_to_head_next=24;
-del_free_temp=25;
-del_return=26;
-del_func_end = 27;
-*/       
         case del_func_start:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight=code_line_itr;
@@ -546,13 +533,13 @@ function reset(){
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Queue.html">Queue</a></li><li><a href="Stack.html">Stack</a></li></ul><h3>Global</h3><ul><li><a href="global.html#consumer">consumer</a></li><li><a href="global.html#create_html_element">create_html_element</a></li><li><a href="global.html#createButtonArr">createButtonArr</a></li><li><a href="global.html#createCons">createCons</a></li><li><a href="global.html#createHashTable">createHashTable</a></li><li><a href="global.html#createLinkedList">createLinkedList</a></li><li><a href="global.html#createProd">createProd</a></li><li><a href="global.html#createQueue">createQueue</a></li><li><a href="global.html#createStack">createStack</a></li><li><a href="global.html#deleteFromLinkedList">deleteFromLinkedList</a></li><li><a href="global.html#deleteVal">deleteVal</a></li><li><a href="global.html#dequeue">dequeue</a></li><li><a href="global.html#draw_array">draw_array</a></li><li><a href="global.html#draw_arrow">draw_arrow</a></li><li><a href="global.html#draw_arrow_color">draw_arrow_color</a></li><li><a href="global.html#draw_boxes">draw_boxes</a></li><li><a href="global.html#draw_fieldset">draw_fieldset</a></li><li><a href="global.html#draw_set">draw_set</a></li><li><a href="global.html#draw_variable">draw_variable</a></li><li><a href="global.html#enqueue">enqueue</a></li><li><a href="global.html#highlightBoxELement">highlightBoxELement</a></li><li><a href="global.html#insertInLinkedLIst">insertInLinkedLIst</a></li><li><a href="global.html#insertVal">insertVal</a></li><li><a href="global.html#loop">loop</a></li><li><a href="global.html#loop_color">loop_color</a></li><li><a href="global.html#popStack">popStack</a></li><li><a href="global.html#producer">producer</a></li><li><a href="global.html#pushStack">pushStack</a></li><li><a href="global.html#removeBoxElm">removeBoxElm</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#searchCode">searchCode</a></li><li><a href="global.html#set_Array_value">set_Array_value</a></li><li><a href="global.html#SetSearchVal">SetSearchVal</a></li><li><a href="global.html#setSize">setSize</a></li><li><a href="global.html#setUpEditor">setUpEditor</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#sortCode">sortCode</a></li><li><a href="global.html#unhighlightBoxELement">unhighlightBoxELement</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="linkedList.html">linkedList</a></li><li><a href="Queue.html">Queue</a></li><li><a href="Stack.html">Stack</a></li></ul><h3>Global</h3><ul><li><a href="global.html#consumer">consumer</a></li><li><a href="global.html#create_html_element">create_html_element</a></li><li><a href="global.html#createButtonArr">createButtonArr</a></li><li><a href="global.html#createCons">createCons</a></li><li><a href="global.html#createHashTable">createHashTable</a></li><li><a href="global.html#createLinkedList">createLinkedList</a></li><li><a href="global.html#createProd">createProd</a></li><li><a href="global.html#createQueue">createQueue</a></li><li><a href="global.html#createStack">createStack</a></li><li><a href="global.html#deleteFromLinkedList">deleteFromLinkedList</a></li><li><a href="global.html#deleteVal">deleteVal</a></li><li><a href="global.html#dequeue">dequeue</a></li><li><a href="global.html#draw_array">draw_array</a></li><li><a href="global.html#draw_arrow">draw_arrow</a></li><li><a href="global.html#draw_arrow_color">draw_arrow_color</a></li><li><a href="global.html#draw_boxes">draw_boxes</a></li><li><a href="global.html#draw_fieldset">draw_fieldset</a></li><li><a href="global.html#draw_set">draw_set</a></li><li><a href="global.html#draw_variable">draw_variable</a></li><li><a href="global.html#enqueue">enqueue</a></li><li><a href="global.html#highlightBoxELement">highlightBoxELement</a></li><li><a href="global.html#insertInLinkedLIst">insertInLinkedLIst</a></li><li><a href="global.html#insertVal">insertVal</a></li><li><a href="global.html#loop">loop</a></li><li><a href="global.html#loop_color">loop_color</a></li><li><a href="global.html#popStack">popStack</a></li><li><a href="global.html#producer">producer</a></li><li><a href="global.html#pushStack">pushStack</a></li><li><a href="global.html#removeBoxElm">removeBoxElm</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#searchCode">searchCode</a></li><li><a href="global.html#set_Array_value">set_Array_value</a></li><li><a href="global.html#SetSearchVal">SetSearchVal</a></li><li><a href="global.html#setSize">setSize</a></li><li><a href="global.html#setUpEditor">setUpEditor</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#sortCode">sortCode</a></li><li><a href="global.html#unhighlightBoxELement">unhighlightBoxELement</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 16:54:14 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 20:03:44 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>

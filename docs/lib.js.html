@@ -328,11 +328,15 @@ class Stack{
     }
 }
 
-
-
+/** Class for Linked List */
 class linkedList{
-    constructor(parent_id){
-        this.linkedListField = draw_fieldset('LInked List',parent_id);
+    /**
+     * Creates the initial frame for linked list and initializes the variables with given name.
+     * @param {string} parent_id ID of the html element inside which this linkedlist will be created
+     * @param {string} linkedList_name  name of the linked list
+     */
+     constructor(parent_id,linkedList_name='Linked List'){
+        this.linkedListField = draw_fieldset(linkedList_name,parent_id);
         this.linkedListField.style.maxWidth = '800px';  
         this.arr = [];
         this.size = 0;
@@ -355,7 +359,11 @@ class linkedList{
         this.currBox;
         this.currArrow;
     }
-
+    /**
+     * Sets the arrow and box to correct position and angle
+     * @param {object} arrow newly created arrow 
+     * @param {object} box  newly created box
+     */
     setArrowBox(arrow,box){
         var field_rect = this.linkedListField.getBoundingClientRect();
         var cur_box_rect = box.getBoundingClientRect();
@@ -495,7 +503,10 @@ class linkedList{
             // this.lc = this.size-1;
         }
     }
-
+    /**
+     * inserts the value given to the end of the linked list
+     * @param {integer} val 
+     */
     insert(val){
         if(this.size ==0){
             this.arr.push(val);
@@ -516,6 +527,10 @@ class linkedList{
         }
     }
 
+    /**
+     * creates a temporary box and sets it position as per the argument
+     * @param {integer} pos defines the location for the tempbox
+     */
     insertTempAtPos(pos){
         this.tempBox = draw_boxes([' '],1,this.linkedListField.id,'array')[0];
         var box = this.tempBox;
@@ -603,6 +618,10 @@ class linkedList{
         }
     }
 
+    /**
+     * sets the arrow previous to the position in out direction as per the position
+     * @param {integer} pos defines the arrow location
+     */
     setArrowPre(pos){
         if(this.size-1 &lt; pos+1)
             var boxPostRect = this.box_list[pos].getBoundingClientRect();
@@ -631,6 +650,10 @@ class linkedList{
         }               
     }
 
+    /**
+     * sets the arrow post the position in inward direction
+     * @param {integer} pos defiens the arrow position
+     */
     setArrowPost(pos){
         if(pos &lt; this.arrow_list.length){
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
@@ -661,6 +684,10 @@ class linkedList{
         }
     }
 
+    /**
+     * resets the arrow pre to the box at position 'pos'.
+     * @param {integer} pos  defines the arrow position
+     */
     resetArrowPre(pos){
         if(this.size-1 &lt; pos+1)
             var boxPostRect = this.box_list[pos].getBoundingClientRect();
@@ -689,7 +716,11 @@ class linkedList{
         }               
     }
 
-    resetArrowPost(pos){
+    /**
+     * resets the arrow post to the box at position 'pos'.
+     * @param {integer} pos  defines the arrow position
+     */
+     resetArrowPost(pos){
         if(pos &lt; this.arrow_list.length){
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
     
@@ -721,12 +752,20 @@ class linkedList{
         }
     }
 
+    /**
+     * sets the values of the box_list as per the arr
+     */
     appendArray(){
         for(var i=0;i&lt;this.size-1;i++){
             this.box_list[i+1].innerHTML = this.arr[i];
         }
     }
 
+    /**
+     * Inserts given value at given position in the linked list
+     * @param {integer} val 
+     * @param {integer} pos 
+     */
     insertAtPos(val,pos){
         this.arr.splice(pos-1,0,val);
         var arrow = draw_arrow(this.linkedListField.id);
@@ -739,6 +778,11 @@ class linkedList{
         this.appendArray();
     }
 
+    /**
+     * Inserts given value at given position in the linked list ut not append the box_list
+     * @param {integer} val 
+     * @param {integer} pos 
+     */
     insertAtPos_noappend(val,pos){
         this.arr.splice(pos-1,0,val);
         var arrow = draw_arrow(this.linkedListField.id);
@@ -751,6 +795,10 @@ class linkedList{
         // this.appendArray();
     }
 
+    /**
+     * Deletes the first linked list node with given value
+     * @param {integer} val 
+     */
     delete(val){
         var val_index = this.arr.findIndex((elm)=>elm==val);
         console.log(val_index);
@@ -791,6 +839,9 @@ class linkedList{
         }
     }   
 
+    /**
+     * removes the highlights from the box_list elements and the tempBox Created
+     */
     removeHighlight(){
         for(i=0;i&lt;this.size;i++){
             unhighlightBoxELement(this.box_list[i]);
@@ -798,6 +849,9 @@ class linkedList{
         unhighlightBoxELement(this.tempBox);
     }
 
+    /**
+     * removes the liked list object from the display
+     */
     remove(){
         this.linkedListField.remove();
     }
@@ -994,7 +1048,8 @@ class Queue{
         this.rear_pointer.style.top =(rectBox['y']-this.reRectOrigin['y'])+55+'px';
         this.rear_pointer.style.left=rectBox['x']-this.reRectOrigin['x']+'px';           
     }
-}</code></pre>
+}
+</code></pre>
         </article>
     </section>
 
@@ -1004,13 +1059,13 @@ class Queue{
 </div>
 
 <nav>
-    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="Queue.html">Queue</a></li><li><a href="Stack.html">Stack</a></li></ul><h3>Global</h3><ul><li><a href="global.html#consumer">consumer</a></li><li><a href="global.html#create_html_element">create_html_element</a></li><li><a href="global.html#createButtonArr">createButtonArr</a></li><li><a href="global.html#createCons">createCons</a></li><li><a href="global.html#createHashTable">createHashTable</a></li><li><a href="global.html#createLinkedList">createLinkedList</a></li><li><a href="global.html#createProd">createProd</a></li><li><a href="global.html#createQueue">createQueue</a></li><li><a href="global.html#createStack">createStack</a></li><li><a href="global.html#deleteFromLinkedList">deleteFromLinkedList</a></li><li><a href="global.html#deleteVal">deleteVal</a></li><li><a href="global.html#dequeue">dequeue</a></li><li><a href="global.html#draw_array">draw_array</a></li><li><a href="global.html#draw_arrow">draw_arrow</a></li><li><a href="global.html#draw_arrow_color">draw_arrow_color</a></li><li><a href="global.html#draw_boxes">draw_boxes</a></li><li><a href="global.html#draw_fieldset">draw_fieldset</a></li><li><a href="global.html#draw_set">draw_set</a></li><li><a href="global.html#draw_variable">draw_variable</a></li><li><a href="global.html#enqueue">enqueue</a></li><li><a href="global.html#highlightBoxELement">highlightBoxELement</a></li><li><a href="global.html#insertInLinkedLIst">insertInLinkedLIst</a></li><li><a href="global.html#insertVal">insertVal</a></li><li><a href="global.html#loop">loop</a></li><li><a href="global.html#loop_color">loop_color</a></li><li><a href="global.html#popStack">popStack</a></li><li><a href="global.html#producer">producer</a></li><li><a href="global.html#pushStack">pushStack</a></li><li><a href="global.html#removeBoxElm">removeBoxElm</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#searchCode">searchCode</a></li><li><a href="global.html#set_Array_value">set_Array_value</a></li><li><a href="global.html#SetSearchVal">SetSearchVal</a></li><li><a href="global.html#setSize">setSize</a></li><li><a href="global.html#setUpEditor">setUpEditor</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#sortCode">sortCode</a></li><li><a href="global.html#unhighlightBoxELement">unhighlightBoxELement</a></li></ul>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="linkedList.html">linkedList</a></li><li><a href="Queue.html">Queue</a></li><li><a href="Stack.html">Stack</a></li></ul><h3>Global</h3><ul><li><a href="global.html#consumer">consumer</a></li><li><a href="global.html#create_html_element">create_html_element</a></li><li><a href="global.html#createButtonArr">createButtonArr</a></li><li><a href="global.html#createCons">createCons</a></li><li><a href="global.html#createHashTable">createHashTable</a></li><li><a href="global.html#createLinkedList">createLinkedList</a></li><li><a href="global.html#createProd">createProd</a></li><li><a href="global.html#createQueue">createQueue</a></li><li><a href="global.html#createStack">createStack</a></li><li><a href="global.html#deleteFromLinkedList">deleteFromLinkedList</a></li><li><a href="global.html#deleteVal">deleteVal</a></li><li><a href="global.html#dequeue">dequeue</a></li><li><a href="global.html#draw_array">draw_array</a></li><li><a href="global.html#draw_arrow">draw_arrow</a></li><li><a href="global.html#draw_arrow_color">draw_arrow_color</a></li><li><a href="global.html#draw_boxes">draw_boxes</a></li><li><a href="global.html#draw_fieldset">draw_fieldset</a></li><li><a href="global.html#draw_set">draw_set</a></li><li><a href="global.html#draw_variable">draw_variable</a></li><li><a href="global.html#enqueue">enqueue</a></li><li><a href="global.html#highlightBoxELement">highlightBoxELement</a></li><li><a href="global.html#insertInLinkedLIst">insertInLinkedLIst</a></li><li><a href="global.html#insertVal">insertVal</a></li><li><a href="global.html#loop">loop</a></li><li><a href="global.html#loop_color">loop_color</a></li><li><a href="global.html#popStack">popStack</a></li><li><a href="global.html#producer">producer</a></li><li><a href="global.html#pushStack">pushStack</a></li><li><a href="global.html#removeBoxElm">removeBoxElm</a></li><li><a href="global.html#reset">reset</a></li><li><a href="global.html#searchCode">searchCode</a></li><li><a href="global.html#set_Array_value">set_Array_value</a></li><li><a href="global.html#SetSearchVal">SetSearchVal</a></li><li><a href="global.html#setSize">setSize</a></li><li><a href="global.html#setUpEditor">setUpEditor</a></li><li><a href="global.html#sleep">sleep</a></li><li><a href="global.html#sortCode">sortCode</a></li><li><a href="global.html#unhighlightBoxELement">unhighlightBoxELement</a></li></ul>
 </nav>
 
 <br class="clear">
 
 <footer>
-    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 16:54:14 GMT+0530 (India Standard Time)
+    Documentation generated by <a href="https://github.com/jsdoc/jsdoc">JSDoc 3.6.7</a> on Wed Oct 27 2021 20:03:44 GMT+0530 (India Standard Time)
 </footer>
 
 <script> prettyPrint(); </script>
