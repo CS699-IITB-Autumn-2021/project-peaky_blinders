@@ -34,12 +34,13 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight=0;
 
 
 
-
-
+/**
+ * Setup the editor.
+ */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
     editor.setTheme("ace/theme/cobalt");   // set the background theme to coba lt0
@@ -72,13 +73,15 @@ arr_nElm=null;
 search_num = 5;
 search_numElm=null;
 
-// mid value
 
 
+//mid index initialisation
 var index_mid=0;
-// left right index 
 
+//low index initialisation
 var index_low=0;
+
+//high index initialisation
 var index_high=0;
 
 
@@ -90,12 +93,19 @@ id_count=0;
 
 // FUNCTION VARIABLE TO store the interval function
 var interval;
+
 // stores last highlighted line number to remove
 var line_rem_highlight=-1;
-//index_high initialisation
+
+
  
 
-
+/**
+ * This function loops over each line of code in editor by checking 
+ * cases according to line number. Every case highlights particular 
+ * line of code, does some opeartion on data structure and changes 
+ * animations accordingly.
+ */
 function loop()
 {
     parent_id='animation_box';
@@ -237,15 +247,25 @@ function loop()
     }
     if(line_rem_highlight==-1)
         line_rem_highlight=code_line_itr;
-}  
-// this function puts the loop() function  on interval call of 1000 milli sec
-// i.e it is called after every 1000 milli sec of 1 sec
+} 
+
+
+
+/** 
+* this function puts the loop() function  on interval call of 1000 milli sec
+* i.e it is called after every 1000 milli sec of 1 sec
+*/
 function loop_color(){
         interval = setInterval(loop,1000);
 }
 
-
+// array intialisation
 set_arr_list_Elm=[];
+
+
+/**
+ * set size of a array
+ */
 function setSize(){
     arr_n = parseInt(document.getElementById('max_size_array').value);
     index_high = arr_n-1;
@@ -263,6 +283,10 @@ function setSize(){
     EnableCtrlButtons(rst);
 }
 
+
+/**
+ * set value of a array
+ */
 function set_Array_value(){
     arr=[];
     for(itr=0;itr<arr_n;itr++){
@@ -273,6 +297,9 @@ function set_Array_value(){
 }
 
 
+/**
+  * set search value in  array  and  enables control buttons .
+ */
 function SetSearchVal(){
     search_num = parseInt(document.getElementById('search_val').value);
     search_num_arr=[search_num];
@@ -293,6 +320,11 @@ function SetSearchVal(){
     
     
 }
+
+
+/**
+ * set array value and search element  which are given at run time .
+ */
 
 searchCode=`int binarySearch(int arr[], int n, int x)
 {
@@ -327,6 +359,12 @@ searchValue=`;
     return 0;
 }`;
 
+
+
+/**
+ * Removes binary search animation. Disables setarray and search  
+ * buttons. and set the all indexes to zero.
+ */
 function reset(){
     removeBoxElm(search_numElm);
     code_line_itr=main;
@@ -344,19 +382,6 @@ function reset(){
     document.getElementById('set_Array_value').disabled = true;
     document.getElementById('SetSearchVal').disabled = true;
     disbaleCtrlButtons();
+    if(line_rem_highlight!=0)
+    document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }
-// function reset(){
-//     removeBoxElm(search_numElm);
-//     code_line_itr=code_begin;
-//     for(i=0;i<arr_n;i++){
-//         if(arrElmSet!=null)
-//             removeBoxElm(arrElmSet[i]);
-//         if(set_arr_list_Elm!=null)
-//             set_arr_list_Elm[i].remove();
-//     }
-//     document.getElementById('search_val').value='';
-//     document.getElementById('max_size_array').value='';
-//     document.getElementById('set_Array_value').disabled = true;
-//     document.getElementById('SetSearchVal').disabled = true;
-//     disbaleCtrlButtons();
-// }

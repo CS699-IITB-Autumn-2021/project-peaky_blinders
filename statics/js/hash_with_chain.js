@@ -28,7 +28,7 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
 // Linked List Array
 var linkedlist_arr = [];
@@ -177,8 +177,8 @@ function deleteVal() {
 function createHashTable(){
     if (!linkedlist_arr[0]) {
         hashtable_size = parseInt(document.getElementById("max_size").value);
-        if(isNaN(hashtable_size))
-            console.log('Error in size');
+        if(isNaN(hashtable_size) || hashtable_size==0)
+        document.getElementById('id03').style.display='block';
         else{
             for (let i=0; i<hashtable_size; i++) {
                 var div = document.createElement('div');
@@ -223,4 +223,7 @@ function reset(){
     key_val = 0;
     document.getElementById("insert").disabled = true;
     document.getElementById("delete").disabled = true;
+    linkedlist_arr =[];
+    if(line_rem_highlight!=0)
+    document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }

@@ -10,10 +10,29 @@
     <script src="{% static 'js/hash_with_chain.js' %}"></script>
     <script src="{% static 'js/button.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
+    <link href='https://fonts.googleapis.com/css?family=Autour One' rel='stylesheet' >
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 </head>
 <body>
     <div class='grid'>
+        <div class="navbar1">
+        
+            <a href="/dashboard">Home</a>
+            <a class="active" href="/linkedlist">Linked List</a>
+            <a href="/stack">Stack</a>
+            <a href="/queue">Queue</a>
+            <a  href="/searching">Searching</a>
+            <a  href="/sorting">Sorting</a>
+           <a href="/logout"><button type="button"  style="color:rgb(216, 210, 210); background-color: red;" >Logout</button></a>
+            
+           </div>
+
+           <div id="id03" class="popup">
+            <div class="modal-content">
+           <span onclick="document.getElementById('id03').style.display='none'" class="close">&times;</span>
+           <p style="color: 	#3f0f0f;font-family:  'Autour One';font-size: 20px;">Error in Size.</p>
+         </div>
+         </div>
         <div class='col-1-1' id="parent">
             <div id="editor">struct node {
     int val;
@@ -61,7 +80,7 @@ void deleteFromHashTable(int val) {
     <div id='input_set'>
         <div>
             <div id='create_struct'>
-                <input type="text" name="" id="max_size" placeholder="Enter Size of queue" class='value_input'>
+                <input type="text" name="" id="max_size" placeholder="Enter Size of Hashtable" class='value_input'>
                 <button type="button" class="value_input value_input_create" onclick="createHashTable()">
                     Create Hash Table
                 </button>        

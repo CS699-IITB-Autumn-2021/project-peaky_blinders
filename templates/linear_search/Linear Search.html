@@ -11,9 +11,20 @@
     <script src="{% static 'js/linear-search.js' %}"></script>
     <script src="{% static 'js/button.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
+    
     </head>
     <body>
-        <div class='grid'>
+        <div class="navbar1">
+        
+            <a href="/dashboard">Home</a>
+            <a href="/linkedlist">Linked List</a>
+            <a href="/stack">Stack</a>
+            <a href="/queue">Queue</a>
+            <a class="active" href="/searching">Searching</a>
+            <a href="/sorting">Sorting</a>
+           <a href="/logout"><button type="button"  style="color:rgb(216, 210, 210); background-color: red;" >Logout</button></a>
+            
+      </div>
             <div class='col-1-1' id="parent">
                 <div id="editor">int linear_search(int x,int *arr,int n)
     {

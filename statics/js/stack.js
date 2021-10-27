@@ -33,14 +33,24 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
+//stack object
 var stk_obj=null;
 
+//stack content array
 var stack_content = [];
+
+//top initialisation
 var top1=0; 
+
+//size variable initialisation
 var size=stack_size;
 
+
+/**
+ * Setup the editor.
+ */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
     editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
@@ -63,15 +73,39 @@ function setUpEditor(){
     }
 }
 
+
+// push value
 var pushVal; 
+
+// push html element
 var pushValElm;
+
+//pop value
 var popVal;
+
+//pop html element
 var popValElm;
+
+//parent id
 var parent_id = 'variable_set';
+
+//temp parent id
 var temp = 'temp';
+
+//heap parent id
 var heap = 'heap';
+
+//constant parent id
 var constants = 'constants'
 
+
+
+/**
+ * This function loops over each line of code in editor by checking 
+ * cases according to line number. Every case highlights particular 
+ * line of code, does some opeartion on data structure and changes 
+ * animations accordingly.
+ */
 function loop() {
     if (code_line_itr != push_begin && code_line_itr != pop_begin && code_line_itr != 0) {
         document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
@@ -104,6 +138,7 @@ function loop() {
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
             code_line_itr = pushend;
+            document.getElementById('id01').style.display='block';
             break;
         case push_head_move:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
@@ -157,6 +192,7 @@ function loop() {
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
             code_line_itr = popend;
+            document.getElementById('id02').style.display='block';
             break;
         case pop_head_move:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
@@ -196,13 +232,17 @@ function loop() {
     }  
 }
 
+
+/**
+ * Calls push method of stk_obj type
+ */
 function pushStack(){
     code_line_itr = push_begin;
     top1 = parseInt(stk_obj.top_val.innerHTML)+1;
     size = parseInt(stk_obj.size_val.innerHTML);
     var input = document.getElementById('push_val').value;
     if(input=='')
-        console.log('error ihn input');
+       document.getElementById('id04').style.display='block';
     else{
         stack_content.push(input);
         pushVal=input;
@@ -212,6 +252,10 @@ function pushStack(){
 }
 
 
+
+/**
+ * Calls pop method of stk_obj type
+ */
 function popStack(){
     code_line_itr = pop_begin;
     top1 = parseInt(stk_obj.top_val.innerHTML);
@@ -220,12 +264,15 @@ function popStack(){
     EnableCtrlButtons();
 }
 
-
+/**
+ * Creates array of stack_max_size and enable push pop and reset button.
+ */
 function createStack(){
     if (!stk_obj) {
         stack_size = parseInt(document.getElementById("stack_max_size").value);
-        if(isNaN(stack_size))
-            console.log('Error in size');
+        if(isNaN(stack_size) || stack_size==0)
+        document.getElementById('id03').style.display='block';
+          
         else{
             stk_obj = new Stack(heap, stack_size,'stack');
             document.getElementById("push").disabled = false;
@@ -235,12 +282,22 @@ function createStack(){
     }
 }  
 
-// this function puts the loop() function  on interval call of 1000 milli sec
-// i.e it is called after every 1000 milli sec of 1 sec
+
+
+/** 
+* this function puts the loop() function  on interval call of 1000 milli sec
+* i.e it is called after every 1000 milli sec of 1 sec
+*/
 function loop_color(){
     interval = setInterval(loop,1000);
 }
 
+
+
+/**
+ * remove stk_obj
+ * Removes stack animation. Disables push pop buttons. 
+ */
 function reset(){
     if(stk_obj!=null)
     {
@@ -254,5 +311,8 @@ function reset(){
     document.getElementById('stack_max_size').value='';
     disbaleCtrlButtons();
     document.getElementById("push").disabled = true;
-    document.getElementById("pop").disabled = true;    
+    document.getElementById("pop").disabled = true; 
+    stk_obj=null;  
+    if(line_rem_highlight!=0) 
+    document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }

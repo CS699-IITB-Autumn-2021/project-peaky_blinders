@@ -1,5 +1,4 @@
 /* Code lines numbers for animation change */
-
 var enqueue_begin = 1;
 var overflow_check = 2;
 var enqueue_ret_err = 3;
@@ -26,8 +25,9 @@ var deque_end = 21;
 var editor;
 
 //Max stack size
-//var stack_size = 0;
 var queue_size =0;
+
+// Total line number of code
 code_line_count=21;
 
 //current code line number
@@ -40,16 +40,21 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
+// Queue object
 var queue_obj=null;
+
+// Enqueue Value
 var val;
+
+// Dequeue value
 var val2;
 
-// var stack_content = [];
-// var top1=0; 
-// var size=stack_size;
 
+/**
+ * Setup the editor.
+ */
 function setUpEditor(){
     editor = ace.edit("editor");    //the html tag with id 'editor' contains the code to be highlighted
     editor.setTheme("ace/theme/cobalt");   // set the background theme to cobalt0
@@ -72,26 +77,36 @@ function setUpEditor(){
     }
 }
 
-var enqValElm;
-var deqValElm;
-var parent_id = 'variable_set';
+
+// temp parent id
 var temp = 'temp';
+
+//heap  parent id
 var heap = 'heap';
+
+//constant parent id
 var constants = 'constants'
 
+//enqueue html element 
+var enqValElm;
+
+//dequeue html element
+var deqValElm;
+
+//paarent id 
+var parent_id = 'variable_set';
+
+
+/**
+ * This function loops over each line of code in editor by checking 
+ * cases according to line number. Every case highlights particular 
+ * line of code, does some opeartion on data structure and changes 
+ * animations accordingly.
+ */
 function loop() {
      if (code_line_itr != enqueue_begin && code_line_itr != deque_begin && code_line_itr!=0) {
          document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
     }
-    // if (stk_obj.top_val.classList.contains('box_label_active')) {
-    //     stk_obj.top_val.classList.remove('box_label_active');
-    // }
-    // if(code_line_itr<=code_line_count){
-    //      document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-    //  }
-
-    
-
     queue_obj.removeHighlight();
     switch(code_line_itr) {
         case enqueue_begin:
@@ -108,9 +123,8 @@ function loop() {
             highlightBoxELement(queue_obj.top_val);
             if ( queue_obj.rear == queue_obj.size -1) {
                 highlightBoxELement(queue_obj.sizeElm);
-
                 code_line_itr =enqueue_ret_err;     
-            }
+               }
             else{
             code_line_itr+=2;
                 }
@@ -119,6 +133,8 @@ function loop() {
              document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
              line_rem_highlight = code_line_itr;
              code_line_itr = enque_end;
+             //alert("Queue is Full");
+             document.getElementById('id01').style.display='block';
              break;
 
         case else_begin:
@@ -146,9 +162,7 @@ function loop() {
             queue_obj.front_pointer.style.top =rectBox['y']-queue_obj.faRectOrigin['y']+55+'px';
             queue_obj.front_pointer.style.left=rectBox['x']-queue_obj.faRectOrigin['x']+'px';         
             code_line_itr = rear_ptr_incr;
-
-           
-             break;
+            break;
         case rear_ptr_incr:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
@@ -196,16 +210,23 @@ function loop() {
             highlightBoxELement(queue_obj.frontElm);
             if(queue_obj.front==-1){
                code_line_itr++;
-        }
+                }
             else {
                     code_line_itr+=2;
                 }
             break;
+        case deque_ret_err:
+            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
+            line_rem_highlight = code_line_itr;
+            code_line_itr = deque_end;
+            //alert("Empty Queue");
+            document.getElementById('id02').style.display='block';
+            break;
         case else2_begin:
-        document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-        line_rem_highlight = code_line_itr;
-        code_line_itr++;
-        break;
+            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;
+            break;
         
         case front_rear_condition_check:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
@@ -258,7 +279,6 @@ function loop() {
             queue_obj.front_pointer.style.left=rectBox['x']-queue_obj.faRectOrigin['x']+'px';  
             code_line_itr++;
             break;
-            
         case else2_end:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight = code_line_itr;
@@ -267,7 +287,6 @@ function loop() {
         case deque_end:
             document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
             code_line_itr=0;
-            
             clearInterval(interval);
             removeBoxElm(deqValElm);
             playButton(0);
@@ -278,31 +297,41 @@ function loop() {
              break;
 
     }  
-}
+} 
 
+
+/**
+ * Calls enqueue method of queue_obj type
+ */
 function enqueue(){
-    //queue_obj.enqueue(document.getElementById('enqueue_val').value);
     code_line_itr = enqueue_begin;
     val = document.getElementById('enqueue_val').value;
+    if(val=='')
+    
+    document.getElementById('id04').style.display='block';
+    else
     EnableCtrlButtons();
 }
 
 
+/**
+ * Calls dequeue method of queue_obj type
+ */
 function dequeue(){
-  //  document.getElementById('dequeue_val').value = queue_obj.dequeue();
-    code_line_itr = deque_begin;
-   
+   code_line_itr = deque_begin;
     EnableCtrlButtons();
 }
 
 
 
-
+/**
+ * Creates array of Max_size and enable enqueue dequeue and reset button.
+ */
 function createQueue(){
     if (!queue_obj) {
         queue_size = parseInt(document.getElementById("max_size").value);
-        if(isNaN(queue_size))
-            console.log('Error in size');
+        if(isNaN(queue_size) || queue_size ==0)
+           document.getElementById('id03').style.display='block';
         else{
             queue_obj = new Queue(heap, queue_size,'queue');
             document.getElementById("enqueue").disabled = false;
@@ -310,21 +339,36 @@ function createQueue(){
         }
     }
   
-}  
+}
 
-// this function puts the loop() function  on interval call of 1000 milli sec
-// i.e it is called after every 1000 milli sec of 1 sec
+
+/** 
+* this function puts the loop() function  on interval call of 1000 milli sec
+* i.e it is called after every 1000 milli sec of 1 sec
+*/
 function loop_color(){
     interval = setInterval(loop,1000);
 }
 
+
+
+/**
+ * remove queue_obj
+ * Removes queue animation. Disables enqueue dequeue buttons. 
+ */
 function reset(){
     if(queue_obj!=null)
         queue_obj.remove();
     queue_obj=null;
     document.getElementById("enqueue").disabled = true;
-    document.getElementById("dequeue").disabled = true;    
+    document.getElementById("dequeue").disabled = true;   
+   if(line_rem_highlight!=0)
+   document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }
+
+
+
+
 // var timeout;
 // window.addEventListener('resize', function(event) {
 //     if(queue_obj!=null){
@@ -332,3 +376,5 @@ function reset(){
 //         timeout = setTimeout(queue_obj.set_arrow_position(),1000);
 //     }
 // }, true);
+
+

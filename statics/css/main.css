@@ -59,7 +59,9 @@ body{
     position: relative;
     font-size: large;
     font-weight: bold;
+    
     background: -webkit-repeating-radial-gradient;
+  
 }
 .box{
     margin: 5px;
@@ -323,11 +325,13 @@ arrow{
     vertical-align: middle;   
     text-align: center;
     margin-top:10px;
+    
 }
 
 #input_set{
     margin-top:20px;
     user-select: all;
+    
 }
 .toh_input{
     top: 100px;
@@ -532,6 +536,94 @@ button[disabled]{
 }
 
 
+
+
+
+
+
+/*___________________________________________________navbar_________________________________________________*/
+
+/* Add a black background color to the top navigation */
+.navbar1 {
+    background-color: #1fbfb8;
+    overflow: hidden;
+    box-shadow: 
+    inset 0 3px 2px rgba(255,255,255,.22),
+    0 0 4px 1px rgba(0,0,0,.1), 
+    0 3px 2px rgba(0,0,0,.2);
+    
+  }
+  
+  /* Style the links inside the navigation bar */
+  .navbar1 a {
+    float: left;
+    color: #0c0c0c;
+    text-align: center;
+    padding: 14px 80px;
+    text-decoration: none;
+    font-size: 25px;
+  }
+  
+  /* Change the color of links on hover */
+  .navbar1 a:hover {
+    background-color: rgb(185, 181, 181);
+    color: black;
+  }
+  
+  /* Add a color to the active/current link */
+  .navbar1 a.active {
+    background-color: #6d7fcc;
+    color: white;
+  }
+
+
+
+  /*______________________________________________________________________________________________________*/
+  /* The Modal (background) */
+
+
+  .popup{
+    display: none; 
+    position: fixed; 
+    z-index: 1; 
+    padding-top: 100px; 
+    left: 700px;
+    top: -110px;
+    width: 100%;
+    max-width: 350px;
+    margin : 10% auto;
+    padding: 40px 30px;
+    background:	white;
+    border-radius: 10px;
+    box-shadow: -9px  6px 52px -8px rgba(0, 0, 0, 0.4);
+    }
+
+  
+  
+  .modal-content {
+      text-align: center;
+      text-decoration: #000;
+    background-color: white;
+    margin: auto;
+    padding: 20px;
+    border: 3px solid rgb(22, 21, 21);
+    width: 80%;
+  }
+  
+ 
+  .close {
+    color: #aaaaaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+  
+  .close:hover,
+  .close:focus {
+    color: #000;
+    text-decoration: none;
+    cursor: pointer;
+  }
 /* ---------------------------------------------------------Linked list--------------------------- */
 .hc_{
     margin: 5px;

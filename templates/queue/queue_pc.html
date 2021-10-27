@@ -10,10 +10,22 @@
     <script src="{% static 'js/pc.js' %}"></script>
     <script src="{% static 'js/button.js' %}"></script>
     <script src="{% static 'js/init.js' %}"></script>
+    
     <!-- <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous"> -->
 </head>
 <body>
     <div class='grid'>
+        <div class="navbar1">
+        
+            <a href="/dashboard">Home</a>
+            <a href="/linkedlist">Linked List</a>
+            <a href="/stack">Stack</a>
+            <a  class="active" href="/queue">Queue</a>
+            <a  href="/searching">Searching</a>
+            <a href="/sorting">Sorting</a>
+           <a href="/logout"><button type="button"  style="color:rgb(216, 210, 210); background-color: red;" >Logout</button></a>
+            
+      </div>
         <div class='col-1-1' id="parent">
             <div id="editor">void producer() {
     mutex_lock();

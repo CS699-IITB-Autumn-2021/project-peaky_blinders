@@ -42,7 +42,7 @@ var id_count=0;
 var interval;
 
 // stores last highlighted line number to remove
-var line_rem_highlight;
+var line_rem_highlight =0;
 
 // Queue object
 var queue_obj=null;
@@ -317,7 +317,7 @@ function producer(producer) {
 /**
  * Sets free mutex to consumer asking for it and starts code execution 
  * at start of consumer function. Enables control buttons
- * @param {string} producer - Id of consumer that wants to consume item.
+ * @param {string} consumer - Id of consumer that wants to consume item.
  */
 function consumer(consumer) {
     if (mutex.innerHTML === '') {
@@ -339,7 +339,7 @@ function createQueue(){
     if (!queue_obj) {
         queue_size = parseInt(document.getElementById("max_size").value);
         if(isNaN(queue_size))
-            console.log('Error in size');
+            alert('Error in size');
         else{
             queue_obj = new Queue(heap, queue_size,'queue');
             mutex = draw_variable("mutex",'',queue_obj.sizeElm.parentElement.parentElement.id); 
@@ -382,6 +382,8 @@ function reset(){
     if (mutex) {
         mutex.remove();
     }
+    if(line_rem_highlight!=0)
+    document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar'); 
 }
 // var timeout;
 // window.addEventListener('resize', function(event) {
