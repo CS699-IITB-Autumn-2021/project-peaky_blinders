@@ -287,6 +287,7 @@ function loop() {
         case deque_end:
             document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
             code_line_itr=0;
+            document.getElementById('dequeue_val').value = deqValElm.innerHTML;
             clearInterval(interval);
             removeBoxElm(deqValElm);
             playButton(0);

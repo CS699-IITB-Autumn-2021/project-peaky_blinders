@@ -145,12 +145,13 @@ function loop()
             line_rem_highlight = code_line_itr;
             code_line_itr++;     
             break;
-            case x_creation:
-                document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
-                search_numElm = draw_variable('x',search_num,parent_id);
-                line_rem_highlight = code_line_itr;
-                code_line_itr++;  
-                break;
+
+        case x_creation:
+            document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
+            search_numElm = draw_variable('x',search_num,parent_id);
+            line_rem_highlight = code_line_itr;
+            code_line_itr++;  
+            break;
 
         case n_calculate:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
@@ -176,8 +177,7 @@ function loop()
         case cond1_check:
             line_rem_highlight = code_line_itr;
             if(index_low<=index_high){
-               
-                 code_line_itr = mid_calc;
+                  code_line_itr = mid_calc;
                 }
             else{
                  code_line_itr = false_return ;
@@ -378,9 +378,7 @@ function reset(){
         }
         if(set_arr_list_Elm!=null) {
             set_arr_list_Elm[i].remove();
-           
-        }
-        
+        }        
     }
     index_mid=0;
     index_low=0;

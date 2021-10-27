@@ -300,11 +300,15 @@ class Stack{
     }
 }
 
-
-
+/** Class for Linked List */
 class linkedList{
-    constructor(parent_id){
-        this.linkedListField = draw_fieldset('LInked List',parent_id);
+    /**
+     * Creates the initial frame for linked list and initializes the variables with given name.
+     * @param {string} parent_id ID of the html element inside which this linkedlist will be created
+     * @param {string} linkedList_name  name of the linked list
+     */
+     constructor(parent_id,linkedList_name='Linked List'){
+        this.linkedListField = draw_fieldset(linkedList_name,parent_id);
         this.linkedListField.style.maxWidth = '800px';  
         this.arr = [];
         this.size = 0;
@@ -327,7 +331,11 @@ class linkedList{
         this.currBox;
         this.currArrow;
     }
-
+    /**
+     * Sets the arrow and box to correct position and angle
+     * @param {object} arrow newly created arrow 
+     * @param {object} box  newly created box
+     */
     setArrowBox(arrow,box){
         var field_rect = this.linkedListField.getBoundingClientRect();
         var cur_box_rect = box.getBoundingClientRect();
@@ -467,7 +475,10 @@ class linkedList{
             // this.lc = this.size-1;
         }
     }
-
+    /**
+     * inserts the value given to the end of the linked list
+     * @param {integer} val 
+     */
     insert(val){
         if(this.size ==0){
             this.arr.push(val);
@@ -488,6 +499,10 @@ class linkedList{
         }
     }
 
+    /**
+     * creates a temporary box and sets it position as per the argument
+     * @param {integer} pos defines the location for the tempbox
+     */
     insertTempAtPos(pos){
         this.tempBox = draw_boxes([' '],1,this.linkedListField.id,'array')[0];
         var box = this.tempBox;
@@ -575,6 +590,10 @@ class linkedList{
         }
     }
 
+    /**
+     * sets the arrow previous to the position in out direction as per the position
+     * @param {integer} pos defines the arrow location
+     */
     setArrowPre(pos){
         if(this.size-1 < pos+1)
             var boxPostRect = this.box_list[pos].getBoundingClientRect();
@@ -603,6 +622,10 @@ class linkedList{
         }               
     }
 
+    /**
+     * sets the arrow post the position in inward direction
+     * @param {integer} pos defiens the arrow position
+     */
     setArrowPost(pos){
         if(pos < this.arrow_list.length){
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
@@ -633,6 +656,10 @@ class linkedList{
         }
     }
 
+    /**
+     * resets the arrow pre to the box at position 'pos'.
+     * @param {integer} pos  defines the arrow position
+     */
     resetArrowPre(pos){
         if(this.size-1 < pos+1)
             var boxPostRect = this.box_list[pos].getBoundingClientRect();
@@ -661,7 +688,11 @@ class linkedList{
         }               
     }
 
-    resetArrowPost(pos){
+    /**
+     * resets the arrow post to the box at position 'pos'.
+     * @param {integer} pos  defines the arrow position
+     */
+     resetArrowPost(pos){
         if(pos < this.arrow_list.length){
             var boxPostRect = this.box_list[pos+1].getBoundingClientRect();
     
@@ -693,12 +724,20 @@ class linkedList{
         }
     }
 
+    /**
+     * sets the values of the box_list as per the arr
+     */
     appendArray(){
         for(var i=0;i<this.size-1;i++){
             this.box_list[i+1].innerHTML = this.arr[i];
         }
     }
 
+    /**
+     * Inserts given value at given position in the linked list
+     * @param {integer} val 
+     * @param {integer} pos 
+     */
     insertAtPos(val,pos){
         this.arr.splice(pos-1,0,val);
         var arrow = draw_arrow(this.linkedListField.id);
@@ -711,6 +750,11 @@ class linkedList{
         this.appendArray();
     }
 
+    /**
+     * Inserts given value at given position in the linked list ut not append the box_list
+     * @param {integer} val 
+     * @param {integer} pos 
+     */
     insertAtPos_noappend(val,pos){
         this.arr.splice(pos-1,0,val);
         var arrow = draw_arrow(this.linkedListField.id);
@@ -723,6 +767,10 @@ class linkedList{
         // this.appendArray();
     }
 
+    /**
+     * Deletes the first linked list node with given value
+     * @param {integer} val 
+     */
     delete(val){
         var val_index = this.arr.findIndex((elm)=>elm==val);
         console.log(val_index);
@@ -763,6 +811,9 @@ class linkedList{
         }
     }   
 
+    /**
+     * removes the highlights from the box_list elements and the tempBox Created
+     */
     removeHighlight(){
         for(i=0;i<this.size;i++){
             unhighlightBoxELement(this.box_list[i]);
@@ -770,6 +821,9 @@ class linkedList{
         unhighlightBoxELement(this.tempBox);
     }
 
+    /**
+     * removes the liked list object from the display
+     */
     remove(){
         this.linkedListField.remove();
     }

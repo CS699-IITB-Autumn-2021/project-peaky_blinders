@@ -122,7 +122,7 @@ var del_pos_storage;
  * animations accordingly.
  */
 function loop() {
-    if (code_line_itr != insert_func_begin && code_line_itr != 0) {
+    if (code_line_itr != insert_func_begin && code_line_itr != 0 && code_line_itr!=del_func_start) {
         document.getElementsByClassName('foo'+line_rem_highlight)[0].classList.remove('bar');
     }
     unhighlightBoxELement(insert_posElm);
@@ -282,19 +282,6 @@ function loop() {
             disbaleCtrlButtons(play);
             disbaleCtrlButtons(step);
             break;
-/*
-del_func_start =17;
-del_while_start =18;
-del_while_head_to_head_next=19;
-del_while_end=20;
-del_if_head_null=21;
-del_if_head_null_true=22;
-del_temp_to_head=23;
-del_head_to_head_next=24;
-del_free_temp=25;
-del_return=26;
-del_func_end = 27;
-*/       
         case del_func_start:
             document.getElementsByClassName('foo'+code_line_itr)[0].classList.add('bar');
             line_rem_highlight=code_line_itr;
