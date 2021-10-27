@@ -144,6 +144,7 @@ function loop()
         case exit_return:
             line_rem_highlight=code_line_itr;
             code_line_itr = function_call;
+            document.getElementById('id01').style.display='block';
         break;
         case array_creation:
             arrElmSet =  draw_array('arr',arr,arr_n,parent_id);        
