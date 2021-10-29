@@ -1,7 +1,9 @@
-"""Imports"""
+"""
+    Imports
+"""
 from django.urls import path
 from . import views
-# Paths for different urls provied by this website
+    # Paths for different urls provied by this website
 urlpatterns = [
     path('', views.signin, name="signin"),
     path('register', views.register, name="register"),
