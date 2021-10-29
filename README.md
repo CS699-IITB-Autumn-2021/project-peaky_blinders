@@ -140,7 +140,8 @@ Running the server
 
 # Path to Code Documentation
 
-    /docs/index.html
+    /docs/docs_frontend/index.html
+    /docs/docs_backend/build/html/index.html
 
 
 
