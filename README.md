@@ -22,6 +22,10 @@ these newbies understand and learn how actually data structures and algorithms w
 
   * Personalised Interface.
 
+# Sell your product
+  
+  Gives you a complete pacakge of concept visualization and core code understanding.
+
 # List of Features
 
  1. Different data structure animations in synchronization with code.
